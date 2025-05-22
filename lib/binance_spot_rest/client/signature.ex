@@ -1,4 +1,4 @@
-defmodule BinanceSpotRest.Query.Signature do
+defmodule BinanceSpotRest.Client.Signature do
   @moduledoc false
   def create(query_string, secret_key) do
     :hmac

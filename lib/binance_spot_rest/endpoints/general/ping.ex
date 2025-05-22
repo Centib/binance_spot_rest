@@ -27,12 +27,10 @@ defmodule BinanceSpotRest.Endpoints.General.Ping do
     def validate(q), do: q
 
     def prepare(q),
-      do: %BinanceSpotRest.RequestData{
-        endpoint_data: %BinanceSpotRest.EndpointData{
-          endpoint: "/api/v3/ping",
-          method: BinanceSpotRest.Enums.Method._get(),
-          security_type: BinanceSpotRest.Enums.SecurityType._NONE()
-        },
+      do: %BinanceSpotRest.Query.RequestSpec{
+        endpoint: "/api/v3/ping",
+        method: BinanceSpotRest.Enums.Method._get(),
+        security_type: BinanceSpotRest.Enums.SecurityType._NONE(),
         query: q
       }
   end

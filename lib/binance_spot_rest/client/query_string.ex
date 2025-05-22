@@ -1,4 +1,4 @@
-defmodule BinanceSpotRest.Query.QueryString do
+defmodule BinanceSpotRest.Client.QueryString do
   @moduledoc false
   defp empty({_key, value}), do: value == nil or value == []
 
@@ -26,7 +26,7 @@ defmodule BinanceSpotRest.Query.QueryString do
   end
 
   def attach_signature(query_string, secret_key) do
-    signature = BinanceSpotRest.Query.Signature.create(query_string, secret_key)
+    signature = BinanceSpotRest.Client.Signature.create(query_string, secret_key)
     attach(query_string, %{signature: signature})
   end
 end
