@@ -130,7 +130,7 @@ defmodule Valpa.Custom do
   end
 
   @doc """
-  Like `validator/3` but returns immediately if `map[key]` is `nil`.
+  Like `validator/3` but returns {:ok, map} if `map[key]` is `nil`.
   """
   @spec maybe_validator(
           map() | {:ok, map()} | {:error, any},
