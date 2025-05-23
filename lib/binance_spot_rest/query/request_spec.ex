@@ -1,8 +1,8 @@
 defmodule BinanceSpotRest.Query.RequestSpec do
   @moduledoc """
-  RequestSpec structure
+  RequestSpec struct
   """
 
-  @enforce_keys [:endpoint, :method, :security_type, :query]
-  defstruct [:endpoint, :method, :security_type, :query]
+  @enforce_keys [:metadata, :query]
+  defstruct [:metadata, :query]
 end

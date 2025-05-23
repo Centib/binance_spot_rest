@@ -5,7 +5,7 @@ defmodule BinanceSpotRest.Endpoints.General.PingTest do
 
   test "ping request" do
     assert {:ok, request} =
-             %BinanceSpotRest.Endpoints.General.Ping{}
+             %BinanceSpotRest.Endpoints.General.Ping.Query{}
              ~>> BinanceSpotRest.Query.validate()
              ~>> BinanceSpotRest.Query.prepare()
              ~>> BinanceSpotRest.Client.create_request()

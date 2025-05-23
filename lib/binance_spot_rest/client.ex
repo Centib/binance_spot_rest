@@ -10,9 +10,11 @@ defmodule BinanceSpotRest.Client do
   @st_none BinanceSpotRest.Enums.SecurityType._NONE()
 
   def create_request(%BinanceSpotRest.Query.RequestSpec{
-        endpoint: endpoint,
-        method: method,
-        security_type: @st_none,
+        metadata: %BinanceSpotRest.Query.EndpointMetadata{
+          endpoint: endpoint,
+          method: method,
+          security_type: @st_none
+        },
         query: %{__struct__: _} = q
       })
       when map_size(q) == 1 do
