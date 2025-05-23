@@ -10,6 +10,12 @@ defmodule BinanceSpotRest.Client.QueryString do
     end
   end
 
+  def create(%_{} = query) do
+    query
+    |> Map.from_struct()
+    |> create()
+  end
+
   def create(%{} = query) do
     query
     |> Enum.reject(&empty/1)

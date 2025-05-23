@@ -3,10 +3,6 @@ defmodule BinanceSpotRest.Client do
   Client
   """
 
-  # defp create_url("", base_url, endpoint), do: "#{base_url}#{endpoint}"
-  # defp create_url(query_string, base_url, endpoint), do: "#{base_url}#{endpoint}?#{query_string}"
-  # defp create_url(base_url, endpoint), do: "#{base_url}#{endpoint}"
-
   @st_none BinanceSpotRest.Enums.SecurityType._NONE()
 
   def create_request(%BinanceSpotRest.Query.RequestSpec{
@@ -23,6 +19,25 @@ defmodule BinanceSpotRest.Client do
       headers: [],
       base_url: BinanceSpotRest.Env.base_url(),
       url: endpoint
+    }
+  end
+
+  def create_request(%BinanceSpotRest.Query.RequestSpec{
+        metadata: %BinanceSpotRest.Query.EndpointMetadata{
+          endpoint: endpoint,
+          method: method,
+          security_type: @st_none
+        },
+        query: %{__struct__: _} = q
+      }) do
+    %BinanceSpotRest.Client.Request{
+      method: method,
+      headers: [],
+      base_url: BinanceSpotRest.Env.base_url(),
+      url:
+        q
+        |> BinanceSpotRest.Client.QueryString.create()
+        |> BinanceSpotRest.Client.Url.create(endpoint)
     }
   end
 
