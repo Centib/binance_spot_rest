@@ -34,14 +34,14 @@ defmodule Valpa.Custom do
   end
 
   defp do_map_validate(map, key, validate) do
-    case validate.(map[key]) do
+    case validate.(Map.fetch!(map, key)) do
       :ok -> {:ok, map}
       {:error, reason} -> {:error, reason}
     end
   end
 
   defp do_map_maybe_validate(map, key, validate) do
-    case map[key] do
+    case Map.fetch!(map, key) do
       nil -> {:ok, map}
       _ -> do_map_validate(map, key, validate)
     end
@@ -130,7 +130,7 @@ defmodule Valpa.Custom do
   end
 
   @doc """
-  Like `validator/3` but returns {:ok, map} if `map[key]` is `nil`.
+  Like `validator/3` but returns {:ok, map} if `Map.fetch!(map, key)` is `nil`.
   """
   @spec maybe_validator(
           map() | {:ok, map()} | {:error, any},

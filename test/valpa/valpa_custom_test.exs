@@ -125,7 +125,7 @@ defmodule Valpa.ValpaCustomTest do
     end
 
     test "returns {:ok, map} for map[key] == nil", %{valid: map} do
-      map2 = Map.delete(map, :score)
+      map2 = %{map | score: nil}
       assert Valpa.Custom.maybe_validator(map2, :score, DummyValidator) == {:ok, map2}
     end
 

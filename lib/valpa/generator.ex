@@ -25,7 +25,7 @@ defmodule Valpa.Generator do
         {:error,
          Valpa.Error.new(%{
            validator: name,
-           value: map[key],
+           value: Map.fetch!(map, key),
            map_key: key,
            criteria: crit
          })}
@@ -53,7 +53,10 @@ defmodule Valpa.Generator do
             end
 
             def unquote(name)(input, key) do
-              predicate = fn map -> Valpa.Predicate.Validator.unquote(name)(map[key]) end
+              predicate = fn map ->
+                Valpa.Predicate.Validator.unquote(name)(Map.fetch!(map, key))
+              end
+
               name = unquote(name)
               input ~>> Validator.validate_map(predicate, name, key)
             end
@@ -72,7 +75,7 @@ defmodule Valpa.Generator do
             end
 
             def unquote(name)(input, key, crit) do
-              predicate = fn map -> Valpa.Predicate.Validator.unquote(name)(map[key], crit) end
+              predicate = fn map -> Valpa.Predicate.Validator.unquote(name)(Map.fetch!(map, key), crit) end
               name = unquote(name)
               input ~>> Validator.validate_map(predicate, name, key, crit)
             end
