@@ -6,7 +6,7 @@ defmodule BinanceSpotRest.Endpoints.General.ExchangeInfo.SymbolQuery do
   defstruct [:symbol, :showPermissionSets]
 
   defimpl BinanceSpotRest.Query do
-    def validate(%BinanceSpotRest.Endpoints.General.ExchangeInfo.SymbolQuery{} = q),
+    def validate(q),
       do:
         q
         |> Valpa.string(:symbol)
