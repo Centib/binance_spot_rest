@@ -1,43 +1,41 @@
 defmodule BinanceSpotRest.Client do
   @moduledoc """
-  Client
+  BinanceSpotRest REST client.
+
+  Builds HTTP requests based on `RequestSpec` input.
   """
 
-  @st_none BinanceSpotRest.Enums.SecurityType._NONE()
+  import BinanceSpotRest.Client.Security
+  import BinanceSpotRest.Client.Methods
 
-  def create_request(%BinanceSpotRest.Query.RequestSpec{
-        metadata: %BinanceSpotRest.Query.EndpointMetadata{
-          endpoint: endpoint,
-          method: method,
-          security_type: @st_none
+  @type opt ::
+          {:base_url, String.t()}
+          | {:headers, [{String.t(), String.t()}]}
+          | {:secret_key, String.t()}
+          | {:timestamp, integer()}
+
+  def create_request(
+        %BinanceSpotRest.Query.RequestSpec{
+          metadata: %BinanceSpotRest.Query.EndpointMetadata{
+            endpoint: endpoint,
+            method: method,
+            security_type: security_type
+          },
+          query: query
         },
-        query: %{__struct__: _} = q
-      })
-      when map_size(q) == 1 do
+        opts \\ []
+      )
+      when is_method(method) and is_security_type(security_type) do
+    base_url = Keyword.get(opts, :base_url, BinanceSpotRest.Env.base_url())
+    headers = Keyword.get(opts, :headers, BinanceSpotRest.Client.Headers.build(security_type))
+    secret_key = Keyword.get(opts, :secret_key, nil)
+    timestamp = Keyword.get(opts, :timestamp, nil)
+
     %BinanceSpotRest.Client.Request{
       method: method,
-      headers: [],
-      base_url: BinanceSpotRest.Env.base_url(),
-      url: endpoint
-    }
-  end
-
-  def create_request(%BinanceSpotRest.Query.RequestSpec{
-        metadata: %BinanceSpotRest.Query.EndpointMetadata{
-          endpoint: endpoint,
-          method: method,
-          security_type: @st_none
-        },
-        query: %{__struct__: _} = q
-      }) do
-    %BinanceSpotRest.Client.Request{
-      method: method,
-      headers: [],
-      base_url: BinanceSpotRest.Env.base_url(),
-      url:
-        q
-        |> BinanceSpotRest.Client.QueryString.create()
-        |> BinanceSpotRest.Client.Url.create(endpoint)
+      headers: headers,
+      base_url: base_url,
+      url: BinanceSpotRest.Client.Url.build(query, endpoint, security_type, secret_key, timestamp)
     }
   end
 
