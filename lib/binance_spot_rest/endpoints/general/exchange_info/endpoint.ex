@@ -10,7 +10,9 @@ defmodule BinanceSpotRest.Endpoints.General.ExchangeInfo.Endpoint do
 
   **Weight:** 20
 
-  Full docs: [Binance API – exchangeInfo](https://binance-docs.github.io/apidocs/spot/en/#exchange-information)
+  **Data Source:** Memory
+
+  Full docs: [Binance API – exchangeInfo](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md#exchange-information)
   """
 
   def metadata do
