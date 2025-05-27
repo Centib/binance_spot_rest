@@ -53,26 +53,24 @@ defmodule Valpa.Predicate.Validator do
   end
 
   def list_of_length(va, length) do
-    le = length(va)
-    list(va) and le >= length.min and le <= length.max
+    list(va) and length(va) >= length.min and length(va) <= length.max
   end
 
   def uniq_list_of_length(va, length) do
-    le = length(va)
-    uniq_list(va) and le >= length.min and le <= length.max
+    uniq_list(va) and length(va) >= length.min and length(va) <= length.max
   end
 
   def map_inclusive_keys(va, keys) do
-    nonempty_map(va) and Enum.any?(keys, &Map.has_key?(va, &1))
+    nonempty_map(va) and Enum.any?(keys, fn key -> Map.get(va, key) != nil end)
   end
 
   def map_exclusive_keys(va, keys) do
-    present_keys = Enum.filter(keys, &Map.has_key?(va, &1))
+    present_keys = Enum.filter(keys, fn key -> Map.get(va, key) != nil end)
     nonempty_map(va) and length(present_keys) == 1
   end
 
   def map_exclusive_optional_keys(va, keys) do
-    Enum.count(keys, &Map.has_key?(va, &1)) <= 1
+    Enum.count(keys, fn key -> Map.get(va, key) != nil end) <= 1
   end
 
   def decimal(va), do: is_struct(va, Decimal)

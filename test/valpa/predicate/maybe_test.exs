@@ -197,6 +197,7 @@ defmodule Valpa.Predicate.MaybeTest do
     assert Validator.maybe_map_exclusive_optional_keys(%{}, [:a, :c])
     assert Validator.maybe_map_exclusive_optional_keys(%{a: 1}, [:a, :c])
     assert Validator.maybe_map_exclusive_optional_keys(%{c: 1}, [:a, :c])
+    assert Validator.maybe_map_exclusive_optional_keys(%{a: nil, c: nil}, [:a, :c])
   end
 
   test "maybe_map_exclusive_optional_keys returns false if more than one key exists" do

@@ -185,6 +185,8 @@ defmodule Valpa.ValpaTest do
 
       assert Valpa.map_exclusive_optional_keys(%{}, [:a, :c]) == ok(%{})
 
+      assert Valpa.map_exclusive_optional_keys(%{a: nil}, [:a, :c]) == ok(%{a: nil})
+
       assert_error(
         Valpa.map_exclusive_optional_keys(%{a: 1, c: 2}, [:a, :c]),
         error(:map_exclusive_optional_keys, %{a: 1, c: 2}, [:a, :c])
