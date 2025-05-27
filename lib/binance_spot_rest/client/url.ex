@@ -6,25 +6,27 @@ defmodule BinanceSpotRest.Client.Url do
   def append_query_string("", endpoint), do: endpoint
   def append_query_string(query_string, endpoint), do: "#{endpoint}?#{query_string}"
 
-  def build(q, endpoint, st, _secret_key, _timestamp)
-      when is_struct(q) and map_size(q) == 1 and is_no_signature(st) do
+  def build(query, endpoint, security_type, _secret_key_fn, _timestamp_fn, _signature_fn)
+      when is_struct(query) and map_size(query) == 1 and is_no_signature(security_type) do
     endpoint
   end
 
-  def build(q, endpoint, st, _secret_key, _timestamp) when is_struct(q) and is_no_signature(st) do
-    q
+  def build(query, endpoint, security_type, _secret_key_fn, _timestamp_fn, _signature_fn)
+      when is_struct(query) and is_no_signature(security_type) do
+    query
     |> BinanceSpotRest.Client.QueryString.create()
     |> append_query_string(endpoint)
   end
 
-  def build(q, endpoint, st, secret_key, timestamp) when is_struct(q) and is_signature(st) do
-    secret_key = if secret_key == nil, do: BinanceSpotRest.Env.secret_key()
-    timestamp = if timestamp == nil, do: BinanceSpotRest.Client.Timestamp.create()
+  def build(query, endpoint, security_type, secret_key_fn, timestamp_fn, signature_fn)
+      when is_struct(query) and is_signature(security_type) do
+    secret_key = secret_key_fn.()
+    timestamp = timestamp_fn.()
 
-    q
+    query
     |> BinanceSpotRest.Client.QueryString.create()
     |> BinanceSpotRest.Client.QueryString.attach_timestamp(timestamp)
-    |> BinanceSpotRest.Client.QueryString.attach_signature(secret_key)
+    |> BinanceSpotRest.Client.QueryString.attach_signature(secret_key, signature_fn)
     |> append_query_string(endpoint)
   end
 end

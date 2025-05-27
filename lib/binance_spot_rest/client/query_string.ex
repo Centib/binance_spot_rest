@@ -20,6 +20,7 @@ defmodule BinanceSpotRest.Client.QueryString do
     query
     |> Enum.reject(&empty/1)
     |> Enum.map(&convert_to_string/1)
+    |> Enum.sort_by(fn {k, _v} -> to_string(k) end)
     |> URI.encode_query()
   end
 
@@ -31,8 +32,8 @@ defmodule BinanceSpotRest.Client.QueryString do
     attach(query_string, %{timestamp: timestamp})
   end
 
-  def attach_signature(query_string, secret_key) do
-    signature = BinanceSpotRest.Client.Signature.create(query_string, secret_key)
+  def attach_signature(query_string, secret_key, signature_fn) do
+    signature = signature_fn.(query_string, secret_key)
     attach(query_string, %{signature: signature})
   end
 end
