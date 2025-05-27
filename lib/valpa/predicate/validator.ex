@@ -48,16 +48,16 @@ defmodule Valpa.Predicate.Validator do
     value_of_values(va, values) or uniq_list_of_values(va, values)
   end
 
-  def integer_in_range(va, range) do
-    integer(va) and va >= range.min and va <= range.max
+  def integer_in_range(va, %{min: min, max: max}) do
+    is_integer(va) and va >= min and va <= max
   end
 
-  def list_of_length(va, length) do
-    list(va) and length(va) >= length.min and length(va) <= length.max
+  def list_of_length(va, %{min: min, max: max}) do
+    list(va) and length(va) >= min and length(va) <= max
   end
 
-  def uniq_list_of_length(va, length) do
-    uniq_list(va) and length(va) >= length.min and length(va) <= length.max
+  def uniq_list_of_length(va, %{min: min, max: max}) do
+    uniq_list(va) and length(va) >= min and length(va) <= max
   end
 
   def map_inclusive_keys(va, keys) do
