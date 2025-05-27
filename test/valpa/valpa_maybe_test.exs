@@ -214,6 +214,19 @@ defmodule Valpa.ValpaMaybeTest do
         error(:maybe_map_exclusive_keys, %{a: 1, c: 2}, [:a, :c])
       )
     end
+
+    test "maybe_map_exclusive_optional_keys/2" do
+      va = %{a: 1}
+      assert Valpa.maybe_map_exclusive_optional_keys(va, [:a, :c]) == ok(va)
+      va = nil
+      assert Valpa.maybe_map_exclusive_optional_keys(va, [:a, :c]) == ok(va)
+      assert Valpa.maybe_map_exclusive_optional_keys(%{}, [:a, :c]) == ok(%{})
+
+      assert_error(
+        Valpa.maybe_map_exclusive_optional_keys(%{a: 1, c: 2}, [:a, :c]),
+        error(:maybe_map_exclusive_optional_keys, %{a: 1, c: 2}, [:a, :c])
+      )
+    end
   end
 
   test "decimal/1" do

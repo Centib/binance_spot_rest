@@ -178,6 +178,18 @@ defmodule Valpa.ValpaTest do
         error(:map_exclusive_keys, %{a: 1, c: 2}, [:a, :c])
       )
     end
+
+    test "map_exclusive_optional_keys/2" do
+      va = %{a: 1}
+      assert Valpa.map_exclusive_optional_keys(va, [:a, :c]) == ok(va)
+
+      assert Valpa.map_exclusive_optional_keys(%{}, [:a, :c]) == ok(%{})
+
+      assert_error(
+        Valpa.map_exclusive_optional_keys(%{a: 1, c: 2}, [:a, :c]),
+        error(:map_exclusive_optional_keys, %{a: 1, c: 2}, [:a, :c])
+      )
+    end
   end
 
   test "decimal/1" do

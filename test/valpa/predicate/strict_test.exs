@@ -174,6 +174,18 @@ defmodule Valpa.Predicate.StrictTest do
     refute Validator.map_exclusive_keys(%{a: 1, c: 2}, [:a, :c])
   end
 
+  # Test map_exclusive_optional_keys/2
+  test "map_exclusive_optional_keys returns true if zero or one of the keys exist" do
+    assert Validator.map_exclusive_optional_keys(%{x: 1}, [:a, :b])
+    assert Validator.map_exclusive_optional_keys(%{a: 1}, [:a, :b])
+    assert Validator.map_exclusive_optional_keys(%{}, [:a, :b])
+  end
+
+  test "map_exclusive_optional_keys returns false if more than one of the keys exist" do
+    refute Validator.map_exclusive_optional_keys(%{a: 1, b: 2}, [:a, :b])
+    refute Validator.map_exclusive_optional_keys(%{a: 1, b: 2, x: 3}, [:a, :b])
+  end
+
   # Test decimal/1
   test "decimal returns true for decimals" do
     assert Validator.decimal(Decimal.new("42.0"))

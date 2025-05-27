@@ -71,5 +71,9 @@ defmodule Valpa.Predicate.Validator do
     nonempty_map(va) and length(present_keys) == 1
   end
 
+  def map_exclusive_optional_keys(va, keys) do
+    Enum.count(keys, &Map.has_key?(va, &1)) <= 1
+  end
+
   def decimal(va), do: is_struct(va, Decimal)
 end

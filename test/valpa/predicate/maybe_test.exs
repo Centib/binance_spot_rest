@@ -191,6 +191,19 @@ defmodule Valpa.Predicate.MaybeTest do
     refute Validator.maybe_map_exclusive_keys(%{a: 1, c: 2}, [:a, :c])
   end
 
+  # Test maybe_map_exclusive_optional_keys/2
+  test "maybe_map_exclusive_optional_keys returns true if value is nil or zero/one key exists" do
+    assert Validator.maybe_map_exclusive_optional_keys(nil, [:a, :c])
+    assert Validator.maybe_map_exclusive_optional_keys(%{}, [:a, :c])
+    assert Validator.maybe_map_exclusive_optional_keys(%{a: 1}, [:a, :c])
+    assert Validator.maybe_map_exclusive_optional_keys(%{c: 1}, [:a, :c])
+  end
+
+  test "maybe_map_exclusive_optional_keys returns false if more than one key exists" do
+    refute Validator.maybe_map_exclusive_optional_keys(%{a: 1, c: 2}, [:a, :c])
+    refute Validator.maybe_map_exclusive_optional_keys(%{a: 1, c: 2, x: 5}, [:a, :c])
+  end
+
   # Test decimal/1
   test "decimal returns true for decimals" do
     assert Validator.maybe_decimal(nil)
