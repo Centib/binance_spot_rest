@@ -108,7 +108,7 @@ defmodule Loe do
   @doc """
   Infix `lift`.
 
-  Allows chaining like `value ~>> fun/1`.
+  Allows chaining like `value ~>> fun()`.
 
   ## Examples
 
@@ -131,6 +131,97 @@ defmodule Loe do
 
     quote do
       Loe.lift(
+        unquote(left),
+        fn unquote(value) -> unquote({call, line, args}) end
+      )
+    end
+  end
+
+  @doc """
+  Applies a function to a raw or boxed error input and returns a normalized result.
+
+  ## Accepted input:
+    - A raw value `a`
+    - A tuple `{:ok, a}`
+    - An error tuple `{:error, e}`
+    - A bare `:error`
+
+  ## Function `fun` may return:
+    - A raw value `b`
+    - A tuple `{:ok, b}`
+    - A tuple `{:error, e}`
+    - A bare `:error`
+
+  ## Result:
+    Always returns either `{:ok, b}` or `{:error, e}`.
+
+  ## Examples
+
+      iex> Loe.tfil(2, fn _x -> :ignore_and_wrap end)
+      {:ok, 2}
+
+      iex> Loe.tfil({:ok, 2}, fn _x -> :ignore end)
+      {:ok, 2}
+
+      iex> Loe.tfil(:error, fn x -> %{a: x, b: 300} end)
+      {:error, %{a: :error, b: 300}}
+
+      iex> Loe.tfil({:error, :bad}, fn x -> %{a: x, b: 300} end)
+      {:error, %{a: :bad, b: 300}}
+
+      iex> Loe.tfil(:error, fn _x -> {:error, :reason} end)
+      {:error, :reason}
+
+      iex> Loe.tfil({:error, :bad}, fn _x -> {:error, :too_bad} end)
+      {:error, :too_bad}
+
+  """
+  @spec tfil(input(a, e), (e -> f | result(a, f))) :: result(a, f)
+        when a: any, e: any, f: any
+  def tfil({:error, reason}, fun), do: do_tfil(fun, reason)
+  def tfil(:error, fun), do: do_tfil(fun, :error)
+  def tfil({:ok, val}, _fun), do: {:ok, val}
+  def tfil(val, _fun), do: {:ok, val}
+
+  defp do_tfil(fun, val) do
+    case fun.(val) do
+      {:ok, _} = ok -> ok
+      {:error, _} = err -> err
+      :error -> {:error, :error}
+      other -> {:error, other}
+    end
+  end
+
+  @doc """
+  Infix `tfil`.
+
+  Allows chaining like `value <~> fun()`.
+
+  ## Examples
+
+      iex> import Loe
+      ...> 5 <~> (fn x -> x + 2 end).()
+      {:ok, 5}
+
+      iex> import Loe
+      ...> {:error, 10} <~> (fn x -> x * 2 end).()
+      {:error, 20}
+
+      iex> import Loe
+      ...> {:error, 10} <~> (fn x -> {:ok, x * 2} end).()
+      {:ok, 20}
+
+      iex> import Loe
+      ...> :error <~> (fn _x -> {:error, :nice} end).()
+      {:error, :nice}
+  """
+  defmacro left <~> {call, line, args} do
+    value = quote do: value
+
+    args = [value | args || []]
+
+    quote do
+      Loe.tfil(
         unquote(left),
         fn unquote(value) -> unquote({call, line, args}) end
       )
