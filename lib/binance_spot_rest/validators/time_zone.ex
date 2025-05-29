@@ -54,7 +54,6 @@ defmodule BinanceSpotRest.Validators.TimeZone do
     offset_minutes >= @min_minutes and offset_minutes <= @max_minutes
   end
 
-  # TODO: consider add message to Valpa, or don't use custom validators - rethink!
   # defp message(tz) do
   #   ~s/Expected: timeZone value (e.g. "0", "8", "4", "-1"), (e.g. "-1:00", "05:45", "+10:30"), from -12:00 to +14:00 (inclusive), got: #{inspect(tz)}/
   # end
@@ -74,18 +73,17 @@ defmodule BinanceSpotRest.Validators.TimeZone do
 
       iex> {:error, _} = Binance.Validators.TimeZone.validate("invalid")
   """
-  # TODO: consider add map_key in Valpa, not here. (maybe add one more new with 3 fields)
   @impl Valpa.CustomValidator
   def validate(value) do
     if valid?(value) do
       :ok
     else
-      {:error, Valpa.Error.new(%{
-        validator: :time_zone,
-        value: value,
-        map_key: :timeZone,
-        criteria: :range_or_format
-      })}
+      {:error,
+       Valpa.Error.new(%{
+         validator: :time_zone,
+         value: value,
+         criteria: %{min: "-12:00", max: "+14:00", accepted_formats: ["±HH", "±HH:MM"]}
+       })}
     end
   end
 end

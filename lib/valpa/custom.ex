@@ -35,8 +35,14 @@ defmodule Valpa.Custom do
 
   defp do_map_validate(map, key, validate) do
     case validate.(Map.fetch!(map, key)) do
-      :ok -> {:ok, map}
-      {:error, reason} -> {:error, reason}
+      :ok ->
+        {:ok, map}
+
+      {:error, %Valpa.Error{} = reason} ->
+        {:error, if(reason.map_key == nil, do: %{reason | map_key: key}, else: reason)}
+
+      {:error, reason} ->
+        {:error, reason}
     end
   end
 

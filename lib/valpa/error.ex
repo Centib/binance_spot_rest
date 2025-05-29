@@ -44,6 +44,16 @@ defmodule Valpa.Error do
     }
   end
 
+  def new(%{validator: validator, value: value, criteria: criteria}) do
+    %__MODULE__{
+      validator: validator,
+      value: value,
+      map_key: nil,
+      criteria: criteria,
+      stacktrace: stacktrace()
+    }
+  end
+
   @type t :: %__MODULE__{
           validator: atom(),
           value: any(),
