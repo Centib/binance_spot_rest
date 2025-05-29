@@ -1,13 +1,27 @@
 defmodule Loe do
   @moduledoc """
-  `Loe` is a minimal library for handling values that may be raw, `{:ok, _}`, or `{:error, _}`.
+  `Loe` is a minimal utility library for working with values that may be raw, `{:ok, _}`, or `{:error, _}`.
 
-  - `lift/2` allows you to apply a function to any of these forms, ensuring a normalized result.
-  - `unwrap!/1` lets you extract the value from `{:ok, _}` or raise on `{:error, _}`.
-  - `~>>` infix operator for chaining lifted calls.
+  It helps normalize, transform, and chain computations while handling both successful and error results in a consistent way.
 
-  It’s designed for situations where you want to treat plain values and result tuples uniformly
-  without needing to constantly check or wrap values yourself.
+  ### Functions
+
+  - `lift/2` — Applies a function to a value if it is raw or `{:ok, _}`. Leaves `{:error, _}` or `:error` unchanged. Always returns `{:ok, _}` or `{:error, _}`.
+  - `tfil/2` — The inverse of `lift/2`. Applies a function **only** if the input is `:error` or `{:error, _}`. Leaves successful values unchanged.
+  - `unwrap!/1` — Extracts the value from `{:ok, value}`. Raises if the value is `:error` or `{:error, _}`.
+
+  ### Operators
+
+  - `~>>` — Infix form of `lift/2`, for chaining operations on success.
+  - `<~>` — Infix form of `tfil/2`, for transforming errors.
+
+  ### Example
+
+  ```elixir
+  value
+  ~>> validate()
+  ~>> normalize()
+  <~> wrap_error()
   """
 
   @typedoc "Input may be a raw value, `{:ok, value}`, `{:error, error}`, or `:error`."
