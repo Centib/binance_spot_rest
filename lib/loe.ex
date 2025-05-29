@@ -96,6 +96,10 @@ defmodule Loe do
   @spec unwrap!(any) :: any | no_return()
   def unwrap!({:ok, val}), do: val
 
+  def unwrap!({:error, exception}) when is_exception(exception) do
+    raise exception
+  end
+
   def unwrap!({:error, reason}) do
     raise RuntimeError, "Loe.unwrap!/1 encountered error: #{inspect(reason)}"
   end
