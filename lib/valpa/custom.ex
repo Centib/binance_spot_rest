@@ -39,7 +39,11 @@ defmodule Valpa.Custom do
         {:ok, map}
 
       {:error, %Valpa.Error{} = reason} ->
-        {:error, if(reason.map_key == nil, do: %{reason | map_key: key}, else: reason)}
+        {:error,
+         if(reason.map_key == nil,
+           do: Valpa.Error.set_map_key(reason, key),
+           else: reason
+         )}
 
       {:error, reason} ->
         {:error, reason}

@@ -79,11 +79,11 @@ defmodule BinanceSpotRest.Validators.TimeZone do
       :ok
     else
       {:error,
-       Valpa.Error.new(%{
+       Valpa.Error.new(
          validator: :time_zone,
          value: value,
          criteria: %{min: "-12:00", max: "+14:00", accepted_formats: ["±HH", "±HH:MM"]}
-       })}
+       )}
     end
   end
 end

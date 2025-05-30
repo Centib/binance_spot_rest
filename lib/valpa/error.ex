@@ -5,18 +5,13 @@ defmodule Valpa.Error do
 
   defexception [:validator, :value, :map_key, :criteria, :stacktrace]
 
-  defp stacktrace() do
-    {:current_stacktrace, trace} = Process.info(self(), :current_stacktrace)
-    Enum.drop(trace, 1)
-  end
-
-  defp format_stacktrace(stacktrace) do
-    case stacktrace do
-      {:current_stacktrace, trace} -> Exception.format_stacktrace(trace)
-      trace when is_list(trace) -> Exception.format_stacktrace(trace)
-      _ -> "No stacktrace available"
-    end
-  end
+  @type t :: %__MODULE__{
+          validator: atom(),
+          value: any(),
+          map_key: atom() | nil,
+          criteria: any() | nil,
+          stacktrace: any() | nil
+        }
 
   @impl true
   def message(%{
@@ -34,31 +29,24 @@ defmodule Valpa.Error do
     """
   end
 
-  def new(%{validator: validator, value: value, map_key: map_key, criteria: criteria}) do
-    %__MODULE__{
-      validator: validator,
-      value: value,
-      map_key: map_key,
-      criteria: criteria,
-      stacktrace: stacktrace()
-    }
+  defp format_stacktrace(stacktrace) do
+    case stacktrace do
+      {:current_stacktrace, trace} -> Exception.format_stacktrace(trace)
+      trace when is_list(trace) -> Exception.format_stacktrace(trace)
+      _ -> "No stacktrace available"
+    end
   end
 
-  def new(%{validator: validator, value: value, criteria: criteria}) do
-    %__MODULE__{
-      validator: validator,
-      value: value,
-      map_key: nil,
-      criteria: criteria,
-      stacktrace: stacktrace()
-    }
+  defp stacktrace() do
+    {:current_stacktrace, trace} = Process.info(self(), :current_stacktrace)
+    Enum.drop(trace, 1)
   end
 
-  @type t :: %__MODULE__{
-          validator: atom(),
-          value: any(),
-          map_key: atom() | nil,
-          criteria: any() | nil,
-          stacktrace: any() | nil
-        }
+  def new(fields) do
+    %{struct(__MODULE__, fields) | stacktrace: stacktrace()}
+  end
+
+  def set_map_key(%__MODULE__{} = error, map_key) do
+    %{error | map_key: map_key}
+  end
 end
