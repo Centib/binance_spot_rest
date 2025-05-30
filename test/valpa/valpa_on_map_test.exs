@@ -11,7 +11,7 @@ defmodule Valpa.ValpaOnMapTest do
      Valpa.Error.new(%{
        validator: validator,
        value: value,
-       map_key: :key,
+       field: :key,
        criteria: criteria
      })}
   end

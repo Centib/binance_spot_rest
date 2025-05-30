@@ -40,8 +40,8 @@ defmodule Valpa.Custom do
 
       {:error, %Valpa.Error{} = reason} ->
         {:error,
-         if(reason.map_key == nil,
-           do: Valpa.Error.set_map_key(reason, key),
+         if(reason.field == nil,
+           do: Valpa.Error.at(reason, key),
            else: reason
          )}
 

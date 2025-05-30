@@ -11,7 +11,7 @@ defmodule Valpa.ValpaMaybeTest do
      Valpa.Error.new(%{
        validator: validator,
        value: value,
-       map_key: nil,
+       field: nil,
        criteria: criteria
      })}
   end

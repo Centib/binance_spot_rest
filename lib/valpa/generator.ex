@@ -12,7 +12,7 @@ defmodule Valpa.Generator do
          Valpa.Error.new(%{
            validator: name,
            value: val,
-           map_key: nil,
+           field: nil,
            criteria: crit
          })}
       end
@@ -26,7 +26,7 @@ defmodule Valpa.Generator do
          Valpa.Error.new(%{
            validator: name,
            value: Map.fetch!(map, key),
-           map_key: key,
+           field: key,
            criteria: crit
          })}
       end

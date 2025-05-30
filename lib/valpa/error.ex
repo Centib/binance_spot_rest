@@ -3,12 +3,12 @@ defmodule Valpa.Error do
   Validation error.
   """
 
-  defexception [:validator, :value, :map_key, :criteria, :__trace__]
+  defexception [:validator, :value, :field, :criteria, :__trace__]
 
   @type t :: %__MODULE__{
-          validator: atom(),
-          value: any(),
-          map_key: atom() | nil,
+          validator: atom() | nil,
+          value: any() | nil,
+          field: atom() | nil,
           criteria: any() | nil,
           __trace__: any() | nil
         }
@@ -17,14 +17,14 @@ defmodule Valpa.Error do
   def message(%{
         validator: validator,
         value: value,
-        map_key: map_key,
+        field: field,
         criteria: criteria,
         __trace__: trace
       }) do
     trace_str = format_trace(trace)
 
     """
-    expected: #{inspect(validator)}#{if(criteria, do: " of #{inspect(criteria)}")}, got: #{inspect(value)}#{if(map_key, do: " for map key #{inspect(map_key)}")}
+    expected: #{inspect(validator)}#{if(criteria, do: " of #{inspect(criteria)}")}, got: #{inspect(value)}#{if(field, do: " for field #{inspect(field)}")}
     #{trace_str}
     """
   end
@@ -46,7 +46,7 @@ defmodule Valpa.Error do
     %{struct(__MODULE__, fields) | __trace__: capture_trace()}
   end
 
-  def set_map_key(%__MODULE__{} = error, map_key) do
-    %{error | map_key: map_key}
+  def at(%__MODULE__{} = error, field) do
+    %{error | field: field}
   end
 end
