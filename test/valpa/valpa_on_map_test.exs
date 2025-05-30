@@ -17,7 +17,7 @@ defmodule Valpa.ValpaOnMapTest do
   end
 
   def assert_error({:error, left}, {:error, right}) do
-    assert Map.delete(left, :stacktrace) == Map.delete(right, :stacktrace)
+    assert Map.delete(left, :__trace__) == Map.delete(right, :__trace__)
   end
 
   describe "type validations" do
