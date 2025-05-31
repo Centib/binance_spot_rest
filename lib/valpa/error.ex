@@ -3,13 +3,14 @@ defmodule Valpa.Error do
   Validation error.
   """
 
-  defexception [:validator, :value, :field, :criteria, :__trace__]
+  defexception [:validator, :value, :field, :criteria, :text, :__trace__]
 
   @type t :: %__MODULE__{
           validator: atom() | nil,
           value: any() | nil,
           field: atom() | nil,
           criteria: any() | nil,
+          text: String.t() | nil,
           __trace__: any() | nil
         }
 
@@ -19,12 +20,17 @@ defmodule Valpa.Error do
         value: value,
         field: field,
         criteria: criteria,
+        text: text,
         __trace__: trace
       }) do
     trace_str = format_trace(trace)
 
+    text =
+      text ||
+        ~s(expected: #{inspect(validator)}#{if(criteria, do: " of #{inspect(criteria)}")}, got: #{inspect(value)}#{if(field, do: " for field #{inspect(field)}")})
+
     """
-    expected: #{inspect(validator)}#{if(criteria, do: " of #{inspect(criteria)}")}, got: #{inspect(value)}#{if(field, do: " for field #{inspect(field)}")}
+    #{text}
     #{trace_str}
     """
   end
