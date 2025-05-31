@@ -23,8 +23,6 @@ defmodule BinanceSpotRest.Endpoints.General.Time.Query do
   ```
   """
 
-  # use Binance.Client, endpoint: "/api/v3/time"
-
   defstruct []
 
   defimpl BinanceSpotRest.Query do
