@@ -9,8 +9,7 @@ defmodule BinanceSpotRest.MixProject do
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       # TODO: this can slower app in :test and :dev
-      consolidate_protocols: Mix.env() != :test,
-      consolidate_protocols: Mix.env() != :dev
+      consolidate_protocols: Mix.env() == :prod
     ]
   end
 
