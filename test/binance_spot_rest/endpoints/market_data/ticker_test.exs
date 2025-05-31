@@ -89,7 +89,7 @@ defmodule BinanceSpotRest.Endpoints.MarketData.TickerTest do
       assert {:error, _} =
                %Ticker.SymbolQuery{
                  symbol: "BTCUSDT",
-                 windowSize: :"24h"
+                 windowSize: "24h"
                }
                ~>> BinanceSpotRest.Query.validate()
     end

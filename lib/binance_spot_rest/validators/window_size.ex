@@ -10,9 +10,6 @@ defmodule BinanceSpotRest.Validators.WindowSize do
 
   @behaviour Valpa.CustomValidator
 
-  defp valid?(ws) when is_binary(ws), do: ws in BinanceSpotRest.Enums.WindowSize.values()
-  defp valid?(_), do: false
-
   @doc """
   Returns :ok if `ws` is a valid window size, {:error, msg} otherwise.
 
@@ -25,7 +22,7 @@ defmodule BinanceSpotRest.Validators.WindowSize do
 
       iex> {:error, _} = BinanceSpotRest.Validators.WindowSize.validate(:"3d")
   """
-  @impl Valpa.CustomValidator
+  @impl true
   def validate(value) do
     if valid?(value) do
       :ok
@@ -36,8 +33,11 @@ defmodule BinanceSpotRest.Validators.WindowSize do
          value: value,
          criteria: BinanceSpotRest.Enums.WindowSize.values(),
          text:
-           ~s/Expected: windowSize value (minutes: "1m" to "59m"), (hours: "1h" to "23h"), (days: "1d" to "7d"), go: #{inspect(value)}/
+           ~s/Expected: windowSize value (minutes: "1m" to "59m"), (hours: "1h" to "23h"), (days: "1d" to "7d"), got: #{inspect(value)}/
        )}
     end
   end
+
+  defp valid?(ws) when is_binary(ws), do: ws in BinanceSpotRest.Enums.WindowSize.values()
+  defp valid?(_), do: false
 end
