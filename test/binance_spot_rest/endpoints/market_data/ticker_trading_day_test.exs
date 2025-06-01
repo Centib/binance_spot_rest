@@ -15,12 +15,12 @@ defmodule BinanceSpotRest.Endpoints.MarketData.TickerTradingDayTest do
                ~>> BinanceSpotRest.Query.prepare()
                ~>> BinanceSpotRest.Client.create_request()
 
-      assert request == %BinanceSpotRest.Client.Request{
+      assert %BinanceSpotRest.Client.Request{
                method: :get,
                headers: [],
                base_url: "https://testnet.binance.vision",
                url: "/api/v3/ticker/tradingDay?symbol=BTCUSDT"
-             }
+             } == request
     end
 
     test "symbols" do
@@ -34,13 +34,13 @@ defmodule BinanceSpotRest.Endpoints.MarketData.TickerTradingDayTest do
                ~>> BinanceSpotRest.Query.prepare()
                ~>> BinanceSpotRest.Client.create_request()
 
-      assert request == %BinanceSpotRest.Client.Request{
+      assert %BinanceSpotRest.Client.Request{
                method: :get,
                headers: [],
                base_url: "https://testnet.binance.vision",
                url:
                  "/api/v3/ticker/tradingDay?symbols=%5B%22BTCUSDT%22%2C%22BNBBTC%22%5D&timeZone=-1%3A00&type=MINI"
-             }
+             } == request
     end
   end
 

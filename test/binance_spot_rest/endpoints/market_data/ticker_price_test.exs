@@ -15,12 +15,12 @@ defmodule BinanceSpotRest.Endpoints.MarketData.TickerPriceTest do
                ~>> BinanceSpotRest.Query.prepare()
                ~>> BinanceSpotRest.Client.create_request()
 
-      assert request == %BinanceSpotRest.Client.Request{
+      assert %BinanceSpotRest.Client.Request{
                method: :get,
                headers: [],
                base_url: "https://testnet.binance.vision",
                url: "/api/v3/ticker/price?symbol=BTCUSDT"
-             }
+             } == request
     end
 
     test "symbols" do
@@ -32,12 +32,12 @@ defmodule BinanceSpotRest.Endpoints.MarketData.TickerPriceTest do
                ~>> BinanceSpotRest.Query.prepare()
                ~>> BinanceSpotRest.Client.create_request()
 
-      assert request == %BinanceSpotRest.Client.Request{
+      assert %BinanceSpotRest.Client.Request{
                method: :get,
                headers: [],
                base_url: "https://testnet.binance.vision",
                url: "/api/v3/ticker/price?symbols=%5B%22BTCUSDT%22%2C%22BNBBTC%22%5D"
-             }
+             } == request
     end
 
     test "empty" do
@@ -47,12 +47,12 @@ defmodule BinanceSpotRest.Endpoints.MarketData.TickerPriceTest do
                ~>> BinanceSpotRest.Query.prepare()
                ~>> BinanceSpotRest.Client.create_request()
 
-      assert request == %BinanceSpotRest.Client.Request{
+      assert %BinanceSpotRest.Client.Request{
                method: :get,
                headers: [],
                base_url: "https://testnet.binance.vision",
                url: "/api/v3/ticker/price"
-             }
+             } == request
     end
   end
 

@@ -10,11 +10,11 @@ defmodule BinanceSpotRest.Endpoints.General.PingTest do
              ~>> BinanceSpotRest.Query.prepare()
              ~>> BinanceSpotRest.Client.create_request()
 
-    assert request == %BinanceSpotRest.Client.Request{
+    assert %BinanceSpotRest.Client.Request{
              method: :get,
              headers: [],
              base_url: "https://testnet.binance.vision",
              url: "/api/v3/ping"
-           }
+           } == request
   end
 end

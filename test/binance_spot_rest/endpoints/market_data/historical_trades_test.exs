@@ -15,12 +15,12 @@ defmodule BinanceSpotRest.Endpoints.MarketData.HistoricalTradesTest do
                ~>> BinanceSpotRest.Query.prepare()
                ~>> BinanceSpotRest.Client.create_request()
 
-      assert request == %BinanceSpotRest.Client.Request{
+      assert %BinanceSpotRest.Client.Request{
                method: :get,
                headers: [],
                base_url: "https://testnet.binance.vision",
                url: "/api/v3/historicalTrades?symbol=BTCUSDT"
-             }
+             } == request
     end
 
     test "symbol, limit and fromId" do
@@ -30,12 +30,12 @@ defmodule BinanceSpotRest.Endpoints.MarketData.HistoricalTradesTest do
                ~>> BinanceSpotRest.Query.prepare()
                ~>> BinanceSpotRest.Client.create_request()
 
-      assert request == %BinanceSpotRest.Client.Request{
+      assert %BinanceSpotRest.Client.Request{
                method: :get,
                headers: [],
                base_url: "https://testnet.binance.vision",
                url: "/api/v3/historicalTrades?fromId=28457&limit=150&symbol=BTCUSDT"
-             }
+             } == request
     end
   end
 

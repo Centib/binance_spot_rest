@@ -15,12 +15,12 @@ defmodule BinanceSpotRest.Endpoints.MarketData.DepthTest do
                ~>> BinanceSpotRest.Query.prepare()
                ~>> BinanceSpotRest.Client.create_request()
 
-      assert request == %BinanceSpotRest.Client.Request{
+      assert %BinanceSpotRest.Client.Request{
                method: :get,
                headers: [],
                base_url: "https://testnet.binance.vision",
                url: "/api/v3/depth?symbol=BTCUSDT"
-             }
+             } == request
     end
 
     test "symbol and limit" do
@@ -30,12 +30,12 @@ defmodule BinanceSpotRest.Endpoints.MarketData.DepthTest do
                ~>> BinanceSpotRest.Query.prepare()
                ~>> BinanceSpotRest.Client.create_request()
 
-      assert request == %BinanceSpotRest.Client.Request{
+      assert %BinanceSpotRest.Client.Request{
                method: :get,
                headers: [],
                base_url: "https://testnet.binance.vision",
                url: "/api/v3/depth?limit=150&symbol=BTCUSDT"
-             }
+             } == request
     end
   end
 

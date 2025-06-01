@@ -15,12 +15,12 @@ defmodule BinanceSpotRest.Endpoints.MarketData.KlinesTest do
                ~>> BinanceSpotRest.Query.prepare()
                ~>> BinanceSpotRest.Client.create_request()
 
-      assert request == %BinanceSpotRest.Client.Request{
+      assert %BinanceSpotRest.Client.Request{
                method: :get,
                headers: [],
                base_url: "https://testnet.binance.vision",
                url: "/api/v3/klines?interval=3m&symbol=BTCUSDT"
-             }
+             } == request
     end
 
     test "symbol, limit and fromId" do
@@ -37,12 +37,13 @@ defmodule BinanceSpotRest.Endpoints.MarketData.KlinesTest do
                ~>> BinanceSpotRest.Query.prepare()
                ~>> BinanceSpotRest.Client.create_request()
 
-      assert request == %BinanceSpotRest.Client.Request{
+      assert %BinanceSpotRest.Client.Request{
                method: :get,
                headers: [],
                base_url: "https://testnet.binance.vision",
-               url: "/api/v3/klines?endTime=1498793809153&interval=3m&limit=150&startTime=1498793709153&symbol=BTCUSDT&timeZone=-1%3A00"
-             }
+               url:
+                 "/api/v3/klines?endTime=1498793809153&interval=3m&limit=150&startTime=1498793709153&symbol=BTCUSDT&timeZone=-1%3A00"
+             } == request
     end
   end
 
@@ -69,12 +70,14 @@ defmodule BinanceSpotRest.Endpoints.MarketData.KlinesTest do
 
     test "invalid non-integer startTime" do
       assert {:error, _} =
-               %Klines.Query{symbol: "BTCUSDT",
+               %Klines.Query{
+                 symbol: "BTCUSDT",
                  interval: :"3m",
                  startTime: "1_498_793_709_153",
                  endTime: 1_498_793_809_153,
                  timeZone: "-1:00",
-                 limit: 150}
+                 limit: 150
+               }
                ~>> BinanceSpotRest.Query.validate()
     end
 
@@ -94,7 +97,7 @@ defmodule BinanceSpotRest.Endpoints.MarketData.KlinesTest do
     test "invalid value interval" do
       assert {:error, _} =
                %Klines.Query{
-                symbol: "BTCUSDT",
+                 symbol: "BTCUSDT",
                  interval: :"11m",
                  startTime: 1_498_793_709_153,
                  endTime: 1_498_793_809_153,
