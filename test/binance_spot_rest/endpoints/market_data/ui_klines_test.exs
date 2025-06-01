@@ -13,12 +13,12 @@ defmodule BinanceSpotRest.Endpoints.MarketData.UiKlinesTest do
                %UiKlines.Query{symbol: "BTCUSDT", interval: :"3m"}
                ~>> BinanceSpotRest.Query.validate()
                ~>> BinanceSpotRest.Query.prepare()
-               ~>> BinanceSpotRest.Client.create_request()
+               ~>> BinanceSpotRest.Client.create_request(base_url: "https://fake.binance.url")
 
       assert %BinanceSpotRest.Client.Request{
                method: :get,
                headers: [],
-               base_url: "https://testnet.binance.vision",
+               base_url: "https://fake.binance.url",
                url: "/api/v3/uiKlines?interval=3m&symbol=BTCUSDT"
              } == request
     end
@@ -35,12 +35,12 @@ defmodule BinanceSpotRest.Endpoints.MarketData.UiKlinesTest do
                }
                ~>> BinanceSpotRest.Query.validate()
                ~>> BinanceSpotRest.Query.prepare()
-               ~>> BinanceSpotRest.Client.create_request()
+               ~>> BinanceSpotRest.Client.create_request(base_url: "https://fake.binance.url")
 
       assert %BinanceSpotRest.Client.Request{
                method: :get,
                headers: [],
-               base_url: "https://testnet.binance.vision",
+               base_url: "https://fake.binance.url",
                url:
                  "/api/v3/uiKlines?endTime=1498793809153&interval=3m&limit=150&startTime=1498793709153&symbol=BTCUSDT&timeZone=-1%3A00"
              } == request

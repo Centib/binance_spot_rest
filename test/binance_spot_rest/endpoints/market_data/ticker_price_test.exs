@@ -13,12 +13,12 @@ defmodule BinanceSpotRest.Endpoints.MarketData.TickerPriceTest do
                %TickerPrice.SymbolQuery{symbol: "BTCUSDT"}
                ~>> BinanceSpotRest.Query.validate()
                ~>> BinanceSpotRest.Query.prepare()
-               ~>> BinanceSpotRest.Client.create_request()
+               ~>> BinanceSpotRest.Client.create_request(base_url: "https://fake.binance.url")
 
       assert %BinanceSpotRest.Client.Request{
                method: :get,
                headers: [],
-               base_url: "https://testnet.binance.vision",
+               base_url: "https://fake.binance.url",
                url: "/api/v3/ticker/price?symbol=BTCUSDT"
              } == request
     end
@@ -30,12 +30,12 @@ defmodule BinanceSpotRest.Endpoints.MarketData.TickerPriceTest do
                }
                ~>> BinanceSpotRest.Query.validate()
                ~>> BinanceSpotRest.Query.prepare()
-               ~>> BinanceSpotRest.Client.create_request()
+               ~>> BinanceSpotRest.Client.create_request(base_url: "https://fake.binance.url")
 
       assert %BinanceSpotRest.Client.Request{
                method: :get,
                headers: [],
-               base_url: "https://testnet.binance.vision",
+               base_url: "https://fake.binance.url",
                url: "/api/v3/ticker/price?symbols=%5B%22BTCUSDT%22%2C%22BNBBTC%22%5D"
              } == request
     end
@@ -45,12 +45,12 @@ defmodule BinanceSpotRest.Endpoints.MarketData.TickerPriceTest do
                %TickerPrice.Query{}
                ~>> BinanceSpotRest.Query.validate()
                ~>> BinanceSpotRest.Query.prepare()
-               ~>> BinanceSpotRest.Client.create_request()
+               ~>> BinanceSpotRest.Client.create_request(base_url: "https://fake.binance.url")
 
       assert %BinanceSpotRest.Client.Request{
                method: :get,
                headers: [],
-               base_url: "https://testnet.binance.vision",
+               base_url: "https://fake.binance.url",
                url: "/api/v3/ticker/price"
              } == request
     end

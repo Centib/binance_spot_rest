@@ -8,12 +8,12 @@ defmodule BinanceSpotRest.Endpoints.General.TimeTest do
              %BinanceSpotRest.Endpoints.General.Time.Query{}
              ~>> BinanceSpotRest.Query.validate()
              ~>> BinanceSpotRest.Query.prepare()
-             ~>> BinanceSpotRest.Client.create_request()
+             ~>> BinanceSpotRest.Client.create_request(base_url: "https://fake.binance.url")
 
     assert %BinanceSpotRest.Client.Request{
              method: :get,
              headers: [],
-             base_url: "https://testnet.binance.vision",
+             base_url: "https://fake.binance.url",
              url: "/api/v3/time"
            } == request
   end

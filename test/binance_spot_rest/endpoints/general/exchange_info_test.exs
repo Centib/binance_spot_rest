@@ -8,12 +8,12 @@ defmodule BinanceSpotRest.Endpoints.General.ExchangeInfoTest do
              %BinanceSpotRest.Endpoints.General.ExchangeInfo.SymbolQuery{symbol: "BNBBTC"}
              ~>> BinanceSpotRest.Query.validate()
              ~>> BinanceSpotRest.Query.prepare()
-             ~>> BinanceSpotRest.Client.create_request()
+             ~>> BinanceSpotRest.Client.create_request(base_url: "https://fake.binance.url")
 
     assert %BinanceSpotRest.Client.Request{
              method: :get,
              headers: [],
-             base_url: "https://testnet.binance.vision",
+             base_url: "https://fake.binance.url",
              url: "/api/v3/exchangeInfo?symbol=BNBBTC"
            } == request
   end
@@ -26,12 +26,12 @@ defmodule BinanceSpotRest.Endpoints.General.ExchangeInfoTest do
              }
              ~>> BinanceSpotRest.Query.validate()
              ~>> BinanceSpotRest.Query.prepare()
-             ~>> BinanceSpotRest.Client.create_request()
+             ~>> BinanceSpotRest.Client.create_request(base_url: "https://fake.binance.url")
 
     assert %BinanceSpotRest.Client.Request{
              method: :get,
              headers: [],
-             base_url: "https://testnet.binance.vision",
+             base_url: "https://fake.binance.url",
              url: "/api/v3/exchangeInfo?showPermissionSets=false&symbol=BNBBTC"
            } == request
   end
@@ -43,12 +43,12 @@ defmodule BinanceSpotRest.Endpoints.General.ExchangeInfoTest do
              }
              ~>> BinanceSpotRest.Query.validate()
              ~>> BinanceSpotRest.Query.prepare()
-             ~>> BinanceSpotRest.Client.create_request()
+             ~>> BinanceSpotRest.Client.create_request(base_url: "https://fake.binance.url")
 
     assert %BinanceSpotRest.Client.Request{
              method: :get,
              headers: [],
-             base_url: "https://testnet.binance.vision",
+             base_url: "https://fake.binance.url",
              url: "/api/v3/exchangeInfo?symbols=%5B%22BTCUSDT%22%2C%22BNBBTC%22%5D"
            } == request
   end
@@ -61,12 +61,12 @@ defmodule BinanceSpotRest.Endpoints.General.ExchangeInfoTest do
              }
              ~>> BinanceSpotRest.Query.validate()
              ~>> BinanceSpotRest.Query.prepare()
-             ~>> BinanceSpotRest.Client.create_request()
+             ~>> BinanceSpotRest.Client.create_request(base_url: "https://fake.binance.url")
 
     assert %BinanceSpotRest.Client.Request{
              method: :get,
              headers: [],
-             base_url: "https://testnet.binance.vision",
+             base_url: "https://fake.binance.url",
              url:
                "/api/v3/exchangeInfo?showPermissionSets=false&symbols=%5B%22BTCUSDT%22%2C%22BNBBTC%22%5D"
            } == request
@@ -77,12 +77,12 @@ defmodule BinanceSpotRest.Endpoints.General.ExchangeInfoTest do
              %BinanceSpotRest.Endpoints.General.ExchangeInfo.Query{}
              ~>> BinanceSpotRest.Query.validate()
              ~>> BinanceSpotRest.Query.prepare()
-             ~>> BinanceSpotRest.Client.create_request()
+             ~>> BinanceSpotRest.Client.create_request(base_url: "https://fake.binance.url")
 
     assert %BinanceSpotRest.Client.Request{
              method: :get,
              headers: [],
-             base_url: "https://testnet.binance.vision",
+             base_url: "https://fake.binance.url",
              url: "/api/v3/exchangeInfo"
            } == request
   end
@@ -94,12 +94,12 @@ defmodule BinanceSpotRest.Endpoints.General.ExchangeInfoTest do
              }
              ~>> BinanceSpotRest.Query.validate()
              ~>> BinanceSpotRest.Query.prepare()
-             ~>> BinanceSpotRest.Client.create_request()
+             ~>> BinanceSpotRest.Client.create_request(base_url: "https://fake.binance.url")
 
     assert %BinanceSpotRest.Client.Request{
              method: :get,
              headers: [],
-             base_url: "https://testnet.binance.vision",
+             base_url: "https://fake.binance.url",
              url: "/api/v3/exchangeInfo?permissions=%5B%22MARGIN%22%2C%22LEVERAGED%22%5D"
            } == request
   end
@@ -109,12 +109,12 @@ defmodule BinanceSpotRest.Endpoints.General.ExchangeInfoTest do
              %BinanceSpotRest.Endpoints.General.ExchangeInfo.Query{symbolStatus: :HALT}
              ~>> BinanceSpotRest.Query.validate()
              ~>> BinanceSpotRest.Query.prepare()
-             ~>> BinanceSpotRest.Client.create_request()
+             ~>> BinanceSpotRest.Client.create_request(base_url: "https://fake.binance.url")
 
     assert %BinanceSpotRest.Client.Request{
              method: :get,
              headers: [],
-             base_url: "https://testnet.binance.vision",
+             base_url: "https://fake.binance.url",
              url: "/api/v3/exchangeInfo?symbolStatus=HALT"
            } == request
   end
@@ -124,12 +124,12 @@ defmodule BinanceSpotRest.Endpoints.General.ExchangeInfoTest do
              %BinanceSpotRest.Endpoints.General.ExchangeInfo.Query{showPermissionSets: false}
              ~>> BinanceSpotRest.Query.validate()
              ~>> BinanceSpotRest.Query.prepare()
-             ~>> BinanceSpotRest.Client.create_request()
+             ~>> BinanceSpotRest.Client.create_request(base_url: "https://fake.binance.url")
 
     assert %BinanceSpotRest.Client.Request{
              method: :get,
              headers: [],
-             base_url: "https://testnet.binance.vision",
+             base_url: "https://fake.binance.url",
              url: "/api/v3/exchangeInfo?showPermissionSets=false"
            } == request
   end
@@ -143,12 +143,12 @@ defmodule BinanceSpotRest.Endpoints.General.ExchangeInfoTest do
              }
              ~>> BinanceSpotRest.Query.validate()
              ~>> BinanceSpotRest.Query.prepare()
-             ~>> BinanceSpotRest.Client.create_request()
+             ~>> BinanceSpotRest.Client.create_request(base_url: "https://fake.binance.url")
 
     assert %BinanceSpotRest.Client.Request{
              method: :get,
              headers: [],
-             base_url: "https://testnet.binance.vision",
+             base_url: "https://fake.binance.url",
              url:
                "/api/v3/exchangeInfo?permissions=%5B%22MARGIN%22%2C%22LEVERAGED%22%5D&showPermissionSets=false&symbolStatus=HALT"
            } == request

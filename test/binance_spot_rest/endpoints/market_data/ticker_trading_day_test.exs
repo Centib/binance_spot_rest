@@ -13,12 +13,12 @@ defmodule BinanceSpotRest.Endpoints.MarketData.TickerTradingDayTest do
                %TickerTradingDay.SymbolQuery{symbol: "BTCUSDT"}
                ~>> BinanceSpotRest.Query.validate()
                ~>> BinanceSpotRest.Query.prepare()
-               ~>> BinanceSpotRest.Client.create_request()
+               ~>> BinanceSpotRest.Client.create_request(base_url: "https://fake.binance.url")
 
       assert %BinanceSpotRest.Client.Request{
                method: :get,
                headers: [],
-               base_url: "https://testnet.binance.vision",
+               base_url: "https://fake.binance.url",
                url: "/api/v3/ticker/tradingDay?symbol=BTCUSDT"
              } == request
     end
@@ -32,12 +32,12 @@ defmodule BinanceSpotRest.Endpoints.MarketData.TickerTradingDayTest do
                }
                ~>> BinanceSpotRest.Query.validate()
                ~>> BinanceSpotRest.Query.prepare()
-               ~>> BinanceSpotRest.Client.create_request()
+               ~>> BinanceSpotRest.Client.create_request(base_url: "https://fake.binance.url")
 
       assert %BinanceSpotRest.Client.Request{
                method: :get,
                headers: [],
-               base_url: "https://testnet.binance.vision",
+               base_url: "https://fake.binance.url",
                url:
                  "/api/v3/ticker/tradingDay?symbols=%5B%22BTCUSDT%22%2C%22BNBBTC%22%5D&timeZone=-1%3A00&type=MINI"
              } == request

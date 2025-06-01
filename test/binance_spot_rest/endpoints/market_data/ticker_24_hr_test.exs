@@ -13,12 +13,12 @@ defmodule BinanceSpotRest.Endpoints.MarketData.Ticker24HrTest do
                %Ticker24Hr.SymbolQuery{symbol: "BTCUSDT"}
                ~>> BinanceSpotRest.Query.validate()
                ~>> BinanceSpotRest.Query.prepare()
-               ~>> BinanceSpotRest.Client.create_request()
+               ~>> BinanceSpotRest.Client.create_request(base_url: "https://fake.binance.url")
 
       assert %BinanceSpotRest.Client.Request{
                method: :get,
                headers: [],
-               base_url: "https://testnet.binance.vision",
+               base_url: "https://fake.binance.url",
                url: "/api/v3/ticker/24hr?symbol=BTCUSDT"
              } == request
     end
@@ -31,12 +31,12 @@ defmodule BinanceSpotRest.Endpoints.MarketData.Ticker24HrTest do
                }
                ~>> BinanceSpotRest.Query.validate()
                ~>> BinanceSpotRest.Query.prepare()
-               ~>> BinanceSpotRest.Client.create_request()
+               ~>> BinanceSpotRest.Client.create_request(base_url: "https://fake.binance.url")
 
       assert %BinanceSpotRest.Client.Request{
                method: :get,
                headers: [],
-               base_url: "https://testnet.binance.vision",
+               base_url: "https://fake.binance.url",
                url: "/api/v3/ticker/24hr?symbols=%5B%22BTCUSDT%22%2C%22BNBBTC%22%5D&type=MINI"
              } == request
     end
@@ -46,12 +46,12 @@ defmodule BinanceSpotRest.Endpoints.MarketData.Ticker24HrTest do
                %Ticker24Hr.Query_DANGER_LARGE_WEIGHT{}
                ~>> BinanceSpotRest.Query.validate()
                ~>> BinanceSpotRest.Query.prepare()
-               ~>> BinanceSpotRest.Client.create_request()
+               ~>> BinanceSpotRest.Client.create_request(base_url: "https://fake.binance.url")
 
       assert %BinanceSpotRest.Client.Request{
                method: :get,
                headers: [],
-               base_url: "https://testnet.binance.vision",
+               base_url: "https://fake.binance.url",
                url: "/api/v3/ticker/24hr"
              } == request
     end

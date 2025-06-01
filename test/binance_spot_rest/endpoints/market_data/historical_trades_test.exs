@@ -13,12 +13,12 @@ defmodule BinanceSpotRest.Endpoints.MarketData.HistoricalTradesTest do
                %HistoricalTrades.Query{symbol: "BTCUSDT"}
                ~>> BinanceSpotRest.Query.validate()
                ~>> BinanceSpotRest.Query.prepare()
-               ~>> BinanceSpotRest.Client.create_request()
+               ~>> BinanceSpotRest.Client.create_request(base_url: "https://fake.binance.url")
 
       assert %BinanceSpotRest.Client.Request{
                method: :get,
                headers: [],
-               base_url: "https://testnet.binance.vision",
+               base_url: "https://fake.binance.url",
                url: "/api/v3/historicalTrades?symbol=BTCUSDT"
              } == request
     end
@@ -28,12 +28,12 @@ defmodule BinanceSpotRest.Endpoints.MarketData.HistoricalTradesTest do
                %HistoricalTrades.Query{symbol: "BTCUSDT", limit: 150, fromId: 28_457}
                ~>> BinanceSpotRest.Query.validate()
                ~>> BinanceSpotRest.Query.prepare()
-               ~>> BinanceSpotRest.Client.create_request()
+               ~>> BinanceSpotRest.Client.create_request(base_url: "https://fake.binance.url")
 
       assert %BinanceSpotRest.Client.Request{
                method: :get,
                headers: [],
-               base_url: "https://testnet.binance.vision",
+               base_url: "https://fake.binance.url",
                url: "/api/v3/historicalTrades?fromId=28457&limit=150&symbol=BTCUSDT"
              } == request
     end

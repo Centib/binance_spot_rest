@@ -9,12 +9,12 @@ defmodule BinanceSpotRest.Endpoints.MarketData.AggTradesTest do
                %BinanceSpotRest.Endpoints.MarketData.AggTrades.Query{symbol: "BTCUSDT"}
                ~>> BinanceSpotRest.Query.validate()
                ~>> BinanceSpotRest.Query.prepare()
-               ~>> BinanceSpotRest.Client.create_request()
+               ~>> BinanceSpotRest.Client.create_request(base_url: "https://fake.binance.url")
 
       assert %BinanceSpotRest.Client.Request{
                method: :get,
                headers: [],
-               base_url: "https://testnet.binance.vision",
+               base_url: "https://fake.binance.url",
                url: "/api/v3/aggTrades?symbol=BTCUSDT"
              } == request
     end
