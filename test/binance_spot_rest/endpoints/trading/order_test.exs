@@ -36,7 +36,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderTest do
                )
 
       assert %BinanceSpotRest.Client.Request{
-               method: :post,
+               method: BinanceSpotRest.Enums.Method._post(),
                headers: [{"FAKE_API_KEY", "fake1234api5678key"}],
                base_url: "https://fake.binance.url",
                url:
@@ -76,7 +76,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderTest do
     #            )
 
     #   assert %BinanceSpotRest.Client.Request{
-    #            method: :post,
+    #            method: BinanceSpotRest.Enums.Method._post(),
     #            headers: [{"X-MBX-APIKEY", BinanceSpotRest.Env.api_key()}],
     #            base_url: "https://testnet.binance.vision",
     #            url:
@@ -101,7 +101,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderTest do
     #            )
 
     #   assert %BinanceSpotRest.Client.Request{
-    #            method: :post,
+    #            method: BinanceSpotRest.Enums.Method._post(),
     #            headers: [{"X-MBX-APIKEY", BinanceSpotRest.Env.api_key()}],
     #            base_url: "https://testnet.binance.vision",
     #            url:
@@ -126,7 +126,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderTest do
     #            )
 
     #   assert %BinanceSpotRest.Client.Request{
-    #            method: :post,
+    #            method: BinanceSpotRest.Enums.Method._post(),
     #            headers: [{"X-MBX-APIKEY", BinanceSpotRest.Env.api_key()}],
     #            base_url: "https://testnet.binance.vision",
     #            url:
@@ -151,7 +151,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderTest do
     #            )
 
     #   assert %BinanceSpotRest.Client.Request{
-    #            method: :post,
+    #            method: BinanceSpotRest.Enums.Method._post(),
     #            headers: [{"X-MBX-APIKEY", BinanceSpotRest.Env.api_key()}],
     #            base_url: "https://testnet.binance.vision",
     #            url:
@@ -176,7 +176,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderTest do
     #            )
 
     #   assert %BinanceSpotRest.Client.Request{
-    #            method: :post,
+    #            method: BinanceSpotRest.Enums.Method._post(),
     #            headers: [{"X-MBX-APIKEY", BinanceSpotRest.Env.api_key()}],
     #            base_url: "https://testnet.binance.vision",
     #            url:
@@ -201,7 +201,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderTest do
     #            )
 
     #   assert %BinanceSpotRest.Client.Request{
-    #            method: :post,
+    #            method: BinanceSpotRest.Enums.Method._post(),
     #            headers: [{"X-MBX-APIKEY", BinanceSpotRest.Env.api_key()}],
     #            base_url: "https://testnet.binance.vision",
     #            url:

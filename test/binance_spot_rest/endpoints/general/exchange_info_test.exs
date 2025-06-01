@@ -11,7 +11,7 @@ defmodule BinanceSpotRest.Endpoints.General.ExchangeInfoTest do
              ~>> BinanceSpotRest.Client.create_request(base_url: "https://fake.binance.url")
 
     assert %BinanceSpotRest.Client.Request{
-             method: :get,
+             method: BinanceSpotRest.Enums.Method._get(),
              headers: [],
              base_url: "https://fake.binance.url",
              url: "/api/v3/exchangeInfo?symbol=BNBBTC"
@@ -29,7 +29,7 @@ defmodule BinanceSpotRest.Endpoints.General.ExchangeInfoTest do
              ~>> BinanceSpotRest.Client.create_request(base_url: "https://fake.binance.url")
 
     assert %BinanceSpotRest.Client.Request{
-             method: :get,
+             method: BinanceSpotRest.Enums.Method._get(),
              headers: [],
              base_url: "https://fake.binance.url",
              url: "/api/v3/exchangeInfo?showPermissionSets=false&symbol=BNBBTC"
@@ -46,7 +46,7 @@ defmodule BinanceSpotRest.Endpoints.General.ExchangeInfoTest do
              ~>> BinanceSpotRest.Client.create_request(base_url: "https://fake.binance.url")
 
     assert %BinanceSpotRest.Client.Request{
-             method: :get,
+             method: BinanceSpotRest.Enums.Method._get(),
              headers: [],
              base_url: "https://fake.binance.url",
              url: "/api/v3/exchangeInfo?symbols=%5B%22BTCUSDT%22%2C%22BNBBTC%22%5D"
@@ -64,7 +64,7 @@ defmodule BinanceSpotRest.Endpoints.General.ExchangeInfoTest do
              ~>> BinanceSpotRest.Client.create_request(base_url: "https://fake.binance.url")
 
     assert %BinanceSpotRest.Client.Request{
-             method: :get,
+             method: BinanceSpotRest.Enums.Method._get(),
              headers: [],
              base_url: "https://fake.binance.url",
              url:
@@ -80,7 +80,7 @@ defmodule BinanceSpotRest.Endpoints.General.ExchangeInfoTest do
              ~>> BinanceSpotRest.Client.create_request(base_url: "https://fake.binance.url")
 
     assert %BinanceSpotRest.Client.Request{
-             method: :get,
+             method: BinanceSpotRest.Enums.Method._get(),
              headers: [],
              base_url: "https://fake.binance.url",
              url: "/api/v3/exchangeInfo"
@@ -97,7 +97,7 @@ defmodule BinanceSpotRest.Endpoints.General.ExchangeInfoTest do
              ~>> BinanceSpotRest.Client.create_request(base_url: "https://fake.binance.url")
 
     assert %BinanceSpotRest.Client.Request{
-             method: :get,
+             method: BinanceSpotRest.Enums.Method._get(),
              headers: [],
              base_url: "https://fake.binance.url",
              url: "/api/v3/exchangeInfo?permissions=%5B%22MARGIN%22%2C%22LEVERAGED%22%5D"
@@ -112,7 +112,7 @@ defmodule BinanceSpotRest.Endpoints.General.ExchangeInfoTest do
              ~>> BinanceSpotRest.Client.create_request(base_url: "https://fake.binance.url")
 
     assert %BinanceSpotRest.Client.Request{
-             method: :get,
+             method: BinanceSpotRest.Enums.Method._get(),
              headers: [],
              base_url: "https://fake.binance.url",
              url: "/api/v3/exchangeInfo?symbolStatus=HALT"
@@ -127,7 +127,7 @@ defmodule BinanceSpotRest.Endpoints.General.ExchangeInfoTest do
              ~>> BinanceSpotRest.Client.create_request(base_url: "https://fake.binance.url")
 
     assert %BinanceSpotRest.Client.Request{
-             method: :get,
+             method: BinanceSpotRest.Enums.Method._get(),
              headers: [],
              base_url: "https://fake.binance.url",
              url: "/api/v3/exchangeInfo?showPermissionSets=false"
@@ -146,7 +146,7 @@ defmodule BinanceSpotRest.Endpoints.General.ExchangeInfoTest do
              ~>> BinanceSpotRest.Client.create_request(base_url: "https://fake.binance.url")
 
     assert %BinanceSpotRest.Client.Request{
-             method: :get,
+             method: BinanceSpotRest.Enums.Method._get(),
              headers: [],
              base_url: "https://fake.binance.url",
              url:

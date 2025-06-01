@@ -16,7 +16,7 @@ defmodule BinanceSpotRest.Endpoints.MarketData.TickerPriceTest do
                ~>> BinanceSpotRest.Client.create_request(base_url: "https://fake.binance.url")
 
       assert %BinanceSpotRest.Client.Request{
-               method: :get,
+               method: BinanceSpotRest.Enums.Method._get(),
                headers: [],
                base_url: "https://fake.binance.url",
                url: "/api/v3/ticker/price?symbol=BTCUSDT"
@@ -33,7 +33,7 @@ defmodule BinanceSpotRest.Endpoints.MarketData.TickerPriceTest do
                ~>> BinanceSpotRest.Client.create_request(base_url: "https://fake.binance.url")
 
       assert %BinanceSpotRest.Client.Request{
-               method: :get,
+               method: BinanceSpotRest.Enums.Method._get(),
                headers: [],
                base_url: "https://fake.binance.url",
                url: "/api/v3/ticker/price?symbols=%5B%22BTCUSDT%22%2C%22BNBBTC%22%5D"
@@ -48,7 +48,7 @@ defmodule BinanceSpotRest.Endpoints.MarketData.TickerPriceTest do
                ~>> BinanceSpotRest.Client.create_request(base_url: "https://fake.binance.url")
 
       assert %BinanceSpotRest.Client.Request{
-               method: :get,
+               method: BinanceSpotRest.Enums.Method._get(),
                headers: [],
                base_url: "https://fake.binance.url",
                url: "/api/v3/ticker/price"

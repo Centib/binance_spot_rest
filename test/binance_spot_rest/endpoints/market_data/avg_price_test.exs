@@ -12,7 +12,7 @@ defmodule BinanceSpotRest.Endpoints.MarketData.AvgPriceTest do
                ~>> BinanceSpotRest.Client.create_request(base_url: "https://fake.binance.url")
 
       assert %BinanceSpotRest.Client.Request{
-               method: :get,
+               method: BinanceSpotRest.Enums.Method._get(),
                headers: [],
                base_url: "https://fake.binance.url",
                url: "/api/v3/avgPrice?symbol=BTCUSDT"
