@@ -39,7 +39,7 @@ defmodule Valpa.Error do
     case trace do
       {:current_stacktrace, tr} -> Exception.format_stacktrace(tr)
       tr when is_list(tr) -> Exception.format_stacktrace(tr)
-      _ -> "No stacktrace available"
+      _ -> "no stacktrace available"
     end
   end
 

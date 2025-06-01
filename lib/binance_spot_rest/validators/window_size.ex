@@ -33,7 +33,7 @@ defmodule BinanceSpotRest.Validators.WindowSize do
          value: value,
          criteria: BinanceSpotRest.Enums.WindowSize.values(),
          text:
-           ~s/Expected: windowSize value (minutes: "1m" to "59m"), (hours: "1h" to "23h"), (days: "1d" to "7d"), got: #{inspect(value)}/
+           ~s/expected: windowSize value (minutes: "1m" to "59m"), (hours: "1h" to "23h"), (days: "1d" to "7d"), got: #{inspect(value)}/
        )}
     end
   end

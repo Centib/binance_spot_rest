@@ -42,7 +42,7 @@ defmodule BinanceSpotRest.Validators.TimeZone do
          value: value,
          criteria: %{min: "-12:00", max: "+14:00", accepted_formats: ["±HH", "±HH:MM"]},
          text:
-           ~s/Expected: timeZone value (e.g. "0", "8", "4", "-1"), (e.g. "-1:00", "05:45", "+10:30"), from -12:00 to +14:00 (inclusive), got: #{inspect(value)}/
+           ~s/expected: timeZone value (e.g. "0", "8", "4", "-1"), (e.g. "-1:00", "05:45", "+10:30"), from -12:00 to +14:00 (inclusive), got: #{inspect(value)}/
        )}
     end
   end
