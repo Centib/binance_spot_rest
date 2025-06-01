@@ -13,20 +13,16 @@ defmodule BinanceSpotRest.Validators.IcebergQty do
       iex> BinanceSpotRest.Validators.IcebergQty.validate(%{icebergQty: Decimal.new("0.5"), timeInForce: :GTC, quantity: Decimal.new("1.0")})
       :ok
 
-      iex> BinanceSpotRest.Validators.IcebergQty.validate(%{icebergQty: Decimal.new("0.5"), timeInForce: :IOC, quantity: Decimal.new("1.0")})
-      {:error, "`icebergQty` is only allowed when `timeInForce` is :GTC, not :IOC."}
+      iex> {:error, %Valpa.Error{field: :timeInForce}} = BinanceSpotRest.Validators.IcebergQty.validate(%{icebergQty: Decimal.new("0.5"), timeInForce: :IOC, quantity: Decimal.new("1.0")})
 
-      iex> BinanceSpotRest.Validators.IcebergQty.validate(%{icebergQty: Decimal.new("1.5"), timeInForce: :GTC, quantity: Decimal.new("1.0")})
-      {:error, "`icebergQty` must be less than the `quantity` value."}
+      iex> {:error, %Valpa.Error{field: :icebergQty}} = BinanceSpotRest.Validators.IcebergQty.validate(%{icebergQty: Decimal.new("1.5"), timeInForce: :GTC, quantity: Decimal.new("1.0")})
 
       iex> BinanceSpotRest.Validators.IcebergQty.validate(%{icebergQty: Decimal.new("0.5"), quantity: Decimal.new("1.0")})
       :ok
 
-      iex> BinanceSpotRest.Validators.IcebergQty.validate(%{icebergQty: "0.5", timeInForce: :GTC, quantity: Decimal.new("1.0")})
-      {:error, "`icebergQty` must be a Decimal."}
+      iex> {:error, %Valpa.Error{field: :icebergQty}} = BinanceSpotRest.Validators.IcebergQty.validate(%{icebergQty: "0.5", timeInForce: :GTC, quantity: Decimal.new("1.0")})
 
-      iex> BinanceSpotRest.Validators.IcebergQty.validate(%{icebergQty: Decimal.new("0.5"), timeInForce: :GTC})
-      {:error, "`icebergQty` requires `quantity` to be set."}
+      iex> {:error, %Valpa.Error{field: :quantity}} = BinanceSpotRest.Validators.IcebergQty.validate(%{icebergQty: Decimal.new("0.5"), timeInForce: :GTC})
 
       iex> BinanceSpotRest.Validators.IcebergQty.validate(%{timeInForce: :GTC, quantity: Decimal.new("1.0")})
       :ok
@@ -38,6 +34,8 @@ defmodule BinanceSpotRest.Validators.IcebergQty do
   @behaviour Valpa.CustomValidator
 
   @allowed_time_in_force BinanceSpotRest.Enums.TimeInForce._GTC()
+
+  @validator :icebergQty
 
   @impl true
   def validate(%{} = map) do
@@ -65,21 +63,58 @@ defmodule BinanceSpotRest.Validators.IcebergQty do
   end
 
   defp validate_iceberg_qty_type(%Decimal{}), do: :ok
-  defp validate_iceberg_qty_type(_), do: {:error, "`icebergQty` must be a Decimal."}
+
+  defp validate_iceberg_qty_type(iceberg_qty),
+    do:
+      {:error,
+       Valpa.Error.new(
+         validator: @validator,
+         value: iceberg_qty,
+         field: :icebergQty,
+         criteria: %{type: :decimal},
+         text: "`icebergQty` must be a Decimal."
+       )}
 
   defp validate_time_in_force(nil), do: :ok
   defp validate_time_in_force(@allowed_time_in_force), do: :ok
 
   defp validate_time_in_force(tif),
-    do: {:error, "`icebergQty` is only allowed when `timeInForce` is :GTC, not #{inspect(tif)}."}
+    do:
+      {:error,
+       Valpa.Error.new(
+         validator: @validator,
+         value: tif,
+         field: :timeInForce,
+         criteria: %{allowed: :GTC},
+         text: "`icebergQty` is only allowed when `timeInForce` is :GTC, not #{inspect(tif)}."
+       )}
 
   defp validate_iceberg_qty_value(_iceberg_qty, nil),
-    do: {:error, "`icebergQty` requires `quantity` to be set."}
+    do:
+      {:error,
+       Valpa.Error.new(
+         validator: @validator,
+         value: nil,
+         field: :quantity,
+         criteria: :required,
+         text: "`icebergQty` requires `quantity` to be set."
+       )}
 
   defp validate_iceberg_qty_value(%Decimal{} = iceberg_qty, %Decimal{} = quantity) do
     case Decimal.compare(iceberg_qty, quantity) do
-      :lt -> :ok
-      _ -> {:error, "`icebergQty` must be less than the `quantity` value."}
+      :lt ->
+        :ok
+
+      _ ->
+        {:error,
+         Valpa.Error.new(
+           validator: @validator,
+           value: iceberg_qty,
+           field: :icebergQty,
+           criteria: %{less_than: :quantity},
+           text:
+             "`icebergQty` must be less than the `quantity` value (got icebergQty=#{iceberg_qty}, quantity=#{quantity})."
+         )}
     end
   end
 end
