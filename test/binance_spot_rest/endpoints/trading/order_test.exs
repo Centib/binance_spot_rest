@@ -63,7 +63,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderTest do
     #   assert {:ok, request} =
     #            %Order.LimitQuery{
     #              symbol: "BTCUSDT",
-    #              interval: :"3m",
+    #              interval: BinanceSpotRest.Enums.Interval._3m(),
     #              startTime: 1_498_793_709_153,
     #              endTime: 1_498_793_809_153,
     #              timeZone: "-1:00",
@@ -88,7 +88,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderTest do
     #   assert {:ok, request} =
     #            %Order.LimitQuery{
     #              symbol: "BTCUSDT",
-    #              interval: :"3m",
+    #              interval: BinanceSpotRest.Enums.Interval._3m(),
     #              startTime: 1_498_793_709_153,
     #              endTime: 1_498_793_809_153,
     #              timeZone: "-1:00",
@@ -113,7 +113,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderTest do
     #   assert {:ok, request} =
     #            %Order.LimitQuery{
     #              symbol: "BTCUSDT",
-    #              interval: :"3m",
+    #              interval: BinanceSpotRest.Enums.Interval._3m(),
     #              startTime: 1_498_793_709_153,
     #              endTime: 1_498_793_809_153,
     #              timeZone: "-1:00",
@@ -138,7 +138,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderTest do
     #   assert {:ok, request} =
     #            %Order.LimitQuery{
     #              symbol: "BTCUSDT",
-    #              interval: :"3m",
+    #              interval: BinanceSpotRest.Enums.Interval._3m(),
     #              startTime: 1_498_793_709_153,
     #              endTime: 1_498_793_809_153,
     #              timeZone: "-1:00",
@@ -163,7 +163,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderTest do
     #   assert {:ok, request} =
     #            %Order.LimitQuery{
     #              symbol: "BTCUSDT",
-    #              interval: :"3m",
+    #              interval: BinanceSpotRest.Enums.Interval._3m(),
     #              startTime: 1_498_793_709_153,
     #              endTime: 1_498_793_809_153,
     #              timeZone: "-1:00",
@@ -188,7 +188,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderTest do
     #   assert {:ok, request} =
     #            %Order.LimitQuery{
     #              symbol: "BTCUSDT",
-    #              interval: :"3m",
+    #              interval: BinanceSpotRest.Enums.Interval._3m(),
     #              startTime: 1_498_793_709_153,
     #              endTime: 1_498_793_809_153,
     #              timeZone: "-1:00",
@@ -213,11 +213,11 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderTest do
   # describe "validation" do
   #   test "invalid without symbol" do
   #     assert {:error, _} =
-  #              %Order.LimitQuery{symbol: nil, interval: :"3m"}
+  #              %Order.LimitQuery{symbol: nil, interval: BinanceSpotRest.Enums.Interval._3m()}
   #              ~>> BinanceSpotRest.Query.validate()
 
   #     assert {:error, _} =
-  #              %Order.LimitQuery{interval: :"3m"}
+  #              %Order.LimitQuery{interval: BinanceSpotRest.Enums.Interval._3m()}
   #              ~>> BinanceSpotRest.Query.validate()
   #   end
 
@@ -235,7 +235,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderTest do
   #     assert {:error, _} =
   #              %Order.LimitQuery{
   #                symbol: "BTCUSDT",
-  #                interval: :"3m",
+  #                interval: BinanceSpotRest.Enums.Interval._3m(),
   #                startTime: "1_498_793_709_153",
   #                endTime: 1_498_793_809_153,
   #                timeZone: "-1:00",
@@ -248,7 +248,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderTest do
   #     assert {:error, _} =
   #              %Order.LimitQuery{
   #                symbol: "BTCUSDT",
-  #                interval: :"3m",
+  #                interval: BinanceSpotRest.Enums.Interval._3m(),
   #                startTime: 1_498_793_709_153,
   #                endTime: 1_498_793_809_153,
   #                timeZone: "-13:00",
@@ -274,7 +274,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderTest do
   #     assert {:error, _} =
   #              %Order.LimitQuery{
   #                symbol: "BTCUSDT",
-  #                interval: :"3m",
+  #                interval: BinanceSpotRest.Enums.Interval._3m(),
   #                startTime: 1_498_793_709_153,
   #                endTime: 1_498_793_809_153,
   #                timeZone: "-1:00",

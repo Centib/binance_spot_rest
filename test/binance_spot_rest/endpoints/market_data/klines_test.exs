@@ -10,7 +10,7 @@ defmodule BinanceSpotRest.Endpoints.MarketData.KlinesTest do
   describe "request" do
     test "symbol and interval" do
       assert {:ok, request} =
-               %Klines.Query{symbol: "BTCUSDT", interval: :"3m"}
+               %Klines.Query{symbol: "BTCUSDT", interval: BinanceSpotRest.Enums.Interval._3m()}
                ~>> BinanceSpotRest.Query.validate()
                ~>> BinanceSpotRest.Query.prepare()
                ~>> BinanceSpotRest.Client.create_request(base_url: "https://fake.binance.url")
@@ -27,7 +27,7 @@ defmodule BinanceSpotRest.Endpoints.MarketData.KlinesTest do
       assert {:ok, request} =
                %Klines.Query{
                  symbol: "BTCUSDT",
-                 interval: :"3m",
+                 interval: BinanceSpotRest.Enums.Interval._3m(),
                  startTime: 1_498_793_709_153,
                  endTime: 1_498_793_809_153,
                  timeZone: "-1:00",
@@ -50,11 +50,11 @@ defmodule BinanceSpotRest.Endpoints.MarketData.KlinesTest do
   describe "validation" do
     test "invalid without symbol" do
       assert {:error, _} =
-               %Klines.Query{symbol: nil, interval: :"3m"}
+               %Klines.Query{symbol: nil, interval: BinanceSpotRest.Enums.Interval._3m()}
                ~>> BinanceSpotRest.Query.validate()
 
       assert {:error, _} =
-               %Klines.Query{interval: :"3m"}
+               %Klines.Query{interval: BinanceSpotRest.Enums.Interval._3m()}
                ~>> BinanceSpotRest.Query.validate()
     end
 
@@ -72,7 +72,7 @@ defmodule BinanceSpotRest.Endpoints.MarketData.KlinesTest do
       assert {:error, _} =
                %Klines.Query{
                  symbol: "BTCUSDT",
-                 interval: :"3m",
+                 interval: BinanceSpotRest.Enums.Interval._3m(),
                  startTime: "1_498_793_709_153",
                  endTime: 1_498_793_809_153,
                  timeZone: "-1:00",
@@ -85,7 +85,7 @@ defmodule BinanceSpotRest.Endpoints.MarketData.KlinesTest do
       assert {:error, _} =
                %Klines.Query{
                  symbol: "BTCUSDT",
-                 interval: :"3m",
+                 interval: BinanceSpotRest.Enums.Interval._3m(),
                  startTime: 1_498_793_709_153,
                  endTime: 1_498_793_809_153,
                  timeZone: "-13:00",
@@ -111,7 +111,7 @@ defmodule BinanceSpotRest.Endpoints.MarketData.KlinesTest do
       assert {:error, _} =
                %Klines.Query{
                  symbol: "BTCUSDT",
-                 interval: :"3m",
+                 interval: BinanceSpotRest.Enums.Interval._3m(),
                  startTime: 1_498_793_709_153,
                  endTime: 1_498_793_809_153,
                  timeZone: "-1:00",

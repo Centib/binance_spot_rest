@@ -90,7 +90,10 @@ defmodule BinanceSpotRest.Endpoints.General.ExchangeInfoTest do
   test "exchange_info permissions query request" do
     assert {:ok, request} =
              %BinanceSpotRest.Endpoints.General.ExchangeInfo.Query{
-               permissions: [:MARGIN, :LEVERAGED]
+               permissions: [
+                 BinanceSpotRest.Enums.Permission._MARGIN(),
+                 BinanceSpotRest.Enums.Permission._LEVERAGED()
+               ]
              }
              ~>> BinanceSpotRest.Query.validate()
              ~>> BinanceSpotRest.Query.prepare()
@@ -106,7 +109,9 @@ defmodule BinanceSpotRest.Endpoints.General.ExchangeInfoTest do
 
   test "exchange_info symbol status query request" do
     assert {:ok, request} =
-             %BinanceSpotRest.Endpoints.General.ExchangeInfo.Query{symbolStatus: :HALT}
+             %BinanceSpotRest.Endpoints.General.ExchangeInfo.Query{
+               symbolStatus: BinanceSpotRest.Enums.SymbolStatus._HALT()
+             }
              ~>> BinanceSpotRest.Query.validate()
              ~>> BinanceSpotRest.Query.prepare()
              ~>> BinanceSpotRest.Client.create_request(base_url: "https://fake.binance.url")
@@ -137,9 +142,12 @@ defmodule BinanceSpotRest.Endpoints.General.ExchangeInfoTest do
   test "exchange_info permissions, show permission sets and symbol status query request" do
     assert {:ok, request} =
              %BinanceSpotRest.Endpoints.General.ExchangeInfo.Query{
-               permissions: [:MARGIN, :LEVERAGED],
+               permissions: [
+                 BinanceSpotRest.Enums.Permission._MARGIN(),
+                 BinanceSpotRest.Enums.Permission._LEVERAGED()
+               ],
                showPermissionSets: false,
-               symbolStatus: :HALT
+               symbolStatus: BinanceSpotRest.Enums.SymbolStatus._HALT()
              }
              ~>> BinanceSpotRest.Query.validate()
              ~>> BinanceSpotRest.Query.prepare()
