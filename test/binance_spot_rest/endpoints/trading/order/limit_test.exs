@@ -5,10 +5,10 @@ defmodule BinanceSpotRest.Endpoints.Trading.Order.LimitTest do
 
   import Loe
 
-  alias BinanceSpotRest.Endpoints.Trading.Order
+  alias BinanceSpotRest.Endpoints.Trading.Order.LimitQuery
 
   def full_valid_query do
-    %Order.LimitQuery{
+    %LimitQuery{
       symbol: "LTCBTC",
       side: BinanceSpotRest.Enums.Side._BUY(),
       type: BinanceSpotRest.Enums.OrderType._LIMIT(),
@@ -72,7 +72,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.Order.LimitTest do
                  full_valid_query()
                  ~>> Map.from_struct()
                  ~>> Map.delete(unquote(field))
-                 ~>> then(&struct(Order.LimitQuery, &1))
+                 ~>> then(&struct(LimitQuery, &1))
                  ~>> BinanceSpotRest.Query.validate()
       end
     end
@@ -91,11 +91,11 @@ defmodule BinanceSpotRest.Endpoints.Trading.Order.LimitTest do
     ]
 
     test "valid without optional fields" do
-      assert {:ok, %Order.LimitQuery{}} =
+      assert {:ok, %LimitQuery{}} =
                full_valid_query()
                ~>> Map.from_struct()
                ~>> Map.drop(@optional)
-               ~>> then(&struct(Order.LimitQuery, &1))
+               ~>> then(&struct(LimitQuery, &1))
                ~>> BinanceSpotRest.Query.validate()
     end
   end
@@ -136,7 +136,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.Order.LimitTest do
                  full_valid_query()
                  |> Map.from_struct()
                  |> Map.put(unquote(field), unquote(Macro.escape(bad_value)))
-                 |> then(&struct(Order.LimitQuery, &1))
+                 |> then(&struct(LimitQuery, &1))
                  |> BinanceSpotRest.Query.validate()
       end
     end
@@ -148,7 +148,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.Order.LimitTest do
                full_valid_query()
                |> Map.from_struct()
                |> Map.put(:timeInForce, BinanceSpotRest.Enums.TimeInForce._FOK())
-               |> then(&struct(Order.LimitQuery, &1))
+               |> then(&struct(LimitQuery, &1))
                |> BinanceSpotRest.Query.validate()
     end
 
@@ -157,7 +157,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.Order.LimitTest do
                full_valid_query()
                |> Map.from_struct()
                |> Map.put(:timeInForce, BinanceSpotRest.Enums.TimeInForce._IOC())
-               |> then(&struct(Order.LimitQuery, &1))
+               |> then(&struct(LimitQuery, &1))
                |> BinanceSpotRest.Query.validate()
     end
 
@@ -166,7 +166,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.Order.LimitTest do
                full_valid_query()
                |> Map.from_struct()
                |> Map.put(:icebergQty, Decimal.new("1.5"))
-               |> then(&struct(Order.LimitQuery, &1))
+               |> then(&struct(LimitQuery, &1))
                |> BinanceSpotRest.Query.validate()
     end
   end

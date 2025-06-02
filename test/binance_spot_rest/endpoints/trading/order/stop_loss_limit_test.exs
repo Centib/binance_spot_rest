@@ -5,10 +5,10 @@ defmodule BinanceSpotRest.Endpoints.Trading.Order.StopLossLimitTest do
 
   import Loe
 
-  alias BinanceSpotRest.Endpoints.Trading.Order
+  alias BinanceSpotRest.Endpoints.Trading.Order.StopLossLimitQuery
 
   def full_valid_query do
-    %Order.StopLossLimitQuery{
+    %StopLossLimitQuery{
       symbol: "LTCBTC",
       side: BinanceSpotRest.Enums.Side._BUY(),
       type: BinanceSpotRest.Enums.OrderType._STOP_LOSS_LIMIT(),
@@ -76,7 +76,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.Order.StopLossLimitTest do
                  full_valid_query()
                  ~>> Map.from_struct()
                  ~>> Map.delete(unquote(field))
-                 ~>> then(&struct(Order.StopLossLimitQuery, &1))
+                 ~>> then(&struct(StopLossLimitQuery, &1))
                  ~>> BinanceSpotRest.Query.validate()
       end
     end
@@ -95,11 +95,11 @@ defmodule BinanceSpotRest.Endpoints.Trading.Order.StopLossLimitTest do
     ]
 
     test "valid without optional fields" do
-      assert {:ok, %Order.StopLossLimitQuery{}} =
+      assert {:ok, %StopLossLimitQuery{}} =
                full_valid_query()
                ~>> Map.from_struct()
                ~>> Map.drop(@optional)
-               ~>> then(&struct(Order.StopLossLimitQuery, &1))
+               ~>> then(&struct(StopLossLimitQuery, &1))
                ~>> BinanceSpotRest.Query.validate()
     end
   end
@@ -108,18 +108,18 @@ defmodule BinanceSpotRest.Endpoints.Trading.Order.StopLossLimitTest do
     @inclusive [:stopPrice, :trailingDelta]
 
     test "valid with one of [:stopPrice, :trailingDelta]" do
-      assert {:ok, %Order.StopLossLimitQuery{}} =
+      assert {:ok, %StopLossLimitQuery{}} =
                full_valid_query()
                ~>> Map.from_struct()
                ~>> Map.delete(:stopPrice)
-               ~>> then(&struct(Order.StopLossLimitQuery, &1))
+               ~>> then(&struct(StopLossLimitQuery, &1))
                ~>> BinanceSpotRest.Query.validate()
 
-      assert {:ok, %Order.StopLossLimitQuery{}} =
+      assert {:ok, %StopLossLimitQuery{}} =
                full_valid_query()
                ~>> Map.from_struct()
                ~>> Map.delete(:trailingDelta)
-               ~>> then(&struct(Order.StopLossLimitQuery, &1))
+               ~>> then(&struct(StopLossLimitQuery, &1))
                ~>> BinanceSpotRest.Query.validate()
     end
 
@@ -128,7 +128,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.Order.StopLossLimitTest do
                full_valid_query()
                ~>> Map.from_struct()
                ~>> Map.drop(@inclusive)
-               ~>> then(&struct(Order.StopLossLimitQuery, &1))
+               ~>> then(&struct(StopLossLimitQuery, &1))
                ~>> BinanceSpotRest.Query.validate()
     end
   end
@@ -158,7 +158,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.Order.StopLossLimitTest do
                  full_valid_query()
                  |> Map.from_struct()
                  |> Map.put(unquote(field), unquote(Macro.escape(bad_value)))
-                 |> then(&struct(Order.StopLossLimitQuery, &1))
+                 |> then(&struct(StopLossLimitQuery, &1))
                  |> BinanceSpotRest.Query.validate()
       end
     end
@@ -170,7 +170,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.Order.StopLossLimitTest do
                full_valid_query()
                |> Map.from_struct()
                |> Map.put(:timeInForce, BinanceSpotRest.Enums.TimeInForce._FOK())
-               |> then(&struct(Order.StopLossLimitQuery, &1))
+               |> then(&struct(StopLossLimitQuery, &1))
                |> BinanceSpotRest.Query.validate()
     end
 
@@ -179,7 +179,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.Order.StopLossLimitTest do
                full_valid_query()
                |> Map.from_struct()
                |> Map.put(:timeInForce, BinanceSpotRest.Enums.TimeInForce._IOC())
-               |> then(&struct(Order.StopLossLimitQuery, &1))
+               |> then(&struct(StopLossLimitQuery, &1))
                |> BinanceSpotRest.Query.validate()
     end
 
@@ -188,7 +188,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.Order.StopLossLimitTest do
                full_valid_query()
                |> Map.from_struct()
                |> Map.put(:icebergQty, Decimal.new("1.5"))
-               |> then(&struct(Order.StopLossLimitQuery, &1))
+               |> then(&struct(StopLossLimitQuery, &1))
                |> BinanceSpotRest.Query.validate()
     end
   end
