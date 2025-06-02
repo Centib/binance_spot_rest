@@ -15,7 +15,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.Order.LimitQuery do
     def validate(q),
       do:
         q
-        |> Valpa.maybe_value_of_values(:type, [BinanceSpotRest.Enums.OrderType._LIMIT()])
+        |> Valpa.value_of_values(:type, [BinanceSpotRest.Enums.OrderType._LIMIT()])
         |> Valpa.string(:symbol)
         |> Valpa.value_of_values(:side, BinanceSpotRest.Enums.Side.values())
         |> Valpa.value_of_values(:timeInForce, BinanceSpotRest.Enums.TimeInForce.values())
