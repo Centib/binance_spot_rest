@@ -1,5 +1,7 @@
 defmodule BinanceSpotRest.Endpoints.Trading.Order.LimitQuery do
-  @moduledoc false
+  @moduledoc """
+  Limit query
+  """
 
   defstruct [
               :symbol,
