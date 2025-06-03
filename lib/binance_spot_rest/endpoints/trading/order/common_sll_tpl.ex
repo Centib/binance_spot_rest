@@ -1,4 +1,4 @@
-defmodule BinanceSpotRest.Endpoints.Trading.Order.SllTplCommon do
+defmodule BinanceSpotRest.Endpoints.Trading.Order.CommonSllTpl do
   @moduledoc false
 
   def fields do

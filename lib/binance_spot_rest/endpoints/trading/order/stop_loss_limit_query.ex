@@ -4,7 +4,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.Order.StopLossLimitQuery do
   """
 
   defstruct [type: BinanceSpotRest.Enums.OrderType._STOP_LOSS_LIMIT()] ++
-              BinanceSpotRest.Endpoints.Trading.Order.SllTplCommon.fields() ++
+              BinanceSpotRest.Endpoints.Trading.Order.CommonSllTpl.fields() ++
               BinanceSpotRest.Endpoints.Trading.Order.Common.fields()
 
   defimpl BinanceSpotRest.Query do
@@ -12,7 +12,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.Order.StopLossLimitQuery do
       do:
         q
         |> Valpa.value_of_values(:type, [BinanceSpotRest.Enums.OrderType._STOP_LOSS_LIMIT()])
-        |> BinanceSpotRest.Endpoints.Trading.Order.SllTplCommon.validation()
+        |> BinanceSpotRest.Endpoints.Trading.Order.CommonSllTpl.validation()
         |> BinanceSpotRest.Endpoints.Trading.Order.Common.validation()
 
     def prepare(q),

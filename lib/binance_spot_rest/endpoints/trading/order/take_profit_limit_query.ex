@@ -4,7 +4,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.Order.TakeProfitLimitQuery do
   """
 
   defstruct [type: BinanceSpotRest.Enums.OrderType._TAKE_PROFIT_LIMIT()] ++
-              BinanceSpotRest.Endpoints.Trading.Order.SllTplCommon.fields() ++
+              BinanceSpotRest.Endpoints.Trading.Order.CommonSllTpl.fields() ++
               BinanceSpotRest.Endpoints.Trading.Order.Common.fields()
 
   defimpl BinanceSpotRest.Query do
@@ -12,7 +12,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.Order.TakeProfitLimitQuery do
       do:
         q
         |> Valpa.value_of_values(:type, [BinanceSpotRest.Enums.OrderType._TAKE_PROFIT_LIMIT()])
-        |> BinanceSpotRest.Endpoints.Trading.Order.SllTplCommon.validation()
+        |> BinanceSpotRest.Endpoints.Trading.Order.CommonSllTpl.validation()
         |> BinanceSpotRest.Endpoints.Trading.Order.Common.validation()
 
     def prepare(q),
