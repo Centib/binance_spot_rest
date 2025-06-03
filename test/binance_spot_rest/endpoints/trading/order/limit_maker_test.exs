@@ -118,10 +118,10 @@ defmodule BinanceSpotRest.Endpoints.Trading.Order.LimitMakerTest do
       test "invalid #{field} type" do
         assert {:error, %{field: unquote(field)}} =
                  full_valid_query()
-                 |> Map.from_struct()
-                 |> Map.put(unquote(field), unquote(Macro.escape(bad_value)))
-                 |> then(&struct(LimitMakerQuery, &1))
-                 |> BinanceSpotRest.Query.validate()
+                 ~>> Map.from_struct()
+                 ~>> Map.put(unquote(field), unquote(Macro.escape(bad_value)))
+                 ~>> then(&struct(LimitMakerQuery, &1))
+                 ~>> BinanceSpotRest.Query.validate()
       end
     end
   end
@@ -132,10 +132,10 @@ defmodule BinanceSpotRest.Endpoints.Trading.Order.LimitMakerTest do
     test "incorrect icebergQty (not lower than quantity)" do
       assert {:error, %{field: :icebergQty}} =
                full_valid_query()
-               |> Map.from_struct()
-               |> Map.put(:icebergQty, Decimal.new("1.5"))
-               |> then(&struct(LimitMakerQuery, &1))
-               |> BinanceSpotRest.Query.validate()
+               ~>> Map.from_struct()
+               ~>> Map.put(:icebergQty, Decimal.new("1.5"))
+               ~>> then(&struct(LimitMakerQuery, &1))
+               ~>> BinanceSpotRest.Query.validate()
     end
   end
 end

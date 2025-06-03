@@ -156,10 +156,10 @@ defmodule BinanceSpotRest.Endpoints.Trading.Order.StopLossLimitTest do
       test "invalid #{field} type" do
         assert {:error, %{field: unquote(field)}} =
                  full_valid_query()
-                 |> Map.from_struct()
-                 |> Map.put(unquote(field), unquote(Macro.escape(bad_value)))
-                 |> then(&struct(StopLossLimitQuery, &1))
-                 |> BinanceSpotRest.Query.validate()
+                 ~>> Map.from_struct()
+                 ~>> Map.put(unquote(field), unquote(Macro.escape(bad_value)))
+                 ~>> then(&struct(StopLossLimitQuery, &1))
+                 ~>> BinanceSpotRest.Query.validate()
       end
     end
   end
@@ -168,28 +168,28 @@ defmodule BinanceSpotRest.Endpoints.Trading.Order.StopLossLimitTest do
     test "incorrect timeInForce (FOC) when icebergQty is set" do
       assert {:error, %{field: :timeInForce}} =
                full_valid_query()
-               |> Map.from_struct()
-               |> Map.put(:timeInForce, BinanceSpotRest.Enums.TimeInForce._FOK())
-               |> then(&struct(StopLossLimitQuery, &1))
-               |> BinanceSpotRest.Query.validate()
+               ~>> Map.from_struct()
+               ~>> Map.put(:timeInForce, BinanceSpotRest.Enums.TimeInForce._FOK())
+               ~>> then(&struct(StopLossLimitQuery, &1))
+               ~>> BinanceSpotRest.Query.validate()
     end
 
     test "incorrect timeInForce (IOC) when icebergQty is set" do
       assert {:error, %{field: :timeInForce}} =
                full_valid_query()
-               |> Map.from_struct()
-               |> Map.put(:timeInForce, BinanceSpotRest.Enums.TimeInForce._IOC())
-               |> then(&struct(StopLossLimitQuery, &1))
-               |> BinanceSpotRest.Query.validate()
+               ~>> Map.from_struct()
+               ~>> Map.put(:timeInForce, BinanceSpotRest.Enums.TimeInForce._IOC())
+               ~>> then(&struct(StopLossLimitQuery, &1))
+               ~>> BinanceSpotRest.Query.validate()
     end
 
     test "incorrect icebergQty (not lower than quantity)" do
       assert {:error, %{field: :icebergQty}} =
                full_valid_query()
-               |> Map.from_struct()
-               |> Map.put(:icebergQty, Decimal.new("1.5"))
-               |> then(&struct(StopLossLimitQuery, &1))
-               |> BinanceSpotRest.Query.validate()
+               ~>> Map.from_struct()
+               ~>> Map.put(:icebergQty, Decimal.new("1.5"))
+               ~>> then(&struct(StopLossLimitQuery, &1))
+               ~>> BinanceSpotRest.Query.validate()
     end
   end
 end

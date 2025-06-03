@@ -146,10 +146,10 @@ defmodule BinanceSpotRest.Endpoints.Trading.Order.StopLossTest do
       test "invalid #{field} type" do
         assert {:error, %{field: unquote(field)}} =
                  full_valid_query()
-                 |> Map.from_struct()
-                 |> Map.put(unquote(field), unquote(Macro.escape(bad_value)))
-                 |> then(&struct(StopLossQuery, &1))
-                 |> BinanceSpotRest.Query.validate()
+                 ~>> Map.from_struct()
+                 ~>> Map.put(unquote(field), unquote(Macro.escape(bad_value)))
+                 ~>> then(&struct(StopLossQuery, &1))
+                 ~>> BinanceSpotRest.Query.validate()
       end
     end
   end

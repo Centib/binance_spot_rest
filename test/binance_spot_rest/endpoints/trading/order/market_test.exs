@@ -186,20 +186,20 @@ defmodule BinanceSpotRest.Endpoints.Trading.Order.MarketTest do
       test "invalid #{field} type" do
         assert {:error, %{field: unquote(field)}} =
                  full_valid_query_with_quantity()
-                 |> Map.from_struct()
-                 |> Map.put(unquote(field), unquote(Macro.escape(bad_value)))
-                 |> then(&struct(MarketQuery, &1))
-                 |> BinanceSpotRest.Query.validate()
+                 ~>> Map.from_struct()
+                 ~>> Map.put(unquote(field), unquote(Macro.escape(bad_value)))
+                 ~>> then(&struct(MarketQuery, &1))
+                 ~>> BinanceSpotRest.Query.validate()
       end
     end
 
     test "invalid quoteOrderQty type" do
       assert {:error, %{field: :quoteOrderQty}} =
                full_valid_query_with_quote_order_qty()
-               |> Map.from_struct()
-               |> Map.put(:quoteOrderQty, "0.002")
-               |> then(&struct(MarketQuery, &1))
-               |> BinanceSpotRest.Query.validate()
+               ~>> Map.from_struct()
+               ~>> Map.put(:quoteOrderQty, "0.002")
+               ~>> then(&struct(MarketQuery, &1))
+               ~>> BinanceSpotRest.Query.validate()
     end
   end
 end
