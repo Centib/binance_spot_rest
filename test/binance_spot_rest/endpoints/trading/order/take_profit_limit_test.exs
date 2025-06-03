@@ -104,7 +104,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.Order.TakeProfitLimitTest do
     end
   end
 
-  describe "validation (specific)" do
+  describe "validation (inclusive):" do
     @inclusive [:stopPrice, :trailingDelta]
 
     test "valid with one of [:stopPrice, :trailingDelta]" do
