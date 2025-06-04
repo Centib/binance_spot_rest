@@ -8,7 +8,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderDeleteTest do
   alias BinanceSpotRest.Endpoints.Trading.OrderDelete
 
   def full_valid_query do
-    %OrderCancel.Query{
+    %OrderDelete.Query{
       symbol: "LTCBTC",
       orderId: 61_031,
       origClientOrderId: "kkFw5yTj1JqZ5vu7PjPJ5S",
@@ -58,7 +58,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderDeleteTest do
                  full_valid_query()
                  ~>> Map.from_struct()
                  ~>> Map.delete(unquote(field))
-                 ~>> then(&struct(OrderCancel.Query, &1))
+                 ~>> then(&struct(OrderDelete.Query, &1))
                  ~>> BinanceSpotRest.Query.validate()
       end
     end
@@ -68,11 +68,11 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderDeleteTest do
     @optional [:newClientOrderId, :cancelRestrictions, :recvWindow]
 
     test "valid without optional fields" do
-      assert {:ok, %OrderCancel.Query{}} =
+      assert {:ok, %OrderDelete.Query{}} =
                full_valid_query()
                ~>> Map.from_struct()
                ~>> Map.drop(@optional)
-               ~>> then(&struct(OrderCancel.Query, &1))
+               ~>> then(&struct(OrderDelete.Query, &1))
                ~>> BinanceSpotRest.Query.validate()
     end
   end
@@ -93,7 +93,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderDeleteTest do
                  full_valid_query()
                  ~>> Map.from_struct()
                  ~>> Map.put(unquote(field), unquote(Macro.escape(bad_value)))
-                 ~>> then(&struct(OrderCancel.Query, &1))
+                 ~>> then(&struct(OrderDelete.Query, &1))
                  ~>> BinanceSpotRest.Query.validate()
       end
     end
@@ -103,18 +103,18 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderDeleteTest do
     @inclusive [:orderId, :origClientOrderId]
 
     test "valid with one of #{inspect(@inclusive)}" do
-      assert {:ok, %OrderCancel.Query{}} =
+      assert {:ok, %OrderDelete.Query{}} =
                full_valid_query()
                ~>> Map.from_struct()
                ~>> Map.delete(:orderId)
-               ~>> then(&struct(OrderCancel.Query, &1))
+               ~>> then(&struct(OrderDelete.Query, &1))
                ~>> BinanceSpotRest.Query.validate()
 
-      assert {:ok, %OrderCancel.Query{}} =
+      assert {:ok, %OrderDelete.Query{}} =
                full_valid_query()
                ~>> Map.from_struct()
                ~>> Map.delete(:origClientOrderId)
-               ~>> then(&struct(OrderCancel.Query, &1))
+               ~>> then(&struct(OrderDelete.Query, &1))
                ~>> BinanceSpotRest.Query.validate()
     end
 
@@ -123,7 +123,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderDeleteTest do
                full_valid_query()
                ~>> Map.from_struct()
                ~>> Map.drop(@inclusive)
-               ~>> then(&struct(OrderCancel.Query, &1))
+               ~>> then(&struct(OrderDelete.Query, &1))
                ~>> BinanceSpotRest.Query.validate()
     end
   end
