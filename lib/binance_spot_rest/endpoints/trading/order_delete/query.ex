@@ -1,4 +1,4 @@
-defmodule BinanceSpotRest.Endpoints.Trading.OrderCancel.Query do
+defmodule BinanceSpotRest.Endpoints.Trading.OrderDelete.Query do
   @moduledoc """
    ### Cancel order (TRADE)
 

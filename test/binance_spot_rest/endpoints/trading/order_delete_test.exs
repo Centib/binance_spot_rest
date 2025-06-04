@@ -1,11 +1,11 @@
-defmodule BinanceSpotRest.Endpoints.Trading.OrderCancel.OrderCancelTest do
+defmodule BinanceSpotRest.Endpoints.Trading.OrderDeleteTest do
   @moduledoc false
 
   use ExUnit.Case, async: true
 
   import Loe
 
-  alias BinanceSpotRest.Endpoints.Trading.OrderCancel
+  alias BinanceSpotRest.Endpoints.Trading.OrderDelete
 
   def full_valid_query do
     %OrderCancel.Query{
