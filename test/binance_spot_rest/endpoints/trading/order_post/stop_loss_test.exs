@@ -1,24 +1,23 @@
-defmodule BinanceSpotRest.Endpoints.Trading.Order.LimitTest do
+defmodule BinanceSpotRest.Endpoints.Trading.OrderPost.StopLossTest do
   @moduledoc false
 
   use ExUnit.Case, async: true
 
   import Loe
 
-  alias BinanceSpotRest.Endpoints.Trading.Order.LimitQuery
+  alias BinanceSpotRest.Endpoints.Trading.OrderPost.StopLossQuery
 
   def full_valid_query do
-    %LimitQuery{
+    %StopLossQuery{
       symbol: "LTCBTC",
       side: BinanceSpotRest.Enums.Side._BUY(),
-      type: BinanceSpotRest.Enums.OrderType._LIMIT(),
-      timeInForce: BinanceSpotRest.Enums.TimeInForce._GTC(),
+      type: BinanceSpotRest.Enums.OrderType._STOP_LOSS(),
       quantity: Decimal.new("1.0"),
-      price: Decimal.new("0.00129"),
+      stopPrice: Decimal.new("20.0"),
+      trailingDelta: 10,
       newClientOrderId: "UsaAPevABCDE4LJ4oTobyX",
       strategyId: 2,
       strategyType: 1_000_200,
-      icebergQty: Decimal.new("0.5"),
       selfTradePreventionMode: BinanceSpotRest.Enums.SelfTradePreventionMode._EXPIRE_BOTH(),
       newOrderRespType: BinanceSpotRest.Enums.NewOrderRespType._ACK(),
       recvWindow: 3000
@@ -44,19 +43,18 @@ defmodule BinanceSpotRest.Endpoints.Trading.Order.LimitTest do
                base_url: "https://fake.binance.url",
                url:
                  "/api/v3/order?" <>
-                   "icebergQty=0.5&" <>
                    "newClientOrderId=UsaAPevABCDE4LJ4oTobyX&" <>
                    "newOrderRespType=ACK&" <>
-                   "price=0.00129&" <>
                    "quantity=1.0&" <>
                    "recvWindow=3000&" <>
                    "selfTradePreventionMode=EXPIRE_BOTH&" <>
                    "side=BUY&" <>
+                   "stopPrice=20.0&" <>
                    "strategyId=2&" <>
                    "strategyType=1000200&" <>
                    "symbol=LTCBTC&" <>
-                   "timeInForce=GTC&" <>
-                   "type=LIMIT&" <>
+                   "trailingDelta=10&" <>
+                   "type=STOP_LOSS&" <>
                    "timestamp=1740587673449&" <>
                    "signature=fake_signature"
              }
@@ -64,7 +62,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.Order.LimitTest do
   end
 
   describe "validation (required):" do
-    @required [:symbol, :side, :timeInForce, :quantity, :price]
+    @required [:symbol, :side, :quantity]
 
     for field <- @required do
       test "invalid without #{field}" do
@@ -72,9 +70,38 @@ defmodule BinanceSpotRest.Endpoints.Trading.Order.LimitTest do
                  full_valid_query()
                  ~>> Map.from_struct()
                  ~>> Map.delete(unquote(field))
-                 ~>> then(&struct(LimitQuery, &1))
+                 ~>> then(&struct(StopLossQuery, &1))
                  ~>> BinanceSpotRest.Query.validate()
       end
+    end
+  end
+
+  describe "validation (inclusive):" do
+    @inclusive [:stopPrice, :trailingDelta]
+
+    test "valid with one of [:stopPrice, :trailingDelta]" do
+      assert {:ok, %StopLossQuery{}} =
+               full_valid_query()
+               ~>> Map.from_struct()
+               ~>> Map.delete(:stopPrice)
+               ~>> then(&struct(StopLossQuery, &1))
+               ~>> BinanceSpotRest.Query.validate()
+
+      assert {:ok, %StopLossQuery{}} =
+               full_valid_query()
+               ~>> Map.from_struct()
+               ~>> Map.delete(:trailingDelta)
+               ~>> then(&struct(StopLossQuery, &1))
+               ~>> BinanceSpotRest.Query.validate()
+    end
+
+    test "invalid if both [:stopPrice, :trailingDelta] missing" do
+      assert {:error, %{validator: :map_inclusive_keys, criteria: @inclusive}} =
+               full_valid_query()
+               ~>> Map.from_struct()
+               ~>> Map.drop(@inclusive)
+               ~>> then(&struct(StopLossQuery, &1))
+               ~>> BinanceSpotRest.Query.validate()
     end
   end
 
@@ -84,50 +111,35 @@ defmodule BinanceSpotRest.Endpoints.Trading.Order.LimitTest do
       :newClientOrderId,
       :strategyId,
       :strategyType,
-      :icebergQty,
       :selfTradePreventionMode,
       :newOrderRespType,
       :recvWindow
     ]
 
     test "valid without optional fields" do
-      assert {:ok, %LimitQuery{}} =
+      assert {:ok, %StopLossQuery{}} =
                full_valid_query()
                ~>> Map.from_struct()
                ~>> Map.drop(@optional)
-               ~>> then(&struct(LimitQuery, &1))
+               ~>> then(&struct(StopLossQuery, &1))
                ~>> BinanceSpotRest.Query.validate()
     end
   end
 
   describe "validation (type):" do
     @bad_types [
-      # should be string
-      {:symbol, 123},
-      # should be correct enum
-      {:side, "BUY_SIDE"},
-      # should be correct enum
-      {:type, :LIMIT_MAKER},
-      # should be correct enum
-      {:timeInForce, :GTC_FORCE},
-      # should be Decimal
-      {:quantity, "not-a-decimal"},
-      # should be Decimal
-      {:price, nil},
-      # should be string
-      {:newClientOrderId, 123},
-      # should be integer
-      {:strategyId, "123"},
-      # should be integer
-      {:strategyType, 12.34},
-      # should be Decimal
-      {:icebergQty, "wrong"},
-      # should be correct enum
-      {:selfTradePreventionMode, :EXPIRE_BOTH_PREVENTION},
-      # should be correct enum
-      {:newOrderRespType, :ACK_RESPONSE},
-      # should be integer
-      {:recvWindow, "5000"}
+      symbol: :LTCBTC,
+      side: :BUY_INVALID,
+      type: :STOP_LOSS_INVALID,
+      quantity: "1.0",
+      stopPrice: "20.0",
+      trailingDelta: 10.5,
+      newClientOrderId: 1234,
+      strategyId: 2.5,
+      strategyType: "1_000_200",
+      selfTradePreventionMode: :EXPIRE_BOTH_INVALID,
+      newOrderRespType: :ACK_INVALID,
+      recvWindow: "3000"
     ]
 
     for {field, bad_value} <- @bad_types do
@@ -136,38 +148,9 @@ defmodule BinanceSpotRest.Endpoints.Trading.Order.LimitTest do
                  full_valid_query()
                  ~>> Map.from_struct()
                  ~>> Map.put(unquote(field), unquote(Macro.escape(bad_value)))
-                 ~>> then(&struct(LimitQuery, &1))
+                 ~>> then(&struct(StopLossQuery, &1))
                  ~>> BinanceSpotRest.Query.validate()
       end
-    end
-  end
-
-  describe "validation (specific):" do
-    test "incorrect timeInForce (FOC) when icebergQty is set" do
-      assert {:error, %{field: :timeInForce}} =
-               full_valid_query()
-               ~>> Map.from_struct()
-               ~>> Map.put(:timeInForce, BinanceSpotRest.Enums.TimeInForce._FOK())
-               ~>> then(&struct(LimitQuery, &1))
-               ~>> BinanceSpotRest.Query.validate()
-    end
-
-    test "incorrect timeInForce (IOC) when icebergQty is set" do
-      assert {:error, %{field: :timeInForce}} =
-               full_valid_query()
-               ~>> Map.from_struct()
-               ~>> Map.put(:timeInForce, BinanceSpotRest.Enums.TimeInForce._IOC())
-               ~>> then(&struct(LimitQuery, &1))
-               ~>> BinanceSpotRest.Query.validate()
-    end
-
-    test "incorrect icebergQty (not lower than quantity)" do
-      assert {:error, %{field: :icebergQty}} =
-               full_valid_query()
-               ~>> Map.from_struct()
-               ~>> Map.put(:icebergQty, Decimal.new("1.5"))
-               ~>> then(&struct(LimitQuery, &1))
-               ~>> BinanceSpotRest.Query.validate()
     end
   end
 end

@@ -1,11 +1,11 @@
-defmodule BinanceSpotRest.Endpoints.Trading.Order.StopLossLimitTest do
+defmodule BinanceSpotRest.Endpoints.Trading.OrderPost.StopLossLimitTest do
   @moduledoc false
 
   use ExUnit.Case, async: true
 
   import Loe
 
-  alias BinanceSpotRest.Endpoints.Trading.Order.StopLossLimitQuery
+  alias BinanceSpotRest.Endpoints.Trading.OrderPost.StopLossLimitQuery
 
   def full_valid_query do
     %StopLossLimitQuery{

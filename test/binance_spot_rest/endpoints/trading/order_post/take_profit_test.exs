@@ -1,17 +1,17 @@
-defmodule BinanceSpotRest.Endpoints.Trading.Order.StopLossTest do
+defmodule BinanceSpotRest.Endpoints.Trading.OrderPost.TakeProfitTest do
   @moduledoc false
 
   use ExUnit.Case, async: true
 
   import Loe
 
-  alias BinanceSpotRest.Endpoints.Trading.Order.StopLossQuery
+  alias BinanceSpotRest.Endpoints.Trading.OrderPost.TakeProfitQuery
 
   def full_valid_query do
-    %StopLossQuery{
+    %TakeProfitQuery{
       symbol: "LTCBTC",
       side: BinanceSpotRest.Enums.Side._BUY(),
-      type: BinanceSpotRest.Enums.OrderType._STOP_LOSS(),
+      type: BinanceSpotRest.Enums.OrderType._TAKE_PROFIT(),
       quantity: Decimal.new("1.0"),
       stopPrice: Decimal.new("20.0"),
       trailingDelta: 10,
@@ -54,7 +54,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.Order.StopLossTest do
                    "strategyType=1000200&" <>
                    "symbol=LTCBTC&" <>
                    "trailingDelta=10&" <>
-                   "type=STOP_LOSS&" <>
+                   "type=TAKE_PROFIT&" <>
                    "timestamp=1740587673449&" <>
                    "signature=fake_signature"
              }
@@ -70,7 +70,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.Order.StopLossTest do
                  full_valid_query()
                  ~>> Map.from_struct()
                  ~>> Map.delete(unquote(field))
-                 ~>> then(&struct(StopLossQuery, &1))
+                 ~>> then(&struct(TakeProfitQuery, &1))
                  ~>> BinanceSpotRest.Query.validate()
       end
     end
@@ -80,18 +80,18 @@ defmodule BinanceSpotRest.Endpoints.Trading.Order.StopLossTest do
     @inclusive [:stopPrice, :trailingDelta]
 
     test "valid with one of [:stopPrice, :trailingDelta]" do
-      assert {:ok, %StopLossQuery{}} =
+      assert {:ok, %TakeProfitQuery{}} =
                full_valid_query()
                ~>> Map.from_struct()
                ~>> Map.delete(:stopPrice)
-               ~>> then(&struct(StopLossQuery, &1))
+               ~>> then(&struct(TakeProfitQuery, &1))
                ~>> BinanceSpotRest.Query.validate()
 
-      assert {:ok, %StopLossQuery{}} =
+      assert {:ok, %TakeProfitQuery{}} =
                full_valid_query()
                ~>> Map.from_struct()
                ~>> Map.delete(:trailingDelta)
-               ~>> then(&struct(StopLossQuery, &1))
+               ~>> then(&struct(TakeProfitQuery, &1))
                ~>> BinanceSpotRest.Query.validate()
     end
 
@@ -100,7 +100,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.Order.StopLossTest do
                full_valid_query()
                ~>> Map.from_struct()
                ~>> Map.drop(@inclusive)
-               ~>> then(&struct(StopLossQuery, &1))
+               ~>> then(&struct(TakeProfitQuery, &1))
                ~>> BinanceSpotRest.Query.validate()
     end
   end
@@ -117,11 +117,11 @@ defmodule BinanceSpotRest.Endpoints.Trading.Order.StopLossTest do
     ]
 
     test "valid without optional fields" do
-      assert {:ok, %StopLossQuery{}} =
+      assert {:ok, %TakeProfitQuery{}} =
                full_valid_query()
                ~>> Map.from_struct()
                ~>> Map.drop(@optional)
-               ~>> then(&struct(StopLossQuery, &1))
+               ~>> then(&struct(TakeProfitQuery, &1))
                ~>> BinanceSpotRest.Query.validate()
     end
   end
@@ -130,7 +130,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.Order.StopLossTest do
     @bad_types [
       symbol: :LTCBTC,
       side: :BUY_INVALID,
-      type: :STOP_LOSS_INVALID,
+      type: :TAKE_PROFIT_INVALID,
       quantity: "1.0",
       stopPrice: "20.0",
       trailingDelta: 10.5,
@@ -148,7 +148,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.Order.StopLossTest do
                  full_valid_query()
                  ~>> Map.from_struct()
                  ~>> Map.put(unquote(field), unquote(Macro.escape(bad_value)))
-                 ~>> then(&struct(StopLossQuery, &1))
+                 ~>> then(&struct(TakeProfitQuery, &1))
                  ~>> BinanceSpotRest.Query.validate()
       end
     end

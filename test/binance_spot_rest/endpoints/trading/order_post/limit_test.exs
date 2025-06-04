@@ -1,22 +1,20 @@
-defmodule BinanceSpotRest.Endpoints.Trading.Order.TakeProfitLimitTest do
+defmodule BinanceSpotRest.Endpoints.Trading.OrderPost.LimitTest do
   @moduledoc false
 
   use ExUnit.Case, async: true
 
   import Loe
 
-  alias BinanceSpotRest.Endpoints.Trading.Order.TakeProfitLimitQuery
+  alias BinanceSpotRest.Endpoints.Trading.OrderPost.LimitQuery
 
   def full_valid_query do
-    %TakeProfitLimitQuery{
+    %LimitQuery{
       symbol: "LTCBTC",
       side: BinanceSpotRest.Enums.Side._BUY(),
-      type: BinanceSpotRest.Enums.OrderType._TAKE_PROFIT_LIMIT(),
+      type: BinanceSpotRest.Enums.OrderType._LIMIT(),
       timeInForce: BinanceSpotRest.Enums.TimeInForce._GTC(),
       quantity: Decimal.new("1.0"),
       price: Decimal.new("0.00129"),
-      stopPrice: Decimal.new("0.001"),
-      trailingDelta: 10,
       newClientOrderId: "UsaAPevABCDE4LJ4oTobyX",
       strategyId: 2,
       strategyType: 1_000_200,
@@ -54,13 +52,11 @@ defmodule BinanceSpotRest.Endpoints.Trading.Order.TakeProfitLimitTest do
                    "recvWindow=3000&" <>
                    "selfTradePreventionMode=EXPIRE_BOTH&" <>
                    "side=BUY&" <>
-                   "stopPrice=0.001&" <>
                    "strategyId=2&" <>
                    "strategyType=1000200&" <>
                    "symbol=LTCBTC&" <>
                    "timeInForce=GTC&" <>
-                   "trailingDelta=10&" <>
-                   "type=TAKE_PROFIT_LIMIT&" <>
+                   "type=LIMIT&" <>
                    "timestamp=1740587673449&" <>
                    "signature=fake_signature"
              }
@@ -76,7 +72,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.Order.TakeProfitLimitTest do
                  full_valid_query()
                  ~>> Map.from_struct()
                  ~>> Map.delete(unquote(field))
-                 ~>> then(&struct(TakeProfitLimitQuery, &1))
+                 ~>> then(&struct(LimitQuery, &1))
                  ~>> BinanceSpotRest.Query.validate()
       end
     end
@@ -95,61 +91,43 @@ defmodule BinanceSpotRest.Endpoints.Trading.Order.TakeProfitLimitTest do
     ]
 
     test "valid without optional fields" do
-      assert {:ok, %TakeProfitLimitQuery{}} =
+      assert {:ok, %LimitQuery{}} =
                full_valid_query()
                ~>> Map.from_struct()
                ~>> Map.drop(@optional)
-               ~>> then(&struct(TakeProfitLimitQuery, &1))
-               ~>> BinanceSpotRest.Query.validate()
-    end
-  end
-
-  describe "validation (inclusive):" do
-    @inclusive [:stopPrice, :trailingDelta]
-
-    test "valid with one of [:stopPrice, :trailingDelta]" do
-      assert {:ok, %TakeProfitLimitQuery{}} =
-               full_valid_query()
-               ~>> Map.from_struct()
-               ~>> Map.delete(:stopPrice)
-               ~>> then(&struct(TakeProfitLimitQuery, &1))
-               ~>> BinanceSpotRest.Query.validate()
-
-      assert {:ok, %TakeProfitLimitQuery{}} =
-               full_valid_query()
-               ~>> Map.from_struct()
-               ~>> Map.delete(:trailingDelta)
-               ~>> then(&struct(TakeProfitLimitQuery, &1))
-               ~>> BinanceSpotRest.Query.validate()
-    end
-
-    test "invalid if both [:stopPrice, :trailingDelta] missing" do
-      assert {:error, %{validator: :map_inclusive_keys, criteria: @inclusive}} =
-               full_valid_query()
-               ~>> Map.from_struct()
-               ~>> Map.drop(@inclusive)
-               ~>> then(&struct(TakeProfitLimitQuery, &1))
+               ~>> then(&struct(LimitQuery, &1))
                ~>> BinanceSpotRest.Query.validate()
     end
   end
 
   describe "validation (type):" do
     @bad_types [
-      symbol: :LTCBTC,
-      side: :BUY_INVALID,
-      type: BinanceSpotRest.Enums.OrderType._LIMIT(),
-      timeInForce: :GTC_INVALID,
-      quantity: "1.0",
-      price: 0.00129,
-      stopPrice: "0.001",
-      trailingDelta: 10.45,
-      newClientOrderId: 123,
-      strategyId: 2.5,
-      strategyType: "1_000_200",
-      icebergQty: "0.5",
-      selfTradePreventionMode: :EXPIRE_BOTH_INVALID,
-      newOrderRespType: :ACK_INVALID,
-      recvWindow: "3000"
+      # should be string
+      {:symbol, 123},
+      # should be correct enum
+      {:side, "BUY_SIDE"},
+      # should be correct enum
+      {:type, :LIMIT_MAKER},
+      # should be correct enum
+      {:timeInForce, :GTC_FORCE},
+      # should be Decimal
+      {:quantity, "not-a-decimal"},
+      # should be Decimal
+      {:price, nil},
+      # should be string
+      {:newClientOrderId, 123},
+      # should be integer
+      {:strategyId, "123"},
+      # should be integer
+      {:strategyType, 12.34},
+      # should be Decimal
+      {:icebergQty, "wrong"},
+      # should be correct enum
+      {:selfTradePreventionMode, :EXPIRE_BOTH_PREVENTION},
+      # should be correct enum
+      {:newOrderRespType, :ACK_RESPONSE},
+      # should be integer
+      {:recvWindow, "5000"}
     ]
 
     for {field, bad_value} <- @bad_types do
@@ -158,7 +136,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.Order.TakeProfitLimitTest do
                  full_valid_query()
                  ~>> Map.from_struct()
                  ~>> Map.put(unquote(field), unquote(Macro.escape(bad_value)))
-                 ~>> then(&struct(TakeProfitLimitQuery, &1))
+                 ~>> then(&struct(LimitQuery, &1))
                  ~>> BinanceSpotRest.Query.validate()
       end
     end
@@ -170,7 +148,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.Order.TakeProfitLimitTest do
                full_valid_query()
                ~>> Map.from_struct()
                ~>> Map.put(:timeInForce, BinanceSpotRest.Enums.TimeInForce._FOK())
-               ~>> then(&struct(TakeProfitLimitQuery, &1))
+               ~>> then(&struct(LimitQuery, &1))
                ~>> BinanceSpotRest.Query.validate()
     end
 
@@ -179,7 +157,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.Order.TakeProfitLimitTest do
                full_valid_query()
                ~>> Map.from_struct()
                ~>> Map.put(:timeInForce, BinanceSpotRest.Enums.TimeInForce._IOC())
-               ~>> then(&struct(TakeProfitLimitQuery, &1))
+               ~>> then(&struct(LimitQuery, &1))
                ~>> BinanceSpotRest.Query.validate()
     end
 
@@ -188,7 +166,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.Order.TakeProfitLimitTest do
                full_valid_query()
                ~>> Map.from_struct()
                ~>> Map.put(:icebergQty, Decimal.new("1.5"))
-               ~>> then(&struct(TakeProfitLimitQuery, &1))
+               ~>> then(&struct(LimitQuery, &1))
                ~>> BinanceSpotRest.Query.validate()
     end
   end

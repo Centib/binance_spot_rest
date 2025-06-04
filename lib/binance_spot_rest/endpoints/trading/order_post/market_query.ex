@@ -1,4 +1,4 @@
-defmodule BinanceSpotRest.Endpoints.Trading.Order.MarketQuery do
+defmodule BinanceSpotRest.Endpoints.Trading.OrderPost.MarketQuery do
   @moduledoc """
   Market query
   """
@@ -9,7 +9,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.Order.MarketQuery do
               :quantity,
               :quoteOrderQty,
               type: BinanceSpotRest.Enums.OrderType._MARKET()
-            ] ++ BinanceSpotRest.Endpoints.Trading.Order.Common.fields()
+            ] ++ BinanceSpotRest.Endpoints.Trading.OrderPost.Common.fields()
 
   defimpl BinanceSpotRest.Query do
     def validate(q),
@@ -21,11 +21,11 @@ defmodule BinanceSpotRest.Endpoints.Trading.Order.MarketQuery do
         |> Valpa.map_exclusive_keys([:quantity, :quoteOrderQty])
         |> Valpa.maybe_decimal(:quantity)
         |> Valpa.maybe_decimal(:quoteOrderQty)
-        |> BinanceSpotRest.Endpoints.Trading.Order.Common.validation()
+        |> BinanceSpotRest.Endpoints.Trading.OrderPost.Common.validation()
 
     def prepare(q),
       do: %BinanceSpotRest.Query.RequestSpec{
-        metadata: BinanceSpotRest.Endpoints.Trading.Order.Endpoint.metadata(),
+        metadata: BinanceSpotRest.Endpoints.Trading.OrderPost.Endpoint.metadata(),
         query: q
       }
   end

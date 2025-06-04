@@ -1,4 +1,4 @@
-defmodule BinanceSpotRest.Endpoints.Trading.Order.Endpoint do
+defmodule BinanceSpotRest.Endpoints.Trading.OrderPost.Endpoint do
   @moduledoc """
   ### New order (TRADE)
 

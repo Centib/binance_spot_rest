@@ -1,11 +1,11 @@
-defmodule BinanceSpotRest.Endpoints.Trading.Order.LimitMakerTest do
+defmodule BinanceSpotRest.Endpoints.Trading.OrderPost.LimitMakerTest do
   @moduledoc false
 
   use ExUnit.Case, async: true
 
   import Loe
 
-  alias BinanceSpotRest.Endpoints.Trading.Order.LimitMakerQuery
+  alias BinanceSpotRest.Endpoints.Trading.OrderPost.LimitMakerQuery
 
   def full_valid_query do
     %LimitMakerQuery{

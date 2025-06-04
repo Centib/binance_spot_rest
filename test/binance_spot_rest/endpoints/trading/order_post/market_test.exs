@@ -1,11 +1,11 @@
-defmodule BinanceSpotRest.Endpoints.Trading.Order.MarketTest do
+defmodule BinanceSpotRest.Endpoints.Trading.OrderPost.MarketTest do
   @moduledoc false
 
   use ExUnit.Case, async: true
 
   import Loe
 
-  alias BinanceSpotRest.Endpoints.Trading.Order.MarketQuery
+  alias BinanceSpotRest.Endpoints.Trading.OrderPost.MarketQuery
 
   def full_valid_query_with_quantity do
     %MarketQuery{
