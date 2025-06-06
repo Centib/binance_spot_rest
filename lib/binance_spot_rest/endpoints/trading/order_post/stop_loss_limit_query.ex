@@ -3,17 +3,13 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderPost.StopLossLimitQuery do
   Stop loss limit query
   """
 
-  defstruct [type: BinanceSpotRest.Enums.OrderType._STOP_LOSS_LIMIT()] ++
-              BinanceSpotRest.Endpoints.Trading.OrderPost.CommonSllTpl.fields() ++
-              BinanceSpotRest.Endpoints.Trading.OrderPost.Common.fields()
+  defstruct BinanceSpotRest.Endpoints.Trading.OrderPost.Shared.StopLossLimit.fields()
 
   defimpl BinanceSpotRest.Query do
     def validate(q),
       do:
         q
-        |> Valpa.value_of_values(:type, [BinanceSpotRest.Enums.OrderType._STOP_LOSS_LIMIT()])
-        |> BinanceSpotRest.Endpoints.Trading.OrderPost.CommonSllTpl.validation()
-        |> BinanceSpotRest.Endpoints.Trading.OrderPost.Common.validation()
+        |> BinanceSpotRest.Endpoints.Trading.OrderPost.Shared.StopLossLimit.validation()
 
     def prepare(q),
       do: %BinanceSpotRest.Query.RequestSpec{
