@@ -3,28 +3,13 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderPost.LimitQuery do
   Limit query
   """
 
-  defstruct [
-              :symbol,
-              :side,
-              :timeInForce,
-              :quantity,
-              :price,
-              :icebergQty,
-              type: BinanceSpotRest.Enums.OrderType._LIMIT()
-            ] ++ BinanceSpotRest.Endpoints.Trading.OrderPost.Common.fields()
+  defstruct BinanceSpotRest.Endpoints.Trading.OrderPost.Shared.Limit.fields()
 
   defimpl BinanceSpotRest.Query do
     def validate(q),
       do:
         q
-        |> Valpa.value_of_values(:type, [BinanceSpotRest.Enums.OrderType._LIMIT()])
-        |> Valpa.string(:symbol)
-        |> Valpa.value_of_values(:side, BinanceSpotRest.Enums.Side.values())
-        |> Valpa.value_of_values(:timeInForce, BinanceSpotRest.Enums.TimeInForce.values())
-        |> Valpa.decimal(:quantity)
-        |> Valpa.decimal(:price)
-        |> Valpa.Custom.validator(BinanceSpotRest.Validators.IcebergQty)
-        |> BinanceSpotRest.Endpoints.Trading.OrderPost.Common.validation()
+        |> BinanceSpotRest.Endpoints.Trading.OrderPost.Shared.Limit.validation()
 
     def prepare(q),
       do: %BinanceSpotRest.Query.RequestSpec{
