@@ -47,7 +47,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderTestPost.TakeProfitLimitTest do
                base_url: "https://fake.binance.url",
                url:
                  "/api/v3/order/test?" <>
-                 "computeCommissionRates=true&" <>
+                   "computeCommissionRates=true&" <>
                    "icebergQty=0.5&" <>
                    "newClientOrderId=UsaAPevABCDE4LJ4oTobyX&" <>
                    "newOrderRespType=ACK&" <>
