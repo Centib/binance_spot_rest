@@ -1,0 +1,66 @@
+defmodule BinanceSpotRest.Endpoints.Trading.OrderTestPost.Endpoint do
+  @moduledoc """
+  ### Test new order (TRADE)
+  ```
+  POST /api/v3/order/test
+  ```
+  Test new order creation and signature/recvWindow long.
+  Creates and validates a new order but does not send it into the matching engine.
+
+  **Weight:**
+
+  | Condition                        | Request Weight  |
+  | ------------                     | ------------    |
+  | Without `computeCommissionRates` | 1               |
+  | With `computeCommissionRates`    | 20              |
+
+  **Parameters:**
+
+  In addition to all parameters accepted by [`POST /api/v3/order`](#new-order-trade),
+  the following optional parameters are also accepted:
+
+  Name                   |Type          | Mandatory    | Description
+  ------------           | ------------ | ------------ | ------------
+  computeCommissionRates | BOOLEAN      | NO           | Default: `false`
+
+  **Data Source:**
+  Memory
+
+  **Response:**
+
+  Without `computeCommissionRates`
+
+  ```
+  {}
+  ```
+
+  With `computeCommissionRates`
+
+  ```
+  {
+    "standardCommissionForOrder": {  //Standard commission rates on trades from the order.
+      "maker": "0.00000112",
+      "taker": "0.00000114"
+    },
+    "taxCommissionForOrder": {       //Tax commission rates for trades from the order.
+      "maker": "0.00000112",
+      "taker": "0.00000114"
+    },
+    "discount": {                    //Discount on standard commissions when paying in BNB.
+      "enabledForAccount": true,
+      "enabledForSymbol": true,
+      "discountAsset": "BNB",
+      "discount": "0.25000000"       //Standard commission is reduced by this rate when paying commission in BNB.
+    }
+  }
+  ```
+  """
+
+  def metadata do
+    %BinanceSpotRest.Query.EndpointMetadata{
+      endpoint: "/api/v3/order/test",
+      method: BinanceSpotRest.Enums.Method._post(),
+      security_type: BinanceSpotRest.Enums.SecurityType._TRADE()
+    }
+  end
+end
