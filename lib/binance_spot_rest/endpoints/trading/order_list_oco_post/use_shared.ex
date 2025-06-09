@@ -41,12 +41,21 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOcoPost.UseShared do
   @below_reverse Map.new(@below, fn {k, v} -> {v, k} end)
 
   defp remap_fields(fields, mapper) do
-    for field <- fields,
-        Map.has_key?(mapper, field),
-        do: mapper[field]
+    pairs =
+      for item <- fields do
+        case item do
+          {f, v} -> {f, v}
+          f -> {f, nil}
+        end
+      end
+
+    for {f, v} <- pairs,
+        Map.has_key?(mapper, f),
+        do: {mapper[f], v}
   end
 
-  def fields(above: above_shared, below: below_shared) do
+  @spec fields(module(), module()) :: list(atom())
+  def fields(above_shared, below_shared) do
     af = remap_fields(above_shared.fields(), @above)
     bf = remap_fields(below_shared.fields(), @below)
 
@@ -54,13 +63,16 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOcoPost.UseShared do
   end
 
   defp remap_back(q, mapper) do
-    for {field, value} <- Map.from_struct(q),
-        Map.has_key?(mapper, field),
+    map = Map.from_struct(q)
+
+    for {f, v} <- map,
+        Map.has_key?(mapper, f),
         into: %{},
-        do: {mapper[field], value}
+        do: {mapper[f], v}
   end
 
-  def validation(q, above: above_shared, below: below_shared) do
+  @spec validation(struct(), module(), module()) :: {:ok, struct()} | {:error, any()}
+  def validation(q, above_shared, below_shared) do
     above_input = remap_back(q, @above_reverse)
     below_input = remap_back(q, @below_reverse)
 
