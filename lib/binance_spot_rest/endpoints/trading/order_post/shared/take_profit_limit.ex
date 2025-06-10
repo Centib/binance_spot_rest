@@ -10,7 +10,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderPost.Shared.TakeProfitLimit do
   def validation(q, remap \\ &Function.identity/1) do
     q
     |> Valpa.value_of_values(remap.(:type), [BinanceSpotRest.Enums.OrderType._TAKE_PROFIT_LIMIT()])
-    |> BinanceSpotRest.Endpoints.Trading.OrderPost.CommonSllTpl.validation()
-    |> BinanceSpotRest.Endpoints.Trading.OrderPost.Common.validation()
+    |> BinanceSpotRest.Endpoints.Trading.OrderPost.CommonSllTpl.validation(remap)
+    |> BinanceSpotRest.Endpoints.Trading.OrderPost.Common.validation(remap)
   end
 end
