@@ -93,42 +93,86 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOcoPost.AboveLimitMakerBelo
     end
   end
 
-  # describe "validation (optional):" do
-  #   @optional [
-  #     :type,
-  #     :newClientOrderId,
-  #     :strategyId,
-  #     :strategyType,
-  #     :icebergQty,
-  #     :selfTradePreventionMode,
-  #     :newOrderRespType,
-  #     :recvWindow
-  #   ]
+  describe "validation (inclusive):" do
+    @inclusive [:belowStopPrice, :belowTrailingDelta]
 
-  #   test "valid without optional fields" do
-  #     assert {:ok, %AboveLimitMakerBelowStopLossQuery{}} =
-  #              full_valid_query()
-  #              ~>> Map.from_struct()
-  #              ~>> Map.drop(@optional)
-  #              ~>> then(&struct(AboveLimitMakerBelowStopLossQuery, &1))
-  #              ~>> BinanceSpotRest.Query.validate()
-  #   end
-  # end
+    test "valid with one of [:belowStopPrice, :belowTrailingDelta]" do
+      assert {:ok, %AboveLimitMakerBelowStopLossQuery{}} =
+               full_valid_query()
+               ~>> Map.from_struct()
+               ~>> Map.delete(Enum.at(@inclusive, 0))
+               ~>> then(&struct(AboveLimitMakerBelowStopLossQuery, &1))
+               ~>> BinanceSpotRest.Query.validate()
+
+      assert {:ok, %AboveLimitMakerBelowStopLossQuery{}} =
+               full_valid_query()
+               ~>> Map.from_struct()
+               ~>> Map.delete(Enum.at(@inclusive, 1))
+               ~>> then(&struct(AboveLimitMakerBelowStopLossQuery, &1))
+               ~>> BinanceSpotRest.Query.validate()
+    end
+
+    test "invalid if both [:belowStopPrice, :belowTrailingDelta] missing" do
+      assert {:error, %{validator: :map_inclusive_keys, criteria: @inclusive}} =
+               full_valid_query()
+               ~>> Map.from_struct()
+               ~>> Map.drop(@inclusive)
+               ~>> then(&struct(AboveLimitMakerBelowStopLossQuery, &1))
+               ~>> BinanceSpotRest.Query.validate()
+    end
+  end
+
+  describe "validation (optional):" do
+    @optional [
+      :listClientOrderId,
+      :aboveType,
+      :aboveClientOrderId,
+      :aboveStrategyId,
+      :aboveStrategyType,
+      :aboveIcebergQty,
+      :belowType,
+      :belowClientOrderId,
+      :belowStrategyId,
+      :belowStrategyType,
+      :selfTradePreventionMode,
+      :newOrderRespType,
+      :recvWindow
+    ]
+
+    test "valid without optional fields" do
+      assert {:ok, %AboveLimitMakerBelowStopLossQuery{}} =
+               full_valid_query()
+               ~>> Map.from_struct()
+               ~>> Map.drop(@optional)
+               ~>> then(&struct(AboveLimitMakerBelowStopLossQuery, &1))
+               ~>> BinanceSpotRest.Query.validate()
+    end
+  end
 
   # describe "validation (type):" do
   #   @bad_types [
+  #     listClientOrderId: 1234,
+  #     # ---
   #     symbol: :LTCBTC,
   #     side: :BUY_INVALID,
-  #     type: :LIMIT_MAKER_INVALID,
   #     quantity: "1.0",
-  #     price: "0.00129",
-  #     newClientOrderId: 123,
-  #     strategyId: 2.5,
-  #     strategyType: "1_000_200",
-  #     icebergQty: "0.5",
   #     selfTradePreventionMode: :EXPIRE_BOTH_INVALID,
   #     newOrderRespType: :ACK_INVALID,
-  #     recvWindow: "3000"
+  #     recvWindow: "3000",
+  #     # ---
+  #     aboveType: :LIMIT_MAKER_INVALID,
+  #     abovePrice: "0.00129",
+  #     aboveClientOrderId: 4567,
+  #     aboveStrategyId: 2.5,
+  #     aboveStrategyType: "1_000_200",
+  #     aboveIcebergQty: "0.5",
+  #     # ---
+  #     belowType: :STOP_LOSS_INVALID,
+  #     belowStopPrice: "20.0",
+  #     belowTrailingDelta: 10.5,
+  #     belowClientOrderId: 8910,
+  #     belowStrategyId: 2.4,
+  #     belowStrategyType: "1_000_200"
   #   ]
 
   #   for {field, bad_value} <- @bad_types do
