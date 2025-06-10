@@ -149,43 +149,43 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOcoPost.AboveLimitMakerBelo
     end
   end
 
-  # describe "validation (type):" do
-  #   @bad_types [
-  #     listClientOrderId: 1234,
-  #     # ---
-  #     symbol: :LTCBTC,
-  #     side: :BUY_INVALID,
-  #     quantity: "1.0",
-  #     selfTradePreventionMode: :EXPIRE_BOTH_INVALID,
-  #     newOrderRespType: :ACK_INVALID,
-  #     recvWindow: "3000",
-  #     # ---
-  #     aboveType: :LIMIT_MAKER_INVALID,
-  #     abovePrice: "0.00129",
-  #     aboveClientOrderId: 4567,
-  #     aboveStrategyId: 2.5,
-  #     aboveStrategyType: "1_000_200",
-  #     aboveIcebergQty: "0.5",
-  #     # ---
-  #     belowType: :STOP_LOSS_INVALID,
-  #     belowStopPrice: "20.0",
-  #     belowTrailingDelta: 10.5,
-  #     belowClientOrderId: 8910,
-  #     belowStrategyId: 2.4,
-  #     belowStrategyType: "1_000_200"
-  #   ]
+  describe "validation (type):" do
+    @bad_types [
+      listClientOrderId: 1234,
+      # ---
+      symbol: :LTCBTC,
+      side: :BUY_INVALID,
+      quantity: "1.0",
+      selfTradePreventionMode: :EXPIRE_BOTH_INVALID,
+      newOrderRespType: :ACK_INVALID,
+      recvWindow: "3000",
+      # ---
+      aboveType: :LIMIT_MAKER_INVALID,
+      abovePrice: "0.00129",
+      aboveClientOrderId: 4567,
+      aboveStrategyId: 2.5,
+      aboveStrategyType: "1_000_200",
+      aboveIcebergQty: "0.5",
+      # ---
+      belowType: :STOP_LOSS_INVALID,
+      belowStopPrice: "20.0",
+      belowTrailingDelta: 10.5,
+      belowClientOrderId: 8910,
+      belowStrategyId: 2.4,
+      belowStrategyType: "1_000_200"
+    ]
 
-  #   for {field, bad_value} <- @bad_types do
-  #     test "invalid #{field} type" do
-  #       assert {:error, %{field: unquote(field)}} =
-  #                full_valid_query()
-  #                ~>> Map.from_struct()
-  #                ~>> Map.put(unquote(field), unquote(Macro.escape(bad_value)))
-  #                ~>> then(&struct(AboveLimitMakerBelowStopLossQuery, &1))
-  #                ~>> BinanceSpotRest.Query.validate()
-  #     end
-  #   end
-  # end
+    for {field, bad_value} <- @bad_types do
+      test "invalid #{field} type" do
+        assert {:error, %{field: unquote(field)}} =
+                 full_valid_query()
+                 ~>> Map.from_struct()
+                 ~>> Map.put(unquote(field), unquote(Macro.escape(bad_value)))
+                 ~>> then(&struct(AboveLimitMakerBelowStopLossQuery, &1))
+                 ~>> BinanceSpotRest.Query.validate()
+      end
+    end
+  end
 
   # describe "validation (specific):" do
   #   # No timeInForce is expected for LimitMaker orders – no test.
