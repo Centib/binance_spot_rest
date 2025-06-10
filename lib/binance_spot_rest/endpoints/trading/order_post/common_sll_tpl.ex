@@ -14,7 +14,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderPost.CommonSllTpl do
     ]
   end
 
-  def validation(q, remap \\ &Function.identity/1) do
+  def validation(q, remap) do
     q
     |> Valpa.string(remap.(:symbol))
     |> Valpa.value_of_values(remap.(:side), BinanceSpotRest.Enums.Side.values())

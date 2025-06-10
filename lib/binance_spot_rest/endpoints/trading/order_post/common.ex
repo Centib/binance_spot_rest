@@ -12,7 +12,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderPost.Common do
     ]
   end
 
-  def validation(q, remap \\ &Function.identity/1) do
+  def validation(q, remap) do
     q
     |> Valpa.maybe_string(remap.(:newClientOrderId))
     |> Valpa.maybe_integer(remap.(:strategyId))
