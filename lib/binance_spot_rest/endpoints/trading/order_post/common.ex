@@ -12,19 +12,19 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderPost.Common do
     ]
   end
 
-  def validation(q) do
+  def validation(q, remap \\ &Function.identity/1) do
     q
-    |> Valpa.maybe_string(:newClientOrderId)
-    |> Valpa.maybe_integer(:strategyId)
-    |> Valpa.maybe_integer_in_range(:strategyType, %{min: 1_000_000, max: :infinity})
+    |> Valpa.maybe_string(remap.(:newClientOrderId))
+    |> Valpa.maybe_integer(remap.(:strategyId))
+    |> Valpa.maybe_integer_in_range(remap.(:strategyType), %{min: 1_000_000, max: :infinity})
     |> Valpa.maybe_value_of_values(
-      :selfTradePreventionMode,
+      remap.(:selfTradePreventionMode),
       BinanceSpotRest.Enums.SelfTradePreventionMode.values()
     )
     |> Valpa.maybe_value_of_values(
-      :newOrderRespType,
+      remap.(:newOrderRespType),
       BinanceSpotRest.Enums.NewOrderRespType.values()
     )
-    |> Valpa.maybe_integer_in_range(:recvWindow, %{min: 0, max: 60_000})
+    |> Valpa.maybe_integer_in_range(remap.(:recvWindow), %{min: 0, max: 60_000})
   end
 end

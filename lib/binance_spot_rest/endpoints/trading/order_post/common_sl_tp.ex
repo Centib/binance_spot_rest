@@ -5,13 +5,13 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderPost.CommonSlTp do
     [:symbol, :side, :quantity, :stopPrice, :trailingDelta]
   end
 
-  def validation(q) do
+  def validation(q, remap \\ &Function.identity/1) do
     q
-    |> Valpa.string(:symbol)
-    |> Valpa.value_of_values(:side, BinanceSpotRest.Enums.Side.values())
-    |> Valpa.decimal(:quantity)
-    |> Valpa.map_inclusive_keys([:stopPrice, :trailingDelta])
-    |> Valpa.maybe_decimal(:stopPrice)
-    |> Valpa.maybe_integer(:trailingDelta)
+    |> Valpa.string(remap.(:symbol))
+    |> Valpa.value_of_values(remap.(:side), BinanceSpotRest.Enums.Side.values())
+    |> Valpa.decimal(remap.(:quantity))
+    |> Valpa.map_inclusive_keys([remap.(:stopPrice), remap.(:trailingDelta)])
+    |> Valpa.maybe_decimal(remap.(:stopPrice))
+    |> Valpa.maybe_integer(remap.(:trailingDelta))
   end
 end

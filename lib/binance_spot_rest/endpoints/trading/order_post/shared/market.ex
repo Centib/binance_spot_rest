@@ -11,14 +11,14 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderPost.Shared.Market do
     ] ++ BinanceSpotRest.Endpoints.Trading.OrderPost.Common.fields()
   end
 
-  def validation(q) do
+  def validation(q, remap \\ &Function.identity/1) do
     q
-    |> Valpa.value_of_values(:type, [BinanceSpotRest.Enums.OrderType._MARKET()])
-    |> Valpa.string(:symbol)
-    |> Valpa.value_of_values(:side, BinanceSpotRest.Enums.Side.values())
-    |> Valpa.map_exclusive_keys([:quantity, :quoteOrderQty])
-    |> Valpa.maybe_decimal(:quantity)
-    |> Valpa.maybe_decimal(:quoteOrderQty)
-    |> BinanceSpotRest.Endpoints.Trading.OrderPost.Common.validation()
+    |> Valpa.value_of_values(remap.(:type), [BinanceSpotRest.Enums.OrderType._MARKET()])
+    |> Valpa.string(remap.(:symbol))
+    |> Valpa.value_of_values(remap.(:side), BinanceSpotRest.Enums.Side.values())
+    |> Valpa.map_exclusive_keys([remap.(:quantity), remap.(:quoteOrderQty)])
+    |> Valpa.maybe_decimal(remap.(:quantity))
+    |> Valpa.maybe_decimal(remap.(:quoteOrderQty))
+    |> BinanceSpotRest.Endpoints.Trading.OrderPost.Common.validation(remap)
   end
 end

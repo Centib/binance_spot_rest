@@ -7,9 +7,9 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderPost.Shared.StopLossLimit do
       BinanceSpotRest.Endpoints.Trading.OrderPost.Common.fields()
   end
 
-  def validation(q) do
+  def validation(q, remap \\ &Function.identity/1) do
     q
-    |> Valpa.value_of_values(:type, [BinanceSpotRest.Enums.OrderType._STOP_LOSS_LIMIT()])
+    |> Valpa.value_of_values(remap.(:type), [BinanceSpotRest.Enums.OrderType._STOP_LOSS_LIMIT()])
     |> BinanceSpotRest.Endpoints.Trading.OrderPost.CommonSllTpl.validation()
     |> BinanceSpotRest.Endpoints.Trading.OrderPost.Common.validation()
   end

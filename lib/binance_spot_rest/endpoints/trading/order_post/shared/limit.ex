@@ -13,15 +13,22 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderPost.Shared.Limit do
     ] ++ BinanceSpotRest.Endpoints.Trading.OrderPost.Common.fields()
   end
 
-  def validation(q) do
+  def validation(q, remap \\ &Function.identity/1) do
     q
-    |> Valpa.value_of_values(:type, [BinanceSpotRest.Enums.OrderType._LIMIT()])
-    |> Valpa.string(:symbol)
-    |> Valpa.value_of_values(:side, BinanceSpotRest.Enums.Side.values())
-    |> Valpa.value_of_values(:timeInForce, BinanceSpotRest.Enums.TimeInForce.values())
-    |> Valpa.decimal(:quantity)
-    |> Valpa.decimal(:price)
-    |> Valpa.Custom.validator(BinanceSpotRest.Validators.IcebergQty)
-    |> BinanceSpotRest.Endpoints.Trading.OrderPost.Common.validation()
+    |> Valpa.value_of_values(remap.(:type), [BinanceSpotRest.Enums.OrderType._LIMIT()])
+    |> Valpa.string(remap.(:symbol))
+    |> Valpa.value_of_values(remap.(:side), BinanceSpotRest.Enums.Side.values())
+    |> Valpa.value_of_values(remap.(:timeInForce), BinanceSpotRest.Enums.TimeInForce.values())
+    |> Valpa.decimal(remap.(:quantity))
+    |> Valpa.decimal(remap.(:price))
+    |> Valpa.Custom.validate(
+      &BinanceSpotRest.Validators.IcebergQty.validate(
+        &1,
+        remap.(:icebergQty),
+        remap.(:timeInForce),
+        remap.(:quantity)
+      )
+    )
+    |> BinanceSpotRest.Endpoints.Trading.OrderPost.Common.validation(remap)
   end
 end
