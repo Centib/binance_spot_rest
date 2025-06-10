@@ -187,16 +187,16 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOcoPost.AboveLimitMakerBelo
     end
   end
 
-  # describe "validation (specific):" do
-  #   # No timeInForce is expected for LimitMaker orders – no test.
+  describe "validation (specific):" do
+    # No timeInForce is expected for LimitMaker orders – no test.
 
-  #   test "incorrect icebergQty (not lower than quantity)" do
-  #     assert {:error, %{field: :icebergQty}} =
-  #              full_valid_query()
-  #              ~>> Map.from_struct()
-  #              ~>> Map.put(:icebergQty, Decimal.new("1.5"))
-  #              ~>> then(&struct(AboveLimitMakerBelowStopLossQuery, &1))
-  #              ~>> BinanceSpotRest.Query.validate()
-  #   end
-  # end
+    test "incorrect aboveIcebergQty (not lower than quantity)" do
+      assert {:error, %{field: :aboveIcebergQty}} =
+               full_valid_query()
+               ~>> Map.from_struct()
+               ~>> Map.put(:aboveIcebergQty, Decimal.new("1.5"))
+               ~>> then(&struct(AboveLimitMakerBelowStopLossQuery, &1))
+               ~>> BinanceSpotRest.Query.validate()
+    end
+  end
 end
