@@ -37,9 +37,6 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOcoPost.UseShared do
   @above Map.merge(@a, @c)
   @below Map.merge(@b, @c)
 
-  @above_reverse Map.new(@above, fn {k, v} -> {v, k} end)
-  @below_reverse Map.new(@below, fn {k, v} -> {v, k} end)
-
   defp remap_fields(fields, mapper) do
     pairs =
       for item <- fields do
@@ -62,22 +59,14 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOcoPost.UseShared do
     Enum.uniq(af ++ bf)
   end
 
-  defp remap_back(q, mapper) do
-    map = Map.from_struct(q)
-
-    for {f, v} <- map,
-        Map.has_key?(mapper, f),
-        into: %{},
-        do: {mapper[f], v}
+  defp remap(field, mapper) do
+    Map.get(mapper, field, field)
   end
 
   @spec validation(struct(), module(), module()) :: {:ok, struct()} | {:error, any()}
   def validation(q, above_shared, below_shared) do
-    above_input = remap_back(q, @above_reverse)
-    below_input = remap_back(q, @below_reverse)
-
-    with {:ok, _} <- above_shared.validation(above_input),
-         {:ok, _} <- below_shared.validation(below_input) do
+    with {:ok, _} <- above_shared.validation(q, &remap(&1, @above)),
+         {:ok, _} <- below_shared.validation(q, &remap(&1, @below)) do
       {:ok, q}
     else
       {:error, reason} -> {:error, reason}
