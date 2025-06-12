@@ -6,7 +6,9 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOcoPost.AboveStopLossLimitB
   alias BinanceSpotRest.Endpoints.Trading.OrderPost.Shared.StopLossLimit, as: Above
   alias BinanceSpotRest.Endpoints.Trading.OrderPost.Shared.LimitMaker, as: Below
 
-  defstruct BinanceSpotRest.Endpoints.Trading.OrderListOcoPost.UseShared.fields(Above, Below) ++
+  defstruct BinanceSpotRest.Endpoints.Trading.OrderListOcoPost.UseShared.fields(Above, Below,
+              side: BinanceSpotRest.Enums.Side._BUY()
+            ) ++
               BinanceSpotRest.Endpoints.Trading.OrderListOcoPost.Common.fields()
 
   defimpl BinanceSpotRest.Query do
@@ -14,6 +16,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOcoPost.AboveStopLossLimitB
       do:
         q
         |> BinanceSpotRest.Endpoints.Trading.OrderListOcoPost.UseShared.validation(Above, Below)
+        |> Valpa.value_of_values(:side, [BinanceSpotRest.Enums.Side._BUY()])
         |> BinanceSpotRest.Endpoints.Trading.OrderListOcoPost.Common.validation()
 
     def prepare(q),

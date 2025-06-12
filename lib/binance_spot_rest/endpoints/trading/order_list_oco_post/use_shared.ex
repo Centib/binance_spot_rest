@@ -51,12 +51,12 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOcoPost.UseShared do
         do: {mapper[f], v}
   end
 
-  @spec fields(module(), module()) :: list(atom())
-  def fields(above_shared, below_shared) do
+  @spec fields(module(), module(), keyword(side: atom())) :: keyword()
+  def fields(above_shared, below_shared, side: side) do
     af = remap_fields(above_shared.fields(), @above)
     bf = remap_fields(below_shared.fields(), @below)
 
-    Enum.uniq(af ++ bf)
+    Enum.uniq(af ++ bf) |> Keyword.put(:side, side)
   end
 
   defp remap(field, mapper) do

@@ -12,7 +12,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOcoPost.AboveTakeProfitLimi
       listClientOrderId: "2inzWQdDvZLHbbAmAozX2N",
       # ---
       symbol: "LTCBTC",
-      side: BinanceSpotRest.Enums.Side._BUY(),
+      side: BinanceSpotRest.Enums.Side._SELL(),
       quantity: Decimal.new("1.0"),
       selfTradePreventionMode: BinanceSpotRest.Enums.SelfTradePreventionMode._EXPIRE_BOTH(),
       newOrderRespType: BinanceSpotRest.Enums.NewOrderRespType._ACK(),
@@ -82,7 +82,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOcoPost.AboveTakeProfitLimi
                    "quantity=1.0&" <>
                    "recvWindow=3000&" <>
                    "selfTradePreventionMode=EXPIRE_BOTH&" <>
-                   "side=BUY&" <>
+                   "side=SELL&" <>
                    "symbol=LTCBTC&" <>
                    "timestamp=1740587673449&" <>
                    "signature=fake_signature"
@@ -93,7 +93,6 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOcoPost.AboveTakeProfitLimi
   describe "validation (required):" do
     @required [
       :symbol,
-      :side,
       :quantity,
       :aboveTimeInForce,
       :abovePrice,
@@ -173,6 +172,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOcoPost.AboveTakeProfitLimi
 
   describe "validation (optional):" do
     @optional [
+      :side,
       :listClientOrderId,
       :aboveIcebergQty,
       :aboveType,

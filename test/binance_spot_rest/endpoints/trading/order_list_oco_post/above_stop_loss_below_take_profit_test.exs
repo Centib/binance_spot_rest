@@ -79,7 +79,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOcoPost.AboveStopLossBelowT
   end
 
   describe "validation (required):" do
-    @required [:symbol, :side, :quantity]
+    @required [:symbol, :quantity]
 
     for field <- @required do
       test "invalid without #{field}" do
@@ -153,6 +153,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOcoPost.AboveStopLossBelowT
 
   describe "validation (optional):" do
     @optional [
+      :side,
       :listClientOrderId,
       :belowType,
       :belowClientOrderId,

@@ -93,7 +93,6 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOcoPost.AboveStopLossLimitB
   describe "validation (required):" do
     @required [
       :symbol,
-      :side,
       :quantity,
       :belowTimeInForce,
       :belowPrice,
@@ -173,6 +172,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOcoPost.AboveStopLossLimitB
 
   describe "validation (optional):" do
     @optional [
+      :side,
       :listClientOrderId,
       :belowIcebergQty,
       :belowType,
