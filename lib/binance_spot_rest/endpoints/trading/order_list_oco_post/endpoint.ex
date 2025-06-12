@@ -10,13 +10,13 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOcoPost.Endpoint do
 
   - An OCO has 2 orders called the **above order** and **below order**.
   - One of the orders must be a `LIMIT_MAKER/TAKE_PROFIT/TAKE_PROFIT_LIMIT` order and the other must be `STOP_LOSS` or `STOP_LOSS_LIMIT` order.
-  - Price restrictions
+  - Price restrictions (_MODIFIED_: it is wrong in original docs)
   - If the OCO is on the `SELL` side:
-    - `LIMIT_MAKER/TAKE_PROFIT_LIMIT` `price` > Last Traded Price > `STOP_LOSS/STOP_LOSS_LIMIT` `stopPrice`
-    - `TAKE_PROFIT stopPrice` > Last Traded Price > `STOP_LOSS/STOP_LOSS_LIMIT stopPrice`
+    - `LIMIT_MAKER` `price` (above) > Last Traded Price > `STOP_LOSS/STOP_LOSS_LIMIT` `stopPrice` (below)
+    - `TAKE_PROFIT/TAKE_PROFIT_LIMIT stopPrice` (above) > Last Traded Price > `STOP_LOSS/STOP_LOSS_LIMIT stopPrice` (below)
   - If the OCO is on the `BUY` side:
-    - `LIMIT_MAKER/TAKE_PROFIT_LIMIT price` < Last Traded Price < `stopPrice`
-    - `TAKE_PROFIT stopPrice` < Last Traded Price < `STOP_LOSS/STOP_LOSS_LIMIT stopPrice`
+    - `LIMIT_MAKER price` (below) < Last Traded Price < `stopPrice` (above)
+    - `TAKE_PROFIT/TAKE_PROFIT_LIMIT stopPrice` (below) < Last Traded Price < `STOP_LOSS/STOP_LOSS_LIMIT stopPrice` (above)
   - OCOs add **2 orders** to the unfilled order count, `EXCHANGE_MAX_ORDERS` filter, and the `MAX_NUM_ORDERS` filter.
 
   **Weight:**
