@@ -74,4 +74,16 @@ defmodule Valpa.Predicate.Validator do
   end
 
   def decimal(va), do: is_struct(va, Decimal)
+
+  def map_compare_int_keys(map, {op, k1, k2}) when op in [:>, :<, :>=, :<=, :==, :!=] do
+    Valpa.Predicate.Compare.compare_int_keys(map, k1, k2, op)
+  end
+
+  def map_compare_float_keys(map, {op, k1, k2}) when op in [:>, :<, :>=, :<=, :==, :!=] do
+    Valpa.Predicate.Compare.compare_float_keys(map, k1, k2, op)
+  end
+
+  def map_compare_decimal_keys(map, {op, k1, k2}) when op in [:>, :<, :>=, :<=, :==, :!=] do
+    Valpa.Predicate.Compare.compare_decimal_keys(map, k1, k2, op)
+  end
 end
