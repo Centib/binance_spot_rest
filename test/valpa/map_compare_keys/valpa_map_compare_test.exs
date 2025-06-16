@@ -35,6 +35,7 @@ defmodule Valpa.ValpaMapCompareTest do
       {%{a: nil, b: 2}, {:<, :a, :b}},
       {%{a: 1, b: nil}, {:<, :a, :b}},
       {%{a: nil, b: nil}, {:<, :a, :b}},
+      {%{a: 5}, {:<, :a, :b}},
       {%{}, {:<, :a, :b}}
     ]
 
@@ -136,6 +137,7 @@ defmodule Valpa.ValpaMapCompareTest do
       {%{a: nil, b: 2.0}, {:<, :a, :b}},
       {%{a: 1.0, b: nil}, {:<, :a, :b}},
       {%{a: nil, b: nil}, {:<, :a, :b}},
+      {%{a: 5.4}, {:<, :a, :b}},
       {%{}, {:<, :a, :b}}
     ]
 
@@ -241,6 +243,7 @@ defmodule Valpa.ValpaMapCompareTest do
       {%{a: nil, b: Decimal.new("2.0")}, {:<, :a, :b}},
       {%{a: Decimal.new("1.0"), b: nil}, {:<, :a, :b}},
       {%{a: nil, b: nil}, {:<, :a, :b}},
+      {%{a: Decimal.new("1.0")}, {:<, :a, :b}},
       {%{}, {:<, :a, :b}}
     ]
 
