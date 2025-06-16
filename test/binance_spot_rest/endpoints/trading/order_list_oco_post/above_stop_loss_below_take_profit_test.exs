@@ -19,14 +19,14 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOcoPost.AboveStopLossBelowT
       recvWindow: 3000,
       # ---
       belowType: BinanceSpotRest.Enums.OrderType._TAKE_PROFIT(),
-      belowStopPrice: Decimal.new("20.0"),
+      belowStopPrice: Decimal.new("0.001"),
       belowTrailingDelta: 10,
       belowClientOrderId: "UsaAPevABCDE4LJ4oTobyX",
       belowStrategyId: 2,
       belowStrategyType: 1_000_200,
       # ---
       aboveType: BinanceSpotRest.Enums.OrderType._STOP_LOSS(),
-      aboveStopPrice: Decimal.new("20.0"),
+      aboveStopPrice: Decimal.new("0.00129"),
       aboveTrailingDelta: 10,
       aboveClientOrderId: "UsaAPevABCDE4LJ4oTobyX",
       aboveStrategyId: 2,
@@ -54,13 +54,13 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOcoPost.AboveStopLossBelowT
                url:
                  "/api/v3/orderList/oco?" <>
                    "aboveClientOrderId=UsaAPevABCDE4LJ4oTobyX&" <>
-                   "aboveStopPrice=20.0&" <>
+                   "aboveStopPrice=0.00129&" <>
                    "aboveStrategyId=2&" <>
                    "aboveStrategyType=1000200&" <>
                    "aboveTrailingDelta=10&" <>
                    "aboveType=STOP_LOSS&" <>
                    "belowClientOrderId=UsaAPevABCDE4LJ4oTobyX&" <>
-                   "belowStopPrice=20.0&" <>
+                   "belowStopPrice=0.001&" <>
                    "belowStrategyId=2&" <>
                    "belowStrategyType=1000200&" <>
                    "belowTrailingDelta=10&" <>
@@ -213,6 +213,38 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOcoPost.AboveStopLossBelowT
                  ~>> then(&struct(AboveStopLossBelowTakeProfitQuery, &1))
                  ~>> BinanceSpotRest.Query.validate()
       end
+    end
+  end
+
+  describe "validation price compare" do
+    test "error if aboveStopPrice is lower than belowStopPrice" do
+      assert {:error, _} =
+               full_valid_query()
+               ~>> Map.from_struct()
+               ~>> Map.put(:aboveStopPrice, Decimal.new("0.001"))
+               ~>> Map.put(:belowStopPrice, Decimal.new("0.002"))
+               ~>> then(&struct(AboveStopLossBelowTakeProfitQuery, &1))
+               ~>> BinanceSpotRest.Query.validate()
+    end
+
+    test "error if aboveStopPrice is equal than belowStopPrice" do
+      assert {:error, _} =
+               full_valid_query()
+               ~>> Map.from_struct()
+               ~>> Map.put(:aboveStopPrice, Decimal.new("0.001"))
+               ~>> Map.put(:belowStopPrice, Decimal.new("0.001"))
+               ~>> then(&struct(AboveStopLossBelowTakeProfitQuery, &1))
+               ~>> BinanceSpotRest.Query.validate()
+    end
+
+    test "ok if aboveStopPrice is greater than belowStopPrice" do
+      assert {:ok, %AboveStopLossBelowTakeProfitQuery{}} =
+               full_valid_query()
+               ~>> Map.from_struct()
+               ~>> Map.put(:aboveStopPrice, Decimal.new("0.002"))
+               ~>> Map.put(:belowStopPrice, Decimal.new("0.001"))
+               ~>> then(&struct(AboveStopLossBelowTakeProfitQuery, &1))
+               ~>> BinanceSpotRest.Query.validate()
     end
   end
 end

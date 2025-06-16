@@ -19,7 +19,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOcoPost.AboveStopLossLimitB
       recvWindow: 3000,
       # ---
       belowType: BinanceSpotRest.Enums.OrderType._LIMIT_MAKER(),
-      belowPrice: Decimal.new("0.00129"),
+      belowPrice: Decimal.new("0.001"),
       belowClientOrderId: "UsaAPevABCDE4LJ4oTobyX",
       belowStrategyId: 2,
       belowStrategyType: 1_000_200,
@@ -28,7 +28,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOcoPost.AboveStopLossLimitB
       aboveType: BinanceSpotRest.Enums.OrderType._STOP_LOSS_LIMIT(),
       aboveTimeInForce: BinanceSpotRest.Enums.TimeInForce._GTC(),
       abovePrice: Decimal.new("0.00129"),
-      aboveStopPrice: Decimal.new("0.001"),
+      aboveStopPrice: Decimal.new("0.00129"),
       aboveTrailingDelta: 10,
       aboveClientOrderId: "UsaAPevABCDE4LJ4oTobyX",
       aboveStrategyId: 2,
@@ -59,7 +59,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOcoPost.AboveStopLossLimitB
                    "aboveClientOrderId=UsaAPevABCDE4LJ4oTobyX&" <>
                    "aboveIcebergQty=0.5&" <>
                    "abovePrice=0.00129&" <>
-                   "aboveStopPrice=0.001&" <>
+                   "aboveStopPrice=0.00129&" <>
                    "aboveStrategyId=2&" <>
                    "aboveStrategyType=1000200&" <>
                    "aboveTimeInForce=GTC&" <>
@@ -67,7 +67,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOcoPost.AboveStopLossLimitB
                    "aboveType=STOP_LOSS_LIMIT&" <>
                    "belowClientOrderId=UsaAPevABCDE4LJ4oTobyX&" <>
                    "belowIcebergQty=0.5&" <>
-                   "belowPrice=0.00129&" <>
+                   "belowPrice=0.001&" <>
                    "belowStrategyId=2&" <>
                    "belowStrategyType=1000200&" <>
                    "belowType=LIMIT_MAKER&" <>
@@ -235,6 +235,38 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOcoPost.AboveStopLossLimitB
                full_valid_query()
                ~>> Map.from_struct()
                ~>> Map.put(:aboveIcebergQty, Decimal.new("1.5"))
+               ~>> then(&struct(AboveStopLossLimitBelowLimitMakerQuery, &1))
+               ~>> BinanceSpotRest.Query.validate()
+    end
+  end
+
+  describe "validation price compare" do
+    test "error if aboveStopPrice is lower than belowPrice" do
+      assert {:error, _} =
+               full_valid_query()
+               ~>> Map.from_struct()
+               ~>> Map.put(:aboveStopPrice, Decimal.new("0.001"))
+               ~>> Map.put(:belowPrice, Decimal.new("0.002"))
+               ~>> then(&struct(AboveStopLossLimitBelowLimitMakerQuery, &1))
+               ~>> BinanceSpotRest.Query.validate()
+    end
+
+    test "error if aboveStopPrice is equal than belowPrice" do
+      assert {:error, _} =
+               full_valid_query()
+               ~>> Map.from_struct()
+               ~>> Map.put(:aboveStopPrice, Decimal.new("0.001"))
+               ~>> Map.put(:belowPrice, Decimal.new("0.001"))
+               ~>> then(&struct(AboveStopLossLimitBelowLimitMakerQuery, &1))
+               ~>> BinanceSpotRest.Query.validate()
+    end
+
+    test "ok if aboveStopPrice is greater than belowPrice" do
+      assert {:ok, %AboveStopLossLimitBelowLimitMakerQuery{}} =
+               full_valid_query()
+               ~>> Map.from_struct()
+               ~>> Map.put(:aboveStopPrice, Decimal.new("0.002"))
+               ~>> Map.put(:belowPrice, Decimal.new("0.001"))
                ~>> then(&struct(AboveStopLossLimitBelowLimitMakerQuery, &1))
                ~>> BinanceSpotRest.Query.validate()
     end

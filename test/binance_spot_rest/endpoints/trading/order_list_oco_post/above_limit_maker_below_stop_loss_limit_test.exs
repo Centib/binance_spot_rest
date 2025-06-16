@@ -239,4 +239,36 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOcoPost.AboveLimitMakerBelo
                ~>> BinanceSpotRest.Query.validate()
     end
   end
+
+  describe "validation price compare" do
+    test "error if abovePrice is lower than belowStopPrice" do
+      assert {:error, _} =
+               full_valid_query()
+               ~>> Map.from_struct()
+               ~>> Map.put(:abovePrice, Decimal.new("0.001"))
+               ~>> Map.put(:belowStopPrice, Decimal.new("0.002"))
+               ~>> then(&struct(AboveLimitMakerBelowStopLossLimitQuery, &1))
+               ~>> BinanceSpotRest.Query.validate()
+    end
+
+    test "error if abovePrice is equal than belowStopPrice" do
+      assert {:error, _} =
+               full_valid_query()
+               ~>> Map.from_struct()
+               ~>> Map.put(:abovePrice, Decimal.new("0.001"))
+               ~>> Map.put(:belowStopPrice, Decimal.new("0.001"))
+               ~>> then(&struct(AboveLimitMakerBelowStopLossLimitQuery, &1))
+               ~>> BinanceSpotRest.Query.validate()
+    end
+
+    test "ok if abovePrice is greater than belowStopPrice" do
+      assert {:ok, %AboveLimitMakerBelowStopLossLimitQuery{}} =
+               full_valid_query()
+               ~>> Map.from_struct()
+               ~>> Map.put(:abovePrice, Decimal.new("0.002"))
+               ~>> Map.put(:belowStopPrice, Decimal.new("0.001"))
+               ~>> then(&struct(AboveLimitMakerBelowStopLossLimitQuery, &1))
+               ~>> BinanceSpotRest.Query.validate()
+    end
+  end
 end

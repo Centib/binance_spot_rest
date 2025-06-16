@@ -18,6 +18,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOcoPost.AboveTakeProfitLimi
         |> BinanceSpotRest.Endpoints.Trading.OrderListOcoPost.UseShared.validation(Above, Below)
         |> Valpa.value_of_values(:side, [BinanceSpotRest.Enums.Side._SELL()])
         |> BinanceSpotRest.Endpoints.Trading.OrderListOcoPost.Common.validation()
+        |> Valpa.map_compare_decimal_keys({:>, :aboveStopPrice, :belowStopPrice})
 
     def prepare(q),
       do: %BinanceSpotRest.Query.RequestSpec{
