@@ -11,5 +11,6 @@
     "tfil",
     "Valpa"
   ],
-  "workbench.colorTheme": "Grunge Light (rainglow)"
+  "workbench.colorTheme": "Gloom Light (rainglow)",
+  "workbench.preferredDarkColorTheme": "Default Dark+"
 }
