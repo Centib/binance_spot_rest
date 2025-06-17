@@ -1,6 +1,8 @@
 defmodule BinanceSpotRest.Endpoints.Trading.OrderListOcoPost.UseShared do
   @moduledoc false
 
+  import Loe
+
   @a %{
     type: :aboveType,
     newClientOrderId: :aboveClientOrderId,
@@ -63,13 +65,11 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOcoPost.UseShared do
     Map.get(mapper, field, field)
   end
 
-  @spec validation(struct(), module(), module()) :: {:ok, struct()} | {:error, any()}
+  @spec validation(struct() | {:ok, struct() | {:error, any()}}, module(), module()) ::
+          {:ok, struct()} | {:error, any()}
   def validation(q, above_shared, below_shared) do
-    with {:ok, _} <- above_shared.validation(q, &remap(&1, @above)),
-         {:ok, _} <- below_shared.validation(q, &remap(&1, @below)) do
-      {:ok, q}
-    else
-      {:error, reason} -> {:error, reason}
-    end
+    q
+    ~>> above_shared.validation(&remap(&1, @above))
+    ~>> below_shared.validation(&remap(&1, @below))
   end
 end
