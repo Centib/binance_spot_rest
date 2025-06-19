@@ -178,7 +178,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOtoPost.WorkingLimitMakerPe
   end
 
   describe "validation (specific) (working):" do
-    # No timeInForce is expected for LimitMaker orders – no test.
+    # No workingTimeInForce is expected for LimitMaker orders – no test.
 
     test "incorrect workingIcebergQty (not lower than quantity)" do
       assert {:error, %{field: :workingIcebergQty}} =
