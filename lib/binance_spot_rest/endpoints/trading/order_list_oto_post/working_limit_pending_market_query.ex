@@ -13,6 +13,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOtoPost.WorkingLimitPending
     def validate(q),
       do:
         q
+        # 'quoteOrderQty' is forbidden for OTO, and 'quantity' is exclusive with 'quoteOrderQty' for MARKET
         |> Valpa.decimal(:pendingQuantity)
         |> Valpa.value_of_values(:pendingQuoteOrderQty, [nil])
         |> BinanceSpotRest.Endpoints.Trading.OrderListOtoPost.UseShared.validation(
