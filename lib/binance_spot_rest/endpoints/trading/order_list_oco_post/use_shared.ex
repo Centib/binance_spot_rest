@@ -53,7 +53,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOcoPost.UseShared do
         do: {mapper[f], v}
   end
 
-  @spec fields(module(), module(), keyword(side: atom())) :: keyword()
+  @spec fields(module(), module(), [side: atom()]) :: keyword()
   def fields(above_shared, below_shared, side: side) do
     af = remap_fields(above_shared.fields(), @above)
     bf = remap_fields(below_shared.fields(), @below)
