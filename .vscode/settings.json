@@ -7,10 +7,11 @@
     "hmac",
     "Klines",
     "LTCBTC",
+    "Otoco",
     "rowspan",
     "tfil",
     "Valpa"
   ],
-  "workbench.colorTheme": "Gloom Light (rainglow)",
+  "workbench.colorTheme": "Grunge Light (rainglow)",
   "workbench.preferredDarkColorTheme": "Default Dark+"
 }
