@@ -56,10 +56,10 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOtoPost.UseShared do
 
   @spec fields(module(), module()) :: keyword()
   def fields(working_shared, pending_shared) do
-    af = remap_fields(working_shared.fields(), @working)
-    bf = remap_fields(pending_shared.fields(), @pending)
+    wf = remap_fields(working_shared.fields(), @working)
+    pf = remap_fields(pending_shared.fields(), @pending)
 
-    Enum.uniq(af ++ bf)
+    Enum.uniq(wf ++ pf)
   end
 
   defp remap(field, mapper) do
