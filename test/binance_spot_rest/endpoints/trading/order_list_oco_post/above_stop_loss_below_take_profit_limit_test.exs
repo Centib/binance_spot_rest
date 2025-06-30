@@ -226,7 +226,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOcoPost.AboveStopLossBelowT
     end
   end
 
-  describe "validation (specific) (above):" do
+  describe "validation (specific) (below):" do
     test "incorrect belowTimeInForce (FOC) when belowIcebergQty is set" do
       assert {:error, %{field: :belowTimeInForce}} =
                full_valid_query()
