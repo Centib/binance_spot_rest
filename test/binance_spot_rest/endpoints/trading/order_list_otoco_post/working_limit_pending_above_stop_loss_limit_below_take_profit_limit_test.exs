@@ -223,13 +223,13 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOtocoPost.WorkingLimitPendi
                  full_valid_query()
                  ~>> Map.from_struct()
                  ~>> Map.put(unquote(field), unquote(Macro.escape(bad_value)))
-                 ~>> then(&struct(WorkingLimitPendingAboveStopLossLimitBelowTakeProfitLimitQuery, &1))
+                 ~>> then(
+                   &struct(WorkingLimitPendingAboveStopLossLimitBelowTakeProfitLimitQuery, &1)
+                 )
                  ~>> BinanceSpotRest.Query.validate()
       end
     end
   end
-
-
 
   describe "validation (inclusive) (pending above):" do
     @inclusive [:pendingAboveStopPrice, :pendingAboveTrailingDelta]
@@ -239,14 +239,18 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOtocoPost.WorkingLimitPendi
                full_valid_query()
                ~>> Map.from_struct()
                ~>> Map.delete(Enum.at(@inclusive, 0))
-               ~>> then(&struct(WorkingLimitPendingAboveStopLossLimitBelowTakeProfitLimitQuery, &1))
+               ~>> then(
+                 &struct(WorkingLimitPendingAboveStopLossLimitBelowTakeProfitLimitQuery, &1)
+               )
                ~>> BinanceSpotRest.Query.validate()
 
       assert {:ok, %WorkingLimitPendingAboveStopLossLimitBelowTakeProfitLimitQuery{}} =
                full_valid_query()
                ~>> Map.from_struct()
                ~>> Map.delete(Enum.at(@inclusive, 1))
-               ~>> then(&struct(WorkingLimitPendingAboveStopLossLimitBelowTakeProfitLimitQuery, &1))
+               ~>> then(
+                 &struct(WorkingLimitPendingAboveStopLossLimitBelowTakeProfitLimitQuery, &1)
+               )
                ~>> BinanceSpotRest.Query.validate()
     end
 
@@ -255,7 +259,9 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOtocoPost.WorkingLimitPendi
                full_valid_query()
                ~>> Map.from_struct()
                ~>> Map.drop(@inclusive)
-               ~>> then(&struct(WorkingLimitPendingAboveStopLossLimitBelowTakeProfitLimitQuery, &1))
+               ~>> then(
+                 &struct(WorkingLimitPendingAboveStopLossLimitBelowTakeProfitLimitQuery, &1)
+               )
                ~>> BinanceSpotRest.Query.validate()
     end
   end
@@ -268,14 +274,18 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOtocoPost.WorkingLimitPendi
                full_valid_query()
                ~>> Map.from_struct()
                ~>> Map.delete(Enum.at(@inclusive, 0))
-               ~>> then(&struct(WorkingLimitPendingAboveStopLossLimitBelowTakeProfitLimitQuery, &1))
+               ~>> then(
+                 &struct(WorkingLimitPendingAboveStopLossLimitBelowTakeProfitLimitQuery, &1)
+               )
                ~>> BinanceSpotRest.Query.validate()
 
       assert {:ok, %WorkingLimitPendingAboveStopLossLimitBelowTakeProfitLimitQuery{}} =
                full_valid_query()
                ~>> Map.from_struct()
                ~>> Map.delete(Enum.at(@inclusive, 1))
-               ~>> then(&struct(WorkingLimitPendingAboveStopLossLimitBelowTakeProfitLimitQuery, &1))
+               ~>> then(
+                 &struct(WorkingLimitPendingAboveStopLossLimitBelowTakeProfitLimitQuery, &1)
+               )
                ~>> BinanceSpotRest.Query.validate()
     end
 
@@ -284,7 +294,9 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOtocoPost.WorkingLimitPendi
                full_valid_query()
                ~>> Map.from_struct()
                ~>> Map.drop(@inclusive)
-               ~>> then(&struct(WorkingLimitPendingAboveStopLossLimitBelowTakeProfitLimitQuery, &1))
+               ~>> then(
+                 &struct(WorkingLimitPendingAboveStopLossLimitBelowTakeProfitLimitQuery, &1)
+               )
                ~>> BinanceSpotRest.Query.validate()
     end
   end
@@ -295,7 +307,9 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOtocoPost.WorkingLimitPendi
                full_valid_query()
                ~>> Map.from_struct()
                ~>> Map.put(:workingTimeInForce, BinanceSpotRest.Enums.TimeInForce._FOK())
-               ~>> then(&struct(WorkingLimitPendingAboveStopLossLimitBelowTakeProfitLimitQuery, &1))
+               ~>> then(
+                 &struct(WorkingLimitPendingAboveStopLossLimitBelowTakeProfitLimitQuery, &1)
+               )
                ~>> BinanceSpotRest.Query.validate()
     end
 
@@ -304,7 +318,9 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOtocoPost.WorkingLimitPendi
                full_valid_query()
                ~>> Map.from_struct()
                ~>> Map.put(:workingTimeInForce, BinanceSpotRest.Enums.TimeInForce._IOC())
-               ~>> then(&struct(WorkingLimitPendingAboveStopLossLimitBelowTakeProfitLimitQuery, &1))
+               ~>> then(
+                 &struct(WorkingLimitPendingAboveStopLossLimitBelowTakeProfitLimitQuery, &1)
+               )
                ~>> BinanceSpotRest.Query.validate()
     end
 
@@ -313,7 +329,9 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOtocoPost.WorkingLimitPendi
                full_valid_query()
                ~>> Map.from_struct()
                ~>> Map.put(:workingIcebergQty, Decimal.new("1.5"))
-               ~>> then(&struct(WorkingLimitPendingAboveStopLossLimitBelowTakeProfitLimitQuery, &1))
+               ~>> then(
+                 &struct(WorkingLimitPendingAboveStopLossLimitBelowTakeProfitLimitQuery, &1)
+               )
                ~>> BinanceSpotRest.Query.validate()
     end
   end
@@ -324,7 +342,9 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOtocoPost.WorkingLimitPendi
                full_valid_query()
                ~>> Map.from_struct()
                ~>> Map.put(:pendingBelowTimeInForce, BinanceSpotRest.Enums.TimeInForce._FOK())
-               ~>> then(&struct(WorkingLimitPendingAboveStopLossLimitBelowTakeProfitLimitQuery, &1))
+               ~>> then(
+                 &struct(WorkingLimitPendingAboveStopLossLimitBelowTakeProfitLimitQuery, &1)
+               )
                ~>> BinanceSpotRest.Query.validate()
     end
 
@@ -333,7 +353,9 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOtocoPost.WorkingLimitPendi
                full_valid_query()
                ~>> Map.from_struct()
                ~>> Map.put(:pendingBelowTimeInForce, BinanceSpotRest.Enums.TimeInForce._IOC())
-               ~>> then(&struct(WorkingLimitPendingAboveStopLossLimitBelowTakeProfitLimitQuery, &1))
+               ~>> then(
+                 &struct(WorkingLimitPendingAboveStopLossLimitBelowTakeProfitLimitQuery, &1)
+               )
                ~>> BinanceSpotRest.Query.validate()
     end
 
@@ -342,7 +364,9 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOtocoPost.WorkingLimitPendi
                full_valid_query()
                ~>> Map.from_struct()
                ~>> Map.put(:pendingBelowIcebergQty, Decimal.new("1.5"))
-               ~>> then(&struct(WorkingLimitPendingAboveStopLossLimitBelowTakeProfitLimitQuery, &1))
+               ~>> then(
+                 &struct(WorkingLimitPendingAboveStopLossLimitBelowTakeProfitLimitQuery, &1)
+               )
                ~>> BinanceSpotRest.Query.validate()
     end
   end
@@ -353,7 +377,9 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOtocoPost.WorkingLimitPendi
                full_valid_query()
                ~>> Map.from_struct()
                ~>> Map.put(:pendingAboveTimeInForce, BinanceSpotRest.Enums.TimeInForce._FOK())
-               ~>> then(&struct(WorkingLimitPendingAboveStopLossLimitBelowTakeProfitLimitQuery, &1))
+               ~>> then(
+                 &struct(WorkingLimitPendingAboveStopLossLimitBelowTakeProfitLimitQuery, &1)
+               )
                ~>> BinanceSpotRest.Query.validate()
     end
 
@@ -362,7 +388,9 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOtocoPost.WorkingLimitPendi
                full_valid_query()
                ~>> Map.from_struct()
                ~>> Map.put(:pendingAboveTimeInForce, BinanceSpotRest.Enums.TimeInForce._IOC())
-               ~>> then(&struct(WorkingLimitPendingAboveStopLossLimitBelowTakeProfitLimitQuery, &1))
+               ~>> then(
+                 &struct(WorkingLimitPendingAboveStopLossLimitBelowTakeProfitLimitQuery, &1)
+               )
                ~>> BinanceSpotRest.Query.validate()
     end
 
@@ -371,7 +399,9 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOtocoPost.WorkingLimitPendi
                full_valid_query()
                ~>> Map.from_struct()
                ~>> Map.put(:pendingAboveIcebergQty, Decimal.new("1.5"))
-               ~>> then(&struct(WorkingLimitPendingAboveStopLossLimitBelowTakeProfitLimitQuery, &1))
+               ~>> then(
+                 &struct(WorkingLimitPendingAboveStopLossLimitBelowTakeProfitLimitQuery, &1)
+               )
                ~>> BinanceSpotRest.Query.validate()
     end
   end
@@ -383,7 +413,9 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOtocoPost.WorkingLimitPendi
                ~>> Map.from_struct()
                ~>> Map.put(:pendingAboveStopPrice, Decimal.new("0.001"))
                ~>> Map.put(:pendingBelowStopPrice, Decimal.new("0.002"))
-               ~>> then(&struct(WorkingLimitPendingAboveStopLossLimitBelowTakeProfitLimitQuery, &1))
+               ~>> then(
+                 &struct(WorkingLimitPendingAboveStopLossLimitBelowTakeProfitLimitQuery, &1)
+               )
                ~>> BinanceSpotRest.Query.validate()
     end
 
@@ -393,7 +425,9 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOtocoPost.WorkingLimitPendi
                ~>> Map.from_struct()
                ~>> Map.put(:pendingAboveStopPrice, Decimal.new("0.001"))
                ~>> Map.put(:pendingBelowStopPrice, Decimal.new("0.001"))
-               ~>> then(&struct(WorkingLimitPendingAboveStopLossLimitBelowTakeProfitLimitQuery, &1))
+               ~>> then(
+                 &struct(WorkingLimitPendingAboveStopLossLimitBelowTakeProfitLimitQuery, &1)
+               )
                ~>> BinanceSpotRest.Query.validate()
     end
 
@@ -403,7 +437,9 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOtocoPost.WorkingLimitPendi
                ~>> Map.from_struct()
                ~>> Map.put(:pendingAboveStopPrice, Decimal.new("0.002"))
                ~>> Map.put(:pendingBelowStopPrice, Decimal.new("0.001"))
-               ~>> then(&struct(WorkingLimitPendingAboveStopLossLimitBelowTakeProfitLimitQuery, &1))
+               ~>> then(
+                 &struct(WorkingLimitPendingAboveStopLossLimitBelowTakeProfitLimitQuery, &1)
+               )
                ~>> BinanceSpotRest.Query.validate()
     end
   end
