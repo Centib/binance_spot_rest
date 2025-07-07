@@ -163,4 +163,26 @@ defmodule BinanceSpotRest.Endpoints.Account.AllOrderListTest do
                ~>> BinanceSpotRest.Query.validate()
     end
   end
+
+  describe "validation (time range):" do
+    test "invalid startTime endTime interval" do
+      assert {:error, %{validator: :timeRange24h, criteria: %{limit_ms: 86_400_000}}} =
+               full_valid_query_with_time()
+               ~>> Map.from_struct()
+               ~>> Map.put(:startTime, 1_751_424_374_960)
+               ~>> Map.put(:endTime, 1_751_624_974_980)
+               ~>> then(&struct(AllOrderList.Query, &1))
+               ~>> BinanceSpotRest.Query.validate()
+    end
+
+    test "invalid startTime endTime relation" do
+      assert {:error, %{validator: :timeRange24h, criteria: %{comparison: :start_before_end}}} =
+               full_valid_query_with_time()
+               ~>> Map.from_struct()
+               ~>> Map.put(:startTime, 1_751_624_974_980)
+               ~>> Map.put(:endTime, 1_751_624_374_960)
+               ~>> then(&struct(AllOrderList.Query, &1))
+               ~>> BinanceSpotRest.Query.validate()
+    end
+  end
 end

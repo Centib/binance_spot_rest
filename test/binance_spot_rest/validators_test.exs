@@ -6,6 +6,5 @@ defmodule BinanceSpotRest.ValidatorsTest do
   doctest BinanceSpotRest.Validators.TimeZone
   doctest BinanceSpotRest.Validators.WindowSize
   doctest BinanceSpotRest.Validators.IcebergQty
-  # doctest BinanceSpotRest.Validators.StartTimeEndTime
-  # doctest BinanceSpotRest.Validators.OcoPricesRelation
+  doctest BinanceSpotRest.Validators.StartTimeEndTimeRange24h
 end
