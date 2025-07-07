@@ -84,6 +84,7 @@ defmodule BinanceSpotRest.Endpoints.Account.AllOrders.Query do
         |> Valpa.maybe_integer(:endTime)
         |> Valpa.map_exclusive_optional_keys([:orderId, :startTime])
         |> Valpa.map_exclusive_optional_keys([:orderId, :endTime])
+        |> Valpa.Custom.validator(BinanceSpotRest.Validators.StartTimeEndTimeRange24h)
         |> Valpa.maybe_integer_in_range(:limit, %{min: 0, max: 1000})
         |> Valpa.maybe_integer_in_range(:recvWindow, %{min: 0, max: 60_000})
 
