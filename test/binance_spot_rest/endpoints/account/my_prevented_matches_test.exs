@@ -170,6 +170,15 @@ defmodule BinanceSpotRest.Endpoints.Account.MyPreventedMatchesTest do
                }
                ~>> BinanceSpotRest.Query.validate()
     end
+
+    test "invalid if both preventedMatchId and orderId is missing" do
+      assert {:error, %{validator: :map_exclusive_keys}} =
+               %MyPreventedMatches.Query{
+                 symbol: "LTCBTC",
+                 recvWindow: 3000
+               }
+               ~>> BinanceSpotRest.Query.validate()
+    end
   end
 
   describe "validation (exclusive optional keys):" do
