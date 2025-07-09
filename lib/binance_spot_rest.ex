@@ -4,8 +4,9 @@ defmodule BinanceSpotRest do
   """
 
   import Loe
-
-  @spec request(struct(), keyword()) :: {:ok, term()} | {:error, term()}
+  @type opts :: [validate: boolean(), execute: boolean()]
+  @spec request(struct()) :: {:error, any()} | {:ok, any()}
+  @spec request(struct(), opts) :: {:ok, any()} | {:error, any()}
   @doc """
   Processes a query struct into a request and optionally validates or sends it.
 
@@ -19,10 +20,13 @@ defmodule BinanceSpotRest do
       BinanceSpotRest.request(query)
       BinanceSpotRest.request(query, validate: false)
       BinanceSpotRest.request(query, execute: false)
+      BinanceSpotRest.request(query, validate: false, execute: false)
   """
   def request(q, opts \\ []) do
-    validate = Keyword.get(opts, :validate, true)
-    execute = Keyword.get(opts, :execute, true)
+    opts = Keyword.validate!(opts, validate: true, execute: true)
+
+    validate = opts[:validate]
+    execute = opts[:execute]
 
     q
     ~>> maybe_validate(validate)
