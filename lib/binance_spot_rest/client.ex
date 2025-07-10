@@ -8,12 +8,13 @@ defmodule BinanceSpotRest.Client do
   import BinanceSpotRest.Client.Security
   import BinanceSpotRest.Client.Methods
 
-  @type opt ::
-          {:base_url, String.t()}
-          | {:headers, [{String.t(), String.t()}]}
-          | {:secret_key_fn, (-> String.t())}
-          | {:timestamp_fn, (-> integer())}
-          | {:signature_fn, (String.t(), String.t() -> String.t())}
+  @type opts :: [
+          base_url: String.t(),
+          headers: [{String.t(), String.t()}],
+          secret_key_fn: (-> String.t()),
+          timestamp_fn: (-> integer()),
+          signature_fn: (String.t(), String.t() -> String.t())
+        ]
 
   def create_request(
         %BinanceSpotRest.Query.RequestSpec{
