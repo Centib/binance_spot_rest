@@ -1,6 +1,6 @@
 defmodule BinanceSpotRest.Enums.CancelRestrictions do
   @moduledoc false
-  use Enuma, [
+  use Numa, [
     :ONLY_NEW,
     :ONLY_PARTIALLY_FILLED
   ]

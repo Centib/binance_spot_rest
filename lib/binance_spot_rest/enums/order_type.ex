@@ -1,6 +1,6 @@
 defmodule BinanceSpotRest.Enums.OrderType do
   @moduledoc false
-  use Enuma, [
+  use Numa, [
     :LIMIT,
     :MARKET,
     :STOP_LOSS,

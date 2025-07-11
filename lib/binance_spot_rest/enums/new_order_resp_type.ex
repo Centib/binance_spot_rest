@@ -1,4 +1,4 @@
 defmodule BinanceSpotRest.Enums.NewOrderRespType do
   @moduledoc false
-  use Enuma, [:ACK, :RESULT, :FULL]
+  use Numa, [:ACK, :RESULT, :FULL]
 end

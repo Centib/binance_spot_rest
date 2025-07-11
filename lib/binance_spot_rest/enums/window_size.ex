@@ -6,5 +6,5 @@ defmodule BinanceSpotRest.Enums.WindowSize do
   @day_range Enum.map(1..7, &"#{&1}d")
   @allowed @minute_range ++ @hour_range ++ @day_range
 
-  use Enuma, @allowed
+  use Numa, @allowed
 end

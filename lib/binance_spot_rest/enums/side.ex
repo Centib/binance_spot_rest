@@ -1,4 +1,4 @@
 defmodule BinanceSpotRest.Enums.Side do
   @moduledoc false
-  use Enuma, [:BUY, :SELL]
+  use Numa, [:BUY, :SELL]
 end

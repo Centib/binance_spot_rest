@@ -1,6 +1,6 @@
 defmodule BinanceSpotRest.Enums.Interval do
   @moduledoc false
-  use Enuma, [
+  use Numa, [
     :"1s",
     :"1m",
     :"3m",

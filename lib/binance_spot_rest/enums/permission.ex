@@ -1,6 +1,6 @@
 defmodule BinanceSpotRest.Enums.Permission do
   @moduledoc false
-  use Enuma, [
+  use Numa, [
     # only :SPOT is available for testnet
     :SPOT,
     :MARGIN,

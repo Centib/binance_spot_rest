@@ -1,6 +1,6 @@
 defmodule BinanceSpotRest.Enums.OrderRateLimitExceededMode do
   @moduledoc false
-  use Enuma, [
+  use Numa, [
     :DO_NOTHING,
     :CANCEL_ONLY
   ]

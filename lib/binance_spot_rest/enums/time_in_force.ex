@@ -11,5 +11,5 @@ defmodule BinanceSpotRest.Enums.TimeInForce do
   | `FOK`  | Fill or Kill. An order will expire if the full order cannot be filled upon execution.                     |
   """
 
-  use Enuma, [:GTC, :IOC, :FOK]
+  use Numa, [:GTC, :IOC, :FOK]
 end

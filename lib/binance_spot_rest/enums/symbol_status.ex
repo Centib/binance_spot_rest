@@ -1,4 +1,4 @@
 defmodule BinanceSpotRest.Enums.SymbolStatus do
   @moduledoc false
-  use Enuma, [:TRADING, :HALT, :BREAK]
+  use Numa, [:TRADING, :HALT, :BREAK]
 end
