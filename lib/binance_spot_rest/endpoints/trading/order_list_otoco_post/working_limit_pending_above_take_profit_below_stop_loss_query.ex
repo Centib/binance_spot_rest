@@ -1,7 +1,8 @@
 defmodule BinanceSpotRest.Endpoints.Trading.OrderListOtocoPost.WorkingLimitPendingAboveTakeProfitBelowStopLossQuery do
   @moduledoc """
-  Order list otoco: working limit pending above take profit below stop loss query
-  """
+             Order List Otoco (post) - Working limit pending above take profit below stop loss query
+
+             """ <> BinanceSpotRest.Endpoints.Trading.OrderListOtocoPost.Endpoint.moduledoc()
 
   alias BinanceSpotRest.Endpoints.Trading.OrderPost.Shared.Limit, as: Working
   alias BinanceSpotRest.Endpoints.Trading.OrderPost.Shared.TakeProfit, as: PendingAbove
