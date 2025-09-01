@@ -12,8 +12,6 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderAmendKeepPriorityPut.Query do
 
   This adds 0 orders to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
 
-  Read [Order Amend Keep Priority FAQ](faqs/order_amend_keep_priority.md) to learn more.
-
   **Weight**:
   4
 
