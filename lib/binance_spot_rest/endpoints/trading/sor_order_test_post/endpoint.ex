@@ -1,61 +1,65 @@
 defmodule BinanceSpotRest.Endpoints.Trading.SorOrderTestPost.Endpoint do
-  @moduledoc """
-  #### Test new order using SOR (TRADE)
+  @moduledoc false
 
-  ```
-  POST /api/v3/sor/order/test
-  ```
+  def moduledoc do
+    """
+    #### Test new order using SOR (TRADE)
 
-  Test new order creation and signature/recvWindow using smart order routing (SOR).
-  Creates and validates a new order but does not send it into the matching engine.
+    ```
+    POST /api/v3/sor/order/test
+    ```
 
-  **Weight:**
-  | Condition | Request Weight |
-  | --------- | -------------- |
-  | Without `computeCommissionRates` | 1 |
-  | With `computeCommissionRates` | 20 |
+    Test new order creation and signature/recvWindow using smart order routing (SOR).
+    Creates and validates a new order but does not send it into the matching engine.
 
-  **Parameters:**
+    **Weight:**
+    | Condition | Request Weight |
+    | --------- | -------------- |
+    | Without `computeCommissionRates` | 1 |
+    | With `computeCommissionRates` | 20 |
 
-  In addition to all parameters accepted by [`POST /api/v3/sor/order`](#new-order-using-sor-trade),
-  the following optional parameters are also accepted:
+    **Parameters:**
 
-  | Name                   | Type    | Mandatory | Description      |
-  | ---------------------- | ------- | --------- | ---------------- |
-  | computeCommissionRates | BOOLEAN | NO        | Default: `false` |
+    In addition to all parameters accepted by [`POST /api/v3/sor/order`](#new-order-using-sor-trade),
+    the following optional parameters are also accepted:
 
-  **Data Source:**
-  Memory
+    | Name                   | Type    | Mandatory | Description      |
+    | ---------------------- | ------- | --------- | ---------------- |
+    | computeCommissionRates | BOOLEAN | NO        | Default: `false` |
 
-  **Response:**
+    **Data Source:**
+    Memory
 
-  Without `computeCommissionRates`
+    **Response:**
 
-  ```
-  {}
-  ```
+    Without `computeCommissionRates`
 
-  With `computeCommissionRates`
+    ```
+    {}
+    ```
 
-  ```javascript
-  {
-    "standardCommissionForOrder": {  //Standard commission rates on trades from the order.
-      "maker": "0.00000112",
-      "taker": "0.00000114"
-    },
-    "taxCommissionForOrder": {       //Tax commission rates for trades from the order
-      "maker": "0.00000112",
-      "taker": "0.00000114"
-    },
-    "discount": {                    //Discount on standard commissions when paying in BNB.
-      "enabledForAccount": true,
-      "enabledForSymbol": true,
-      "discountAsset": "BNB",
-      "discount": "0.25000000"       //Standard commission is reduced by this rate when paying commission in BNB.
+    With `computeCommissionRates`
+
+    ```javascript
+    {
+      "standardCommissionForOrder": {  //Standard commission rates on trades from the order.
+        "maker": "0.00000112",
+        "taker": "0.00000114"
+      },
+      "taxCommissionForOrder": {       //Tax commission rates for trades from the order
+        "maker": "0.00000112",
+        "taker": "0.00000114"
+      },
+      "discount": {                    //Discount on standard commissions when paying in BNB.
+        "enabledForAccount": true,
+        "enabledForSymbol": true,
+        "discountAsset": "BNB",
+        "discount": "0.25000000"       //Standard commission is reduced by this rate when paying commission in BNB.
+      }
     }
-  }
-  ```
-  """
+    ```
+    """
+  end
 
   def metadata do
     %BinanceSpotRest.Query.EndpointMetadata{

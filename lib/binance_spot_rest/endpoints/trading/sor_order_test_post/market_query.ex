@@ -1,7 +1,8 @@
 defmodule BinanceSpotRest.Endpoints.Trading.SorOrderTestPost.MarketQuery do
   @moduledoc """
-  Sor order test market query
-  """
+             Sor Order Test (post) - Market query
+
+             """ <> BinanceSpotRest.Endpoints.Trading.SorOrderTestPost.Endpoint.moduledoc()
 
   defstruct BinanceSpotRest.Endpoints.Trading.OrderPost.Shared.Market.fields() ++
               BinanceSpotRest.Endpoints.Trading.SorOrderTestPost.Common.fields()
