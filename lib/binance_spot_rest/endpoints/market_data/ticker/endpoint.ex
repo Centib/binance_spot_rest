@@ -1,29 +1,33 @@
 defmodule BinanceSpotRest.Endpoints.MarketData.Ticker.Endpoint do
-  @moduledoc """
-  ### Rolling window price change statistics
+  @moduledoc false
 
-  ```
-  GET /api/v3/ticker
-  ```
+  def moduledoc do
+    """
+    ### Rolling window price change statistics
 
-  **Note:** This endpoint is different from the `GET /api/v3/ticker/24hr` endpoint.
+    ```
+    GET /api/v3/ticker
+    ```
 
-  The window used to compute statistics will be no more than 59999ms from the requested `windowSize`.
+    **Note:** This endpoint is different from the `GET /api/v3/ticker/24hr` endpoint.
 
-  `openTime` for `/api/v3/ticker` always starts on a minute, while the `closeTime` is the current time of the request.
-  As such, the effective window will be up to 59999ms wider than `windowSize`.
+    The window used to compute statistics will be no more than 59999ms from the requested `windowSize`.
 
-  E.g. If the `closeTime` is 1641287867099 (January 04, 2022 09:17:47:099 UTC) , and the `windowSize` is `1d`. the `openTime` will be: 1641201420000 (January 3, 2022, 09:17:00)
+    `openTime` for `/api/v3/ticker` always starts on a minute, while the `closeTime` is the current time of the request.
+    As such, the effective window will be up to 59999ms wider than `windowSize`.
 
-  **Weight:**
+    E.g. If the `closeTime` is 1641287867099 (January 04, 2022 09:17:47:099 UTC) , and the `windowSize` is `1d`. the `openTime` will be: 1641201420000 (January 3, 2022, 09:17:00)
 
-  4 for each requested <tt>symbol</tt> regardless of <tt>windowSize</tt>. <br/><br/> The weight for this request will cap at 200 once the number of `symbols` in the request is more than 50.
+    **Weight:**
 
-  **Data Source:**
-  Database
+    4 for each requested <tt>symbol</tt> regardless of <tt>windowSize</tt>. <br/><br/> The weight for this request will cap at 200 once the number of `symbols` in the request is more than 50.
 
-  Full docs: [Binance API – ticker](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md#rolling-window-price-change-statistics)
-  """
+    **Data Source:**
+    Database
+
+    Full docs: [Binance API – ticker](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md#rolling-window-price-change-statistics)
+    """
+  end
 
   def metadata do
     %BinanceSpotRest.Query.EndpointMetadata{
