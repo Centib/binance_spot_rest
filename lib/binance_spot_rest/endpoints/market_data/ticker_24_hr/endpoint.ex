@@ -1,58 +1,62 @@
 defmodule BinanceSpotRest.Endpoints.MarketData.Ticker24Hr.Endpoint do
-    @moduledoc """
-  ### 24hr ticker price change statistics
+  @moduledoc false
 
-  ```
-  GET /api/v3/ticker/24hr
-  ```
+  def moduledoc do
+    """
+    ### 24hr ticker price change statistics
 
-  24 hour rolling window price change statistics. **Careful** when accessing this with no symbol.
+    ```
+    GET /api/v3/ticker/24hr
+    ```
 
-  **Weight:**
+    24 hour rolling window price change statistics. **Careful** when accessing this with no symbol.
 
-  <table>
-  <thead>
-    <tr>
-        <th>Parameter</th>
-        <th>Symbols Provided</th>
-        <th>Weight</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-        <td rowspan="2">symbol</td>
-        <td>1</td>
-        <td>2</td>
-    </tr>
-    <tr>
-        <td>symbol parameter is omitted</td>
-        <td>80</td>
-    </tr>
-    <tr>
-        <td rowspan="4">symbols</td>
-        <td>1-20</td>
-        <td>2</td>
-    </tr>
-    <tr>
-        <td>21-100</td>
-        <td>40</td>
-    </tr>
-    <tr>
-        <td>101 or more</td>
-        <td>80</td>
-    </tr>
-    <tr>
-        <td>symbols parameter is omitted</td>
-        <td>80</td>
-    </tr>
-  </tbody>
-  </table>
+    **Weight:**
 
-  **Data Source:**
-  Memory
+    <table>
+    <thead>
+      <tr>
+          <th>Parameter</th>
+          <th>Symbols Provided</th>
+          <th>Weight</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+          <td rowspan="2">symbol</td>
+          <td>1</td>
+          <td>2</td>
+      </tr>
+      <tr>
+          <td>symbol parameter is omitted</td>
+          <td>80</td>
+      </tr>
+      <tr>
+          <td rowspan="4">symbols</td>
+          <td>1-20</td>
+          <td>2</td>
+      </tr>
+      <tr>
+          <td>21-100</td>
+          <td>40</td>
+      </tr>
+      <tr>
+          <td>101 or more</td>
+          <td>80</td>
+      </tr>
+      <tr>
+          <td>symbols parameter is omitted</td>
+          <td>80</td>
+      </tr>
+    </tbody>
+    </table>
 
-  Full docs: [Binance API – ticker/24hr](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md#24hr-ticker-price-change-statistics)
-  """
+    **Data Source:**
+    Memory
+
+    Full docs: [Binance API – ticker/24hr](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md#24hr-ticker-price-change-statistics)
+    """
+  end
 
   def metadata do
     %BinanceSpotRest.Query.EndpointMetadata{
