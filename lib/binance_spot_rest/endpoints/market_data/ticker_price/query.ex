@@ -1,7 +1,7 @@
 defmodule BinanceSpotRest.Endpoints.MarketData.TickerPrice.Query do
   @moduledoc """
-  Empty query
-  """
+             Ticker Price - Empty query
+             """ <> BinanceSpotRest.Endpoints.MarketData.TickerPrice.Endpoint.moduledoc()
 
   defstruct []
 
