@@ -1,7 +1,8 @@
 defmodule BinanceSpotRest.Endpoints.Trading.OrderTestPost.LimitQuery do
   @moduledoc """
-  Order test: limit query
-  """
+             Order Test (post) - Limit query
+
+             """ <> BinanceSpotRest.Endpoints.Trading.OrderTestPost.Endpoint.moduledoc()
 
   defstruct BinanceSpotRest.Endpoints.Trading.OrderPost.Shared.Limit.fields() ++
               BinanceSpotRest.Endpoints.Trading.OrderTestPost.Common.fields()

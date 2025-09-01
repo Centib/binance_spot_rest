@@ -1,7 +1,8 @@
 defmodule BinanceSpotRest.Endpoints.Trading.OrderTestPost.StopLossQuery do
   @moduledoc """
-  Order test: stop loss query
-  """
+             Order Test (post) - Stop loss query
+
+             """ <> BinanceSpotRest.Endpoints.Trading.OrderTestPost.Endpoint.moduledoc()
 
   defstruct BinanceSpotRest.Endpoints.Trading.OrderPost.Shared.StopLoss.fields() ++
               BinanceSpotRest.Endpoints.Trading.OrderTestPost.Common.fields()

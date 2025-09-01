@@ -1,7 +1,8 @@
 defmodule BinanceSpotRest.Endpoints.Trading.OrderTestPost.TakeProfitLimitQuery do
   @moduledoc """
-  Order test: take profit limit query
-  """
+             Order Test (post) - Take profit limit query
+
+             """ <> BinanceSpotRest.Endpoints.Trading.OrderTestPost.Endpoint.moduledoc()
 
   defstruct BinanceSpotRest.Endpoints.Trading.OrderPost.Shared.TakeProfitLimit.fields() ++
               BinanceSpotRest.Endpoints.Trading.OrderTestPost.Common.fields()
