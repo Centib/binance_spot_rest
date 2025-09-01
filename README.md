@@ -185,6 +185,11 @@ Please refer to existing endpoint modules for examples.
 
 Full docs: [HexDocs](https://hexdocs.pm/binance_spot_rest)
 
+## Contributing
+
+Contributions are welcome via issues or pull requests.
+Created and maintained by [Centib](https://github.com/Centib).
+
 ## License
 
 Released under the [MIT License](LICENSE.md)
