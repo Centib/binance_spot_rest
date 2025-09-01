@@ -1,5 +1,7 @@
 defmodule BinanceSpotRest.Endpoints.Trading.OrderListDelete.Query do
   @moduledoc """
+  Order List (delete)
+
   #### Cancel Order list (TRADE)
 
   ```

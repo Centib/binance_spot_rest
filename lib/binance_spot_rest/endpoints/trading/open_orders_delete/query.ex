@@ -1,5 +1,7 @@
 defmodule BinanceSpotRest.Endpoints.Trading.OpenOrdersDelete.Query do
   @moduledoc """
+  Open Orders (delete)
+
   ### Cancel All Open Orders on a Symbol (TRADE)
   ```
   DELETE /api/v3/openOrders

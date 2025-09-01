@@ -1,6 +1,8 @@
 defmodule BinanceSpotRest.Endpoints.Trading.OrderDelete.Query do
   @moduledoc """
-   ### Cancel order (TRADE)
+  Order (delete)
+
+  ### Cancel order (TRADE)
 
   ```
   DELETE /api/v3/order

@@ -1,5 +1,7 @@
 defmodule BinanceSpotRest.Endpoints.Trading.OrderAmendKeepPriorityPut.Query do
   @moduledoc """
+  Order Amend Keep Priority (put)
+
   ### Order Amend Keep Priority (TRADE)
 
   ```
