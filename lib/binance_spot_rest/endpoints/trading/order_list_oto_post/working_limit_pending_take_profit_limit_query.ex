@@ -1,7 +1,8 @@
 defmodule BinanceSpotRest.Endpoints.Trading.OrderListOtoPost.WorkingLimitPendingTakeProfitLimitQuery do
   @moduledoc """
-  Order list oto: working limit pending take profit limit query
-  """
+             Order List Oto (post) - Working limit pending take profit limit query
+
+             """ <> BinanceSpotRest.Endpoints.Trading.OrderListOtoPost.Endpoint.moduledoc()
 
   alias BinanceSpotRest.Endpoints.Trading.OrderPost.Shared.Limit, as: Working
   alias BinanceSpotRest.Endpoints.Trading.OrderPost.Shared.TakeProfitLimit, as: Pending

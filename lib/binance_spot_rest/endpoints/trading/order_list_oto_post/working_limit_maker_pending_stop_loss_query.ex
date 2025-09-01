@@ -1,7 +1,8 @@
 defmodule BinanceSpotRest.Endpoints.Trading.OrderListOtoPost.WorkingLimitMakerPendingStopLossQuery do
   @moduledoc """
-  Order list oto: working limit maker pending stop loss query
-  """
+             Order List Oto (post) - Working limit maker pending stop loss query
+
+             """ <> BinanceSpotRest.Endpoints.Trading.OrderListOtoPost.Endpoint.moduledoc()
 
   alias BinanceSpotRest.Endpoints.Trading.OrderPost.Shared.LimitMaker, as: Working
   alias BinanceSpotRest.Endpoints.Trading.OrderPost.Shared.StopLoss, as: Pending
