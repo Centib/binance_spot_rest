@@ -1,7 +1,8 @@
 defmodule BinanceSpotRest.Endpoints.Trading.SorOrderPost.LimitQuery do
   @moduledoc """
-  Sor order limit query
-  """
+             Sor Order (post) - Limit query
+
+             """ <> BinanceSpotRest.Endpoints.Trading.SorOrderPost.Endpoint.moduledoc()
 
   defstruct BinanceSpotRest.Endpoints.Trading.OrderPost.Shared.Limit.fields()
 
