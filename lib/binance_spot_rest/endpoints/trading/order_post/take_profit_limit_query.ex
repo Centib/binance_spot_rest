@@ -1,7 +1,8 @@
 defmodule BinanceSpotRest.Endpoints.Trading.OrderPost.TakeProfitLimitQuery do
   @moduledoc """
-  Take profit limit query
-  """
+             Order (post) - Take profit limit query
+
+             """ <> BinanceSpotRest.Endpoints.Trading.OrderPost.Endpoint.moduledoc()
 
   defstruct BinanceSpotRest.Endpoints.Trading.OrderPost.Shared.TakeProfitLimit.fields()
 

@@ -1,22 +1,26 @@
 defmodule BinanceSpotRest.Endpoints.Trading.OrderPost.Endpoint do
-  @moduledoc """
-  ### New order (TRADE)
+  @moduledoc false
 
-  ```
-  POST /api/v3/order
-  ```
+  def moduledoc do
+    """
+    ### New order (TRADE)
 
-  Send in a new order.
+    ```
+    POST /api/v3/order
+    ```
 
-  **Weight:**
-  1
+    Send in a new order.
+
+    **Weight:**
+    1
 
 
-  **Data Source:**
-  Matching Engine
+    **Data Source:**
+    Matching Engine
 
-  Full docs: [Binance API – order](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md#new-order-trade)
-  """
+    Full docs: [Binance API – order](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md#new-order-trade)
+    """
+  end
 
   def metadata do
     %BinanceSpotRest.Query.EndpointMetadata{
