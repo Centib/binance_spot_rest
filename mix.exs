@@ -1,15 +1,25 @@
 defmodule BinanceSpotRest.MixProject do
   use Mix.Project
 
+  @source_url "https://github.com/Centib/binance_spot_rest"
+  @version "0.1.0"
+
   def project do
     [
       app: :binance_spot_rest,
-      version: "0.1.0",
+      version: @version,
       elixir: "~> 1.18",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
-      # TODO: this can slower app in :test and :dev
-      consolidate_protocols: Mix.env() == :prod
+      consolidate_protocols: Mix.env() == :prod,
+
+      # Hex
+      description: "Elixir library for Binance Spot rest api",
+      package: package(),
+
+      # Docs
+      name: "Binance Spot Rest",
+      docs: docs()
     ]
   end
 
@@ -30,8 +40,26 @@ defmodule BinanceSpotRest.MixProject do
       {:numa, "~> 0.1.0"},
       {:loe, "~> 0.1.2"},
       {:valpa, "~> 0.1.0"}
-      # {:dep_from_hexpm, "~> 0.3.0"},
-      # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
+    ]
+  end
+
+  defp package do
+    [
+      maintainers: ["gnjec (Centib)"],
+      licenses: ["MIT"],
+      links: %{"GitHub" => @source_url},
+      files: ~w(.formatter.exs mix.exs README.md CHANGELOG.md LICENSE.md lib),
+      keywords: ["binance", "spot", "rest", "crypto", "api"]
+    ]
+  end
+
+  defp docs do
+    [
+      main: "readme",
+      extras: ["README.md", "CHANGELOG.md", "LICENSE.md"],
+      source_ref: "v#{@version}",
+      source_url: @source_url,
+      logo: "assets/logo.svg"
     ]
   end
 end
