@@ -1,5 +1,7 @@
 defmodule BinanceSpotRest.Endpoints.General.Ping.Query do
   @moduledoc """
+  Ping
+  
   ### Test connectivity
   ```
   GET /api/v3/ping

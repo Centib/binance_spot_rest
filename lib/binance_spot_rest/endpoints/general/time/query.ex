@@ -1,5 +1,7 @@
 defmodule BinanceSpotRest.Endpoints.General.Time.Query do
   @moduledoc """
+  Time
+  
   ### Check server time
   ```
   GET /api/v3/time
