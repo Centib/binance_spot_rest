@@ -1,7 +1,8 @@
 defmodule BinanceSpotRest.Endpoints.Trading.OrderCancelReplacePost.LimitMakerQuery do
   @moduledoc """
-  Order cancel replace: limit maker order
-  """
+             Order Cancel Replace (post) - Limit maker order
+             
+             """ <> BinanceSpotRest.Endpoints.Trading.OrderCancelReplacePost.Endpoint.moduledoc()
 
   defstruct BinanceSpotRest.Endpoints.Trading.OrderPost.Shared.LimitMaker.fields() ++
               BinanceSpotRest.Endpoints.Trading.OrderCancelReplacePost.Common.fields()

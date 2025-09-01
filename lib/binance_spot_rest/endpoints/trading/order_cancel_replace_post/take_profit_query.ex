@@ -1,7 +1,8 @@
 defmodule BinanceSpotRest.Endpoints.Trading.OrderCancelReplacePost.TakeProfitQuery do
   @moduledoc """
-  Order cancel replace: take profit query
-  """
+             Order Cancel Replace (post) - Take profit query
+             
+             """ <> BinanceSpotRest.Endpoints.Trading.OrderCancelReplacePost.Endpoint.moduledoc()
 
   defstruct BinanceSpotRest.Endpoints.Trading.OrderPost.Shared.TakeProfit.fields() ++
               BinanceSpotRest.Endpoints.Trading.OrderCancelReplacePost.Common.fields()

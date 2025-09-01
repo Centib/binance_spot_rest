@@ -1,7 +1,8 @@
 defmodule BinanceSpotRest.Endpoints.Trading.OrderCancelReplacePost.MarketQuery do
   @moduledoc """
-  Order cancel replace: market query
-  """
+             Order Cancel Replace (post) - Market query
+             
+             """ <> BinanceSpotRest.Endpoints.Trading.OrderCancelReplacePost.Endpoint.moduledoc()
 
   defstruct BinanceSpotRest.Endpoints.Trading.OrderPost.Shared.Market.fields() ++
               BinanceSpotRest.Endpoints.Trading.OrderCancelReplacePost.Common.fields()

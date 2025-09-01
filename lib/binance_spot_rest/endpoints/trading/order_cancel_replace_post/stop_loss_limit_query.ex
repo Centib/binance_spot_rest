@@ -1,7 +1,8 @@
 defmodule BinanceSpotRest.Endpoints.Trading.OrderCancelReplacePost.StopLossLimitQuery do
   @moduledoc """
-  Order cancel replace: stop loss limit query
-  """
+             Order Cancel Replace (post) - Stop loss limit query
+             
+             """ <> BinanceSpotRest.Endpoints.Trading.OrderCancelReplacePost.Endpoint.moduledoc()
 
   defstruct BinanceSpotRest.Endpoints.Trading.OrderPost.Shared.StopLossLimit.fields() ++
               BinanceSpotRest.Endpoints.Trading.OrderCancelReplacePost.Common.fields()
