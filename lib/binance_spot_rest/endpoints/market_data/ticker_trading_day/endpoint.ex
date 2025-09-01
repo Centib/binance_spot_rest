@@ -1,28 +1,32 @@
 defmodule BinanceSpotRest.Endpoints.MarketData.TickerTradingDay.Endpoint do
-  @moduledoc """
-  ### Trading Day Ticker
+  @moduledoc false
 
-  ```
-  GET /api/v3/ticker/tradingDay
-  ```
+  def moduledoc do
+    """
+    ### Trading Day Ticker
 
-  Price change statistics for a trading day.
+    ```
+    GET /api/v3/ticker/tradingDay
+    ```
 
-  **Weight:**
+    Price change statistics for a trading day.
 
-  4 for each requested <tt>symbol</tt>. <br/><br/> The weight for this request will cap at 200 once the number of `symbols` in the request is more than 50.
+    **Weight:**
 
-  **Notes:**
+    4 for each requested <tt>symbol</tt>. <br/><br/> The weight for this request will cap at 200 once the number of `symbols` in the request is more than 50.
 
-  - Supported values for `timeZone`:
-  - Hours and minutes (e.g. `-1:00`, `05:45`)
-  - Only hours (e.g. `0`, `8`, `4`)
+    **Notes:**
 
-  **Data Source:**
-  Database
+    - Supported values for `timeZone`:
+    - Hours and minutes (e.g. `-1:00`, `05:45`)
+    - Only hours (e.g. `0`, `8`, `4`)
 
-  Full docs: [Binance API – ticker/tradingDay](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md#trading-day-ticker)
-  """
+    **Data Source:**
+    Database
+
+    Full docs: [Binance API – ticker/tradingDay](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md#trading-day-ticker)
+    """
+  end
 
   def metadata do
     %BinanceSpotRest.Query.EndpointMetadata{

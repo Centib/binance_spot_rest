@@ -1,7 +1,7 @@
 defmodule BinanceSpotRest.Endpoints.MarketData.TickerTradingDay.SymbolQuery do
   @moduledoc """
-  Symbol query
-  """
+             Ticker Trading Day - Symbol query
+             """ <> BinanceSpotRest.Endpoints.MarketData.TickerTradingDay.Endpoint.moduledoc()
 
   defstruct [:symbol, :timeZone, :type]
 
