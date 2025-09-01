@@ -20,7 +20,8 @@ defmodule BinanceSpotRest.Endpoints.MarketData.Ticker.Endpoint do
 
     **Weight:**
 
-    4 for each requested <tt>symbol</tt> regardless of <tt>windowSize</tt>. <br/><br/> The weight for this request will cap at 200 once the number of `symbols` in the request is more than 50.
+    4 for each requested `symbol` regardless of `windowSize`.
+    The weight for this request will cap at 200 once the number of `symbols` in the request is more than 50.
 
     **Data Source:**
     Database
