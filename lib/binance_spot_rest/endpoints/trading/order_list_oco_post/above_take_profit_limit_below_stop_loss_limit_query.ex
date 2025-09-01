@@ -1,7 +1,8 @@
 defmodule BinanceSpotRest.Endpoints.Trading.OrderListOcoPost.AboveTakeProfitLimitBelowStopLossLimitQuery do
   @moduledoc """
-  Order list oco: above take profit limit below stop loss limit query
-  """
+             Order List Oco (post) - Above take profit limit below stop loss limit query
+
+             """ <> BinanceSpotRest.Endpoints.Trading.OrderListOcoPost.Endpoint.moduledoc()
 
   alias BinanceSpotRest.Endpoints.Trading.OrderPost.Shared.TakeProfitLimit, as: Above
   alias BinanceSpotRest.Endpoints.Trading.OrderPost.Shared.StopLossLimit, as: Below

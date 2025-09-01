@@ -1,7 +1,8 @@
 defmodule BinanceSpotRest.Endpoints.Trading.OrderListOcoPost.AboveStopLossBelowLimitMakerQuery do
   @moduledoc """
-  Order list oco: above stop loss below limit maker query
-  """
+             Order List Oco (post) - Above stop loss below limit maker query
+
+             """ <> BinanceSpotRest.Endpoints.Trading.OrderListOcoPost.Endpoint.moduledoc()
 
   alias BinanceSpotRest.Endpoints.Trading.OrderPost.Shared.StopLoss, as: Above
   alias BinanceSpotRest.Endpoints.Trading.OrderPost.Shared.LimitMaker, as: Below
