@@ -21,3 +21,11 @@ binance_spot_rest-*.tar
 
 # Temporary files, for example, from tests.
 /tmp/
+
+.erlang.cookie
+
+.elixir_ls/
+
+.hex/
+
+.vscode/
