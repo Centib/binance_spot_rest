@@ -1,6 +1,6 @@
 # Changelog
 
-## [v0.1.0] – 2025-09-01
+## v0.1.0 (2025-09-01)
 
 - Initial public release
 - Unified `request/2` function for all Spot endpoints
