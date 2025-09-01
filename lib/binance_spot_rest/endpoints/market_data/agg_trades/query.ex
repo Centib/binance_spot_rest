@@ -1,5 +1,7 @@
 defmodule BinanceSpotRest.Endpoints.MarketData.AggTrades.Query do
   @moduledoc """
+  Agg Trades
+
   ### Compressed/Aggregate trades list
 
   ```

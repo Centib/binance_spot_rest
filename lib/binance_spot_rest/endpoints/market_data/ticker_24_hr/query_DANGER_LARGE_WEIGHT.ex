@@ -1,6 +1,7 @@
 defmodule BinanceSpotRest.Endpoints.MarketData.Ticker24Hr.Query_DANGER_LARGE_WEIGHT do
   @moduledoc """
              Ticker 24 Hr - Query without specify symbol. Weight is 80!
+             
              """ <> BinanceSpotRest.Endpoints.MarketData.Ticker24Hr.Endpoint.moduledoc()
 
   defstruct [:type]

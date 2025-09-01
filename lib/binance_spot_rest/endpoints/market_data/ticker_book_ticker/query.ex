@@ -1,6 +1,7 @@
 defmodule BinanceSpotRest.Endpoints.MarketData.TickerBookTicker.Query do
   @moduledoc """
              Ticker Book Ticker - Empty query
+
              """ <> BinanceSpotRest.Endpoints.MarketData.TickerBookTicker.Endpoint.moduledoc()
 
   defstruct []

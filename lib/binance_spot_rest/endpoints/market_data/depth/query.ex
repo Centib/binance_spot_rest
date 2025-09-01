@@ -1,5 +1,7 @@
 defmodule BinanceSpotRest.Endpoints.MarketData.Depth.Query do
   @moduledoc """
+  Depth
+  
   ### Order book
 
   ```

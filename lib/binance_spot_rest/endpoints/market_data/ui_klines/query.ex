@@ -1,5 +1,7 @@
 defmodule BinanceSpotRest.Endpoints.MarketData.UiKlines.Query do
   @moduledoc """
+  Ui Klines
+
   ### UIKlines
 
   ```

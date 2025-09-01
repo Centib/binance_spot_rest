@@ -1,6 +1,7 @@
 defmodule BinanceSpotRest.Endpoints.MarketData.TickerPrice.SymbolQuery do
   @moduledoc """
              Ticker Price - Symbol query
+
              """ <> BinanceSpotRest.Endpoints.MarketData.TickerPrice.Endpoint.moduledoc()
 
   defstruct [:symbol]

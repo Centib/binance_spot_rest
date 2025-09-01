@@ -1,5 +1,7 @@
 defmodule BinanceSpotRest.Endpoints.MarketData.Klines.Query do
   @moduledoc """
+  Klines
+  
   ### Kline/Candlestick data
 
   ```

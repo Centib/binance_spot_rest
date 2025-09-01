@@ -1,5 +1,7 @@
 defmodule BinanceSpotRest.Endpoints.MarketData.HistoricalTrades.Query do
   @moduledoc """
+  Historical Trades
+
   ### Old trade lookup
 
   ```

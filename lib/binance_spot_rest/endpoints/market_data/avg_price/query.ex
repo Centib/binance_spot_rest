@@ -1,5 +1,7 @@
 defmodule BinanceSpotRest.Endpoints.MarketData.AvgPrice.Query do
   @moduledoc """
+  Avg Price
+
   ### Current average price
 
   ```

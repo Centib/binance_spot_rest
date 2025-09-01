@@ -1,5 +1,7 @@
 defmodule BinanceSpotRest.Endpoints.MarketData.Trades.Query do
   @moduledoc """
+  Trades
+  
   ### Recent trades list
 
   ```
