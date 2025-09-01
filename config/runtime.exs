@@ -1,6 +1,6 @@
 import Config
 
 config :binance_spot_rest,
-  base_url: "https://testnet.binance.vision",
-  api_key: "vJ9eyBd0K30FXqJzH7qcCtvAtoTwblx4gpt7MGUiKSPX87KSl4935eghtw8Yg9XB",
-  secret_key: "4FUwszTKkICxwaMLHEniD8K2iHi7J5Ou1r7DRD7L9OfTlAmjdtWPYXzkWVJKrdG7"
+  base_url: System.get_env("BINANCE_SPOT_REST_BASE_URL", "https://testnet.binance.vision"),
+  api_key: System.get_env("BINANCE_SPOT_REST_API_KEY"),
+  secret_key: System.get_env("BINANCE_SPOT_REST_SECRET_KEY")
