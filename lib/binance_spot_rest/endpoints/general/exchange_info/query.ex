@@ -1,7 +1,8 @@
 defmodule BinanceSpotRest.Endpoints.General.ExchangeInfo.Query do
   @moduledoc """
-  Query - permissions and status available
-  """
+             Exchange Info - Permissions and status query
+
+             """ <> BinanceSpotRest.Endpoints.General.ExchangeInfo.Endpoint.moduledoc()
 
   defstruct [:permissions, :showPermissionSets, :symbolStatus]
 

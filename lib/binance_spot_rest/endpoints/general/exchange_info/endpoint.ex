@@ -1,19 +1,22 @@
 defmodule BinanceSpotRest.Endpoints.General.ExchangeInfo.Endpoint do
-  @moduledoc """
-  ### Exchange information
+  @moduledoc false
+  def moduledoc do
+    """
+    ### Exchange information
 
-  ```
-  GET /api/v3/exchangeInfo
-  ```
+    ```
+    GET /api/v3/exchangeInfo
+    ```
 
-  Current exchange trading rules and symbol information
+    Current exchange trading rules and symbol information
 
-  **Weight:** 20
+    **Weight:** 20
 
-  **Data Source:** Memory
+    **Data Source:** Memory
 
-  Full docs: [Binance API – exchangeInfo](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md#exchange-information)
-  """
+    Full docs: [Binance API – exchangeInfo](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md#exchange-information)
+    """
+  end
 
   def metadata do
     %BinanceSpotRest.Query.EndpointMetadata{

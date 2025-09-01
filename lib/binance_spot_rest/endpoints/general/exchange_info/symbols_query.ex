@@ -1,6 +1,6 @@
 defmodule BinanceSpotRest.Endpoints.General.ExchangeInfo.SymbolsQuery do
   @moduledoc """
-  Symbols query
+  Exchange Info - Symbols query
   """
 
   defstruct [:symbols, :showPermissionSets]
