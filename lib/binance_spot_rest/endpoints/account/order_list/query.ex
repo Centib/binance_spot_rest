@@ -1,5 +1,7 @@
 defmodule BinanceSpotRest.Endpoints.Account.OrderList.Query do
   @moduledoc """
+  Order List
+
   ### Query Order list (USER_DATA)
 
   ```

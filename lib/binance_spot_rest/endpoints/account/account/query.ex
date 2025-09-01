@@ -1,5 +1,7 @@
 defmodule BinanceSpotRest.Endpoints.Account.Account.Query do
   @moduledoc """
+  Account
+  
   ### Account information (USER_DATA)
 
   ```

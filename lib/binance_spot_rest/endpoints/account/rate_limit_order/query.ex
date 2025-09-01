@@ -1,5 +1,7 @@
 defmodule BinanceSpotRest.Endpoints.Account.RateLimitOrder.Query do
   @moduledoc """
+  Rate Limit Order
+
   ### Query Unfilled Order Count (USER_DATA)
 
   ```

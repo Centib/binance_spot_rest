@@ -1,5 +1,7 @@
 defmodule BinanceSpotRest.Endpoints.Account.AccountCommission.Query do
   @moduledoc """
+  Account Commission
+
   ### Query Commission Rates (USER_DATA)
 
   ```

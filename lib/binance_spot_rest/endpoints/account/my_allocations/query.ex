@@ -1,5 +1,7 @@
 defmodule BinanceSpotRest.Endpoints.Account.MyAllocations.Query do
   @moduledoc """
+  My Allocations
+
   ### Query Allocations (USER_DATA)
 
   ```

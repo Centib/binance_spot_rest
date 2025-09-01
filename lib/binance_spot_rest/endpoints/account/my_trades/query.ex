@@ -1,5 +1,7 @@
 defmodule BinanceSpotRest.Endpoints.Account.MyTrades.Query do
   @moduledoc """
+  My Trades
+
   ### Account trade list (USER_DATA)
 
   ```

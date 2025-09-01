@@ -1,5 +1,7 @@
 defmodule BinanceSpotRest.Endpoints.Account.MyPreventedMatches.Query do
   @moduledoc """
+  My Prevented Matches
+
   ### Query Prevented Matches (USER_DATA)
 
   ```
