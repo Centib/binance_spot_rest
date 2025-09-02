@@ -1,5 +1,7 @@
 defmodule BinanceSpotRest.Validators.IcebergQty do
   @moduledoc """
+  Internal
+  
   Validator for the `icebergQty` field.
 
   Rules:

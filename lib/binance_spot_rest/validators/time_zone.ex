@@ -1,5 +1,7 @@
 defmodule BinanceSpotRest.Validators.TimeZone do
   @moduledoc """
+  Internal
+  
   Validates `timeZone` values.
 
   Supported formats:

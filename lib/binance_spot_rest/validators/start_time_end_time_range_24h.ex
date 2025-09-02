@@ -1,5 +1,7 @@
 defmodule BinanceSpotRest.Validators.StartTimeEndTimeRange24h do
   @moduledoc """
+  Internal
+  
   Validate that `endTime` is not before `startTime` and that the interval doesn't exceed 24 hours.
 
   The time interval (after converting seconds to milliseconds when needed) cannot exceed 24 hours (86,400,000 milliseconds).

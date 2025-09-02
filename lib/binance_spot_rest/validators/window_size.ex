@@ -1,5 +1,7 @@
 defmodule BinanceSpotRest.Validators.WindowSize do
   @moduledoc """
+  Internal
+  
   Validates `windowSize` values.
 
   Supported values:
