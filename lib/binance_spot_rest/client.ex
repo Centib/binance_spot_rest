@@ -1,8 +1,46 @@
 defmodule BinanceSpotRest.Client do
   @moduledoc """
-  BinanceSpotRest REST client.
+  Low-level BinanceSpotRest REST client (internal/advanced use).
 
-  Builds HTTP requests based on `RequestSpec` input.
+  This module builds and executes HTTP requests based on a `RequestSpec`.
+
+  ## Overview
+
+  The client handles:
+
+    * Constructing the full request URL
+    * Adding required headers
+    * Signing requests for endpoints that require authentication
+    * Making the HTTP request via `Req`
+
+  **Note:** This module is intended for advanced users who need fine-grained control.
+  For most use cases, you should use `BinanceSpotRest.request/1` instead.
+
+  ## Options (`opts`)
+
+  All functions accept optional keyword list:
+
+    * `:base_url` - Base API URL (default: `BinanceSpotRest.Env.base_url()`)
+    * `:headers` - List of headers (default: built from `security_type`)
+    * `:secret_key_fn` - Function returning secret key (default: `BinanceSpotRest.Env.secret_key()`)
+    * `:timestamp_fn` - Function returning current timestamp (default: `BinanceSpotRest.Client.Timestamp.create()`)
+    * `:signature_fn` - Function that creates signature (default: `BinanceSpotRest.Client.Signature.create()`)
+
+  ## Example
+
+      alias BinanceSpotRest.Endpoints.Trading.OrderPost.LimitQuery
+
+      query = %LimitQuery{...}
+
+      request =
+        BinanceSpotRest.Client.create_request(query,
+          base_url: "https://mock.url",
+          timestamp_fn: fn -> 1_740_000_000_000 end,
+          signature_fn: fn _qs, _key -> "mock-signature" end
+        )
+
+      {:ok, response} = BinanceSpotRest.Client.make_request(request)
+
   """
 
   import BinanceSpotRest.Client.Security
