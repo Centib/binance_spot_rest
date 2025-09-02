@@ -14,7 +14,7 @@ defmodule BinanceSpotRest.MixProject do
       consolidate_protocols: Mix.env() == :prod,
 
       # Hex
-      description: "Elixir library for Binance Spot rest api",
+      description: "Elixir library for Binance Spot REST API",
       package: package(),
 
       # Docs
@@ -56,7 +56,7 @@ defmodule BinanceSpotRest.MixProject do
   defp docs do
     [
       main: "readme",
-      extras: ["README.md", "CHANGELOG.md", "LICENSE.md"],
+      extras: ["README.md", "CHANGELOG.md", "assets/architecture.md", "LICENSE.md"],
       source_ref: "v#{@version}",
       source_url: @source_url,
       logo: "assets/logo.svg"
