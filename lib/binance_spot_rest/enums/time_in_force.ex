@@ -1,14 +1,15 @@
 defmodule BinanceSpotRest.Enums.TimeInForce do
   @moduledoc """
-  ### Time in force (timeInForce)
+  Defines the time-in-force options for Binance Spot orders.
 
-  This sets how long an order will be active before expiration.
+  This enum corresponds to the `timeInForce` parameter in the
+  [Binance API – New Order (TRADE)](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md#new-order-trade).
 
-  | Status | Description                                                                                               |
-  | ------ | --------------------------------------------------------------------------------------------------------- |
-  | `GTC`  | Good Til Canceled. An order will be on the book unless the order is canceled.                             |
-  | `IOC`  | Immediate Or Cancel. An order will try to fill the order as much as it can before the order expires.      |
-  | `FOK`  | Fill or Kill. An order will expire if the full order cannot be filled upon execution.                     |
+  Supported values:
+
+    * `:GTC` – Good Till Canceled. The order remains active on the book until it is canceled.
+    * `:IOC` – Immediate Or Cancel. The order will attempt to fill as much as possible immediately, and any unfilled portion is canceled.
+    * `:FOK` – Fill Or Kill. The order must be filled in its entirety immediately, or it is canceled.
   """
 
   use Numa, [:GTC, :IOC, :FOK]

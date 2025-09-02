@@ -20,7 +20,7 @@ defmodule BinanceSpotRest.Endpoints.MarketData.UiKlines.Query do
   | Name      | Type   | Mandatory | Description                      |
   | --------- | ------ | --------- | -------------------------------- |
   | symbol    | STRING | YES       |                                  |
-  | interval  | ENUM   | YES       | See [`klines`](#kline-intervals) |
+  | interval  | ENUM   | YES       | See [`klines`](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md#kline-intervals) |
   | startTime | LONG   | NO        |                                  |
   | endTime   | LONG   | NO        |                                  |
   | timeZone  | STRING | NO        | Default: 0 (UTC)                 |

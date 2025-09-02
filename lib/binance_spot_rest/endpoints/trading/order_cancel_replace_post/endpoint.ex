@@ -3,7 +3,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderCancelReplacePost.Endpoint do
 
   def moduledoc do
     """
-      ### Cancel an Existing Order and Send a New Order (TRADE)
+    ### Cancel an Existing Order and Send a New Order (TRADE)
 
     ```
     POST /api/v3/order/cancelReplace
