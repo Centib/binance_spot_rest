@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.1.1 (2025-09-03)
+
+- Bumped `valpa` dependency to `~> 0.1.1`
+- Validations now behave consistently with the latest Valpa
+- **Stacktraces for validation errors are no longer shown in production**
+- Minor internal improvements; no breaking changes
+
 ## v0.1.0 (2025-09-01)
 
 - Initial public release

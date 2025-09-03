@@ -2,7 +2,7 @@ defmodule BinanceSpotRest.MixProject do
   use Mix.Project
 
   @source_url "https://github.com/Centib/binance_spot_rest"
-  @version "0.1.0"
+  @version "0.1.1"
 
   def project do
     [
@@ -37,9 +37,9 @@ defmodule BinanceSpotRest.MixProject do
       {:ex_doc, "~> 0.38.1", only: :dev, runtime: false},
       {:req, "~> 0.5.8"},
       {:decimal, "~> 2.3.0"},
-      {:numa, "~> 0.1.0"},
+      {:numa, "~> 0.1.1"},
       {:loe, "~> 0.1.2"},
-      {:valpa, "~> 0.1.0"}
+      {:valpa, "~> 0.1.1"}
     ]
   end
 

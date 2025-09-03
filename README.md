@@ -25,7 +25,7 @@ Add to your `mix.exs`:
 ```elixir
 def deps do
   [
-    {:binance_spot_rest, "~> 0.1.0"}
+    {:binance_spot_rest, "~> 0.1.1"}
   ]
 end
 ```
@@ -79,6 +79,25 @@ setx BINANCE_SPOT_REST_BASE_URL "https://api.binance.com"
 ```
 
 This keeps credentials out of code and version control.
+
+### Validation Behavior
+
+BinanceSpotRest uses [Valpa](https://hexdocs.pm/valpa/) for query parameter validation.
+
+- **Default behavior in v0.1.1:**
+
+  - In `:dev` and `:test` environments, validation errors include full stacktraces.
+  - In `:prod`, stacktraces are **hidden**; only the error tuple is returned.
+    This prevents leaking internal details in production logs.
+
+- **Optional configuration:**
+  You can override the default stacktrace behavior by configuring Valpa directly:
+
+```elixir
+import Config
+
+config :valpa, show_stacktrace: true  # or false
+```
 
 ## Usage
 
