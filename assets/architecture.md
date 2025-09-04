@@ -1,4 +1,4 @@
-# Architecture
+# Architecture Guide
 
 This page describes the **low-level workflow** of the `BinanceSpotRest` library.
 Intended for advanced users, contributors, or testing purposes.
@@ -45,18 +45,16 @@ Prepare the query for execution using `prepare/1`:
     * `security_type` — endpoint security (`:NONE`, `:TRADE`, etc.)
   * `query` → original query struct
 
-## 4. Client Request
+## 4. Build Request
 
-Build and execute the HTTP request using `BinanceSpotRest.Client`:
+Turn the `RequestSpec` into a client request using `BinanceSpotRest.Client.create_request/2`:
 
 ```elixir
 request = BinanceSpotRest.Client.create_request(request_spec)
-{:ok, response} = BinanceSpotRest.Client.make_request(request)
 ```
 
-* `create_request/2` builds `%BinanceSpotRest.Client.Request{}`
-* `make_request/1` executes the HTTP request via `Req`
-* Optional keyword arguments allow mocking for testing:
+* Produces `%BinanceSpotRest.Client.Request{}`
+* Accepts optional overrides for **testing or mocking**:
 
 ```elixir
 request = BinanceSpotRest.Client.create_request(request_spec,
@@ -67,7 +65,18 @@ request = BinanceSpotRest.Client.create_request(request_spec,
 )
 ```
 
-## 5. Workflow Diagram
+## 5. Make Request
+
+Execute the built client request using `make_request/1`:
+
+```elixir
+{:ok, response} = BinanceSpotRest.Client.make_request(request)
+```
+
+* Sends the request via `Req`
+* Returns `{:ok, response}` or `{:error, reason}`
+
+## Workflow Diagram
 
 ```
       ┌───────────────────────────────┐
@@ -87,19 +96,33 @@ request = BinanceSpotRest.Client.create_request(request_spec,
 │        metadata + original query           │
 └────────────────────┬───────────────────────┘
                      │ create_request(opts \\ [])
-                     │ # optional overrides:
-                     │ # base_url, headers,
-                     │ # timestamp_fn, signature_fn
                      ▼
      ┌──────────────────────────────────┐
      │    Client Request Struct         │
-     │ %BinanceSpotRest.Client.Request  │
+     │  %BinanceSpotRest.Client.Request │
      └───────────────┬──────────────────┘
                      │ make_request()
                      ▼
         ┌───────────────────────────┐
         │        HTTP Response      │
         └───────────────────────────┘
+```
+
+## Pipeline
+
+For convenience, the entire flow can be expressed as a pipeline using `Loe`.
+
+(The diagram above shows the step-by-step flow; the pipeline below demonstrates the same process in practice.)
+
+```
+import Loe
+
+%BinanceSpotRest.Endpoints.General.Time.Query{}
+~>> BinanceSpotRest.Query.validate()
+~>> BinanceSpotRest.Query.prepare()
+~>> BinanceSpotRest.Client.create_request()
+~>> BinanceSpotRest.Client.make_request()
+# => {:ok, response} or {:error, reason}
 ```
 
 ## Notes

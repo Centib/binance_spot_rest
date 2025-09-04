@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.1.2 (2025-09-04)
+
+- Added **Architecture Guide** with detailed low-level workflow and pipeline examples
+- Separated client request creation (`create_request/2`) from execution (`make_request/1`) in docs
+- Improved documentation clarity for configuration, validation behavior, and pipeline usage
+- Added link to Architecture Guide from main README
+- Minor formatting and readability improvements in README and guides
+- No breaking changes; fully backward compatible
+
 ## v0.1.1 (2025-09-03)
 
 - Bumped `valpa` dependency to `~> 0.1.1`

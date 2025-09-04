@@ -25,7 +25,7 @@ Add to your `mix.exs`:
 ```elixir
 def deps do
   [
-    {:binance_spot_rest, "~> 0.1.1"}
+    {:binance_spot_rest, "~> 0.1.2"}
   ]
 end
 ```
@@ -167,6 +167,8 @@ query
   signature_fn: fn _qs, _key -> "mock-signature" end
 )
 ```
+
+For a detailed low-level workflow and pipeline examples, see the [Architecture Guide](https://hexdocs.pm/binance_spot_rest/architecture.html).
 
 ## Endpoint Queries
 
