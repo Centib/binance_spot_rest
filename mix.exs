@@ -33,7 +33,7 @@ defmodule BinanceSpotRest.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:credo, "~> 1.7.12"},
+      {:credo, "~> 1.7.12", only: [:dev, :test], runtime: false},
       {:ex_doc, "~> 0.38.1", only: :dev, runtime: false},
       {:req, "~> 0.5.8"},
       {:decimal, "~> 2.3.0"},
