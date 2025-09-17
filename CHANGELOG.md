@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.1.3 (2025-09-17)
+
+- Fixed dependency conflict for `credo`:
+  - Restricted `credo` to `[:dev, :test]` with `runtime: false`
+  - Prevents conflicts when used as a dependency in other projects
+- No functional changes; fully backward compatible
+
 ## v0.1.2 (2025-09-04)
 
 - Added **Architecture Guide** with detailed low-level workflow and pipeline examples

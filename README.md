@@ -25,7 +25,7 @@ Add to your `mix.exs`:
 ```elixir
 def deps do
   [
-    {:binance_spot_rest, "~> 0.1.2"}
+    {:binance_spot_rest, "~> 0.1.3"}
   ]
 end
 ```
