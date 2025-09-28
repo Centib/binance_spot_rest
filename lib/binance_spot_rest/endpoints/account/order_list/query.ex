@@ -19,7 +19,7 @@ defmodule BinanceSpotRest.Endpoints.Account.OrderList.Query do
   | ----------------- | ------ | --------- | --------------------------------------------------------------------------------------------------- |
   | orderListId       | LONG   | NO\*      | Query order list by `orderListId`. <br>`orderListId` or `origClientOrderId` must be provided.       |
   | origClientOrderId | STRING | NO\*      | Query order list by `listClientOrderId`. <br>`orderListId` or `origClientOrderId` must be provided. |
-  | recvWindow        | LONG   | NO        | The value cannot be greater than `60000`                                                            |
+  | recvWindow        | DECIMAL | NO        | The value cannot be greater than `60000`. Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified. |
   | timestamp         | LONG   | YES       |                                                                                                     |
 
   **Data Source:**

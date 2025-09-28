@@ -21,14 +21,14 @@ defmodule BinanceSpotRest.Endpoints.Account.MyTrades.Query do
 
   | Name       | Type   | Mandatory | Description                                             |
   | ---------- | ------ | --------- | ------------------------------------------------------- |
-  | symbol     | STRING | YES       |
+  | symbol     | STRING | YES       |                                                         |
   | orderId    | LONG   | NO        | This can only be used in combination with `symbol`.     |
-  | startTime  | LONG   | NO        |
-  | endTime    | LONG   | NO        |
+  | startTime  | LONG   | NO        |                                                         |
+  | endTime    | LONG   | NO        |                                                         |
   | fromId     | LONG   | NO        | TradeId to fetch from. Default gets most recent trades. |
   | limit      | INT    | NO        | Default: 500; Maximum: 1000.                            |
-  | recvWindow | LONG   | NO        | The value cannot be greater than `60000`                |
-  | timestamp  | LONG   | YES       |
+  | recvWindow | DECIMAL | NO        | The value cannot be greater than `60000`. Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.                |
+  | timestamp  | LONG   | YES       |                                                         |
 
   **Notes:**
 

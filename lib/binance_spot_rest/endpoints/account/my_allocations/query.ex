@@ -25,7 +25,7 @@ defmodule BinanceSpotRest.Endpoints.Account.MyAllocations.Query do
   | fromAllocationId | INT    | No        |                                           |
   | limit            | INT    | No        | Default: 500; Maximum: 1000               |
   | orderId          | LONG   | No        |                                           |
-  | recvWindow       | LONG   | No        | The value cannot be greater than `60000`. |
+  | recvWindow       | DECIMAL | NO        | The value cannot be greater than `60000`. Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.  |
   | timestamp        | LONG   | No        |                                           |
 
   Supported parameter combinations:

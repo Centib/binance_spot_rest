@@ -17,7 +17,7 @@ defmodule BinanceSpotRest.Endpoints.Account.RateLimitOrder.Query do
 
   | Name       | Type | Mandatory | Description                              |
   | ---------- | ---- | --------- | ---------------------------------------- |
-  | recvWindow       | DECIMAL | NO        | The value cannot be greater than `60000`. Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.  |
+  | recvWindow | DECIMAL | NO        | The value cannot be greater than `60000`. Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.  |
   | timestamp  | LONG | YES       |                                          |
 
   **Data Source:**

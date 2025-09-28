@@ -18,7 +18,7 @@ defmodule BinanceSpotRest.Endpoints.Account.OpenOrders.Query do
   | Name       | Type   | Mandatory | Description                              |
   | ---------- | ------ | --------- | ---------------------------------------- |
   | symbol     | STRING | NO        |                                          |
-  | recvWindow | LONG   | NO        | The value cannot be greater than `60000` |
+  | recvWindow | DECIMAL | NO        | The value cannot be greater than `60000`. Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified. |
   | timestamp  | LONG   | YES       |                                          |
 
   - If the symbol is not sent, orders for all symbols will be returned in an array.

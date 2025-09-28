@@ -1,7 +1,7 @@
 defmodule BinanceSpotRest.Endpoints.Account.Order.Query do
   @moduledoc """
   Order
-  
+
   ### Query order (USER_DATA)
 
   ```
@@ -20,7 +20,7 @@ defmodule BinanceSpotRest.Endpoints.Account.Order.Query do
   | symbol            | STRING | YES       |                                          |
   | orderId           | LONG   | NO        |                                          |
   | origClientOrderId | STRING | NO        |                                          |
-  | recvWindow        | LONG   | NO        | The value cannot be greater than `60000` |
+  | recvWindow        | DECIMAL | NO        | The value cannot be greater than `60000`. Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified. |
   | timestamp         | LONG   | YES       |                                          |
 
   **Notes:**

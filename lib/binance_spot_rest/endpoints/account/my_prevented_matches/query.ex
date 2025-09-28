@@ -26,7 +26,7 @@ defmodule BinanceSpotRest.Endpoints.Account.MyPreventedMatches.Query do
   | orderId              | LONG   | NO        |                                          |
   | fromPreventedMatchId | LONG   | NO        |                                          |
   | limit                | INT    | NO        | Default: `500`; Maximum: `1000`          |
-  | recvWindow           | LONG   | NO        | The value cannot be greater than `60000` |
+  | recvWindow           | DECIMAL | NO        | The value cannot be greater than `60000`. Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.  |
   | timestamp            | LONG   | YES       |                                          |
 
   **Weight:**
