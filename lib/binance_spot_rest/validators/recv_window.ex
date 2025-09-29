@@ -5,9 +5,9 @@ defmodule BinanceSpotRest.Validators.RecvWindow do
   Validates `recvWindow` values.
 
   Rules:
-    - Must be an integer or a `Decimal`.
+    - Must be a `Decimal`.
     - Must be between 0 and 60000.
-    - If a `Decimal`, supports up to 3 decimal places of precision.
+    - Supports up to 3 decimal places of precision.
   """
 
   @behaviour Valpa.CustomValidator
@@ -21,17 +21,17 @@ defmodule BinanceSpotRest.Validators.RecvWindow do
 
   ## Examples
 
-      iex> BinanceSpotRest.Validators.RecvWindow.validate(5000)
+      iex> BinanceSpotRest.Validators.RecvWindow.validate(Decimal.new("5000"))
       :ok
 
       iex> BinanceSpotRest.Validators.RecvWindow.validate(Decimal.new("50.123"))
       :ok
 
-      iex> {:error, _} = BinanceSpotRest.Validators.RecvWindow.validate(70000)
+      iex> {:error, _} = BinanceSpotRest.Validators.RecvWindow.validate(Decimal.new("70000"))
 
       iex> {:error, _} = BinanceSpotRest.Validators.RecvWindow.validate(Decimal.new("44.4440"))
 
-      iex> {:error, _} = BinanceSpotRest.Validators.RecvWindow.validate(-5)
+      iex> {:error, _} = BinanceSpotRest.Validators.RecvWindow.validate(Decimal.new("-5"))
   """
   @impl true
   def validate(value) do
@@ -43,19 +43,16 @@ defmodule BinanceSpotRest.Validators.RecvWindow do
          validator: :recvWindow,
          value: value,
          criteria: %{
-           type: [:integer, :decimal],
+           type: :decimal,
            decimal_places_up_to: @max_decimal_places,
            max: 60_000,
            min: 0
          },
          text:
-           ~s/expected: recvWindow ≥ 0 and ≤ 60000 (integer or decimal with up to 3 decimal places), got: #{inspect(value)}/
+           ~s/expected: recvWindow ≥ 0 and ≤ 60000 (decimal with up to 3 decimal places), got: #{inspect(value)}/
        )}
     end
   end
-
-  # Integer case
-  defp valid?(v) when is_integer(v), do: v >= 0 and v <= 60_000
 
   # Decimal case
   defp valid?(%Decimal{} = v) do
