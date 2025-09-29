@@ -7,4 +7,5 @@ defmodule BinanceSpotRest.ValidatorsTest do
   doctest BinanceSpotRest.Validators.WindowSize
   doctest BinanceSpotRest.Validators.IcebergQty
   doctest BinanceSpotRest.Validators.StartTimeEndTimeRange24h
+  doctest BinanceSpotRest.Validators.RecvWindow
 end
