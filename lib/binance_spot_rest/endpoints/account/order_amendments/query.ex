@@ -66,7 +66,7 @@ defmodule BinanceSpotRest.Endpoints.Account.OrderAmendments.Query do
         |> Valpa.integer(:orderId)
         |> Valpa.maybe_integer(:fromExecutionId)
         |> Valpa.maybe_integer_in_range(:limit, %{min: 0, max: 1000})
-        |> Valpa.maybe_integer_in_range(:recvWindow, %{min: 0, max: 60_000})
+        |> Valpa.Custom.maybe_validator(:recvWindow, BinanceSpotRest.Validators.RecvWindow)
 
     def prepare(q),
       do: %BinanceSpotRest.Query.RequestSpec{

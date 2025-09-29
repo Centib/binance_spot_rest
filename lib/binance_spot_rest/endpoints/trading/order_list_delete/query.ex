@@ -46,7 +46,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListDelete.Query do
         |> Valpa.maybe_string(:listClientOrderId)
         |> Valpa.maybe_string(:newClientOrderId)
         |> Valpa.map_inclusive_keys([:orderListId, :listClientOrderId])
-        |> Valpa.maybe_integer_in_range(:recvWindow, %{min: 0, max: 60_000})
+        |> Valpa.Custom.maybe_validator(:recvWindow, BinanceSpotRest.Validators.RecvWindow)
 
     def prepare(q),
       do: %BinanceSpotRest.Query.RequestSpec{

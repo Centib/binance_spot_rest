@@ -25,6 +25,6 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderPost.Common do
       remap.(:newOrderRespType),
       BinanceSpotRest.Enums.NewOrderRespType.values()
     )
-    |> Valpa.maybe_integer_in_range(remap.(:recvWindow), %{min: 0, max: 60_000})
+    |> Valpa.Custom.maybe_validator(remap.(:recvWindow), BinanceSpotRest.Validators.RecvWindow)
   end
 end

@@ -51,7 +51,7 @@ defmodule BinanceSpotRest.Endpoints.Account.RateLimitOrder.Query do
     def validate(q),
       do:
         q
-        |> Valpa.maybe_integer_in_range(:recvWindow, %{min: 0, max: 60_000})
+        |> Valpa.Custom.maybe_validator(:recvWindow, BinanceSpotRest.Validators.RecvWindow)
 
     def prepare(q),
       do: %BinanceSpotRest.Query.RequestSpec{

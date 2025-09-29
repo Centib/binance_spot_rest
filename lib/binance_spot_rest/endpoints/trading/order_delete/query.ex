@@ -98,7 +98,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderDelete.Query do
           :cancelRestrictions,
           BinanceSpotRest.Enums.CancelRestrictions.values()
         )
-        |> Valpa.maybe_integer_in_range(:recvWindow, %{min: 0, max: 60_000})
+        |> Valpa.Custom.maybe_validator(:recvWindow, BinanceSpotRest.Validators.RecvWindow)
 
     def prepare(q),
       do: %BinanceSpotRest.Query.RequestSpec{
