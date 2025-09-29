@@ -14,7 +14,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderAmendKeepPriorityPutTest do
       orderId: 61_031,
       origClientOrderId: "kkFw5yTj1JqZ5vu7PjPJ5S",
       newClientOrderId: "newClientOrderId",
-      recvWindow: 3000
+      recvWindow: Decimal.new("3000.123")
     }
   end
 
@@ -41,7 +41,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderAmendKeepPriorityPutTest do
                    "newQty=0.38&" <>
                    "orderId=61031&" <>
                    "origClientOrderId=kkFw5yTj1JqZ5vu7PjPJ5S&" <>
-                   "recvWindow=3000&" <>
+                   "recvWindow=3000.123&" <>
                    "symbol=LTCBTC&" <>
                    "timestamp=1740587673449&" <>
                    "signature=fake_signature"

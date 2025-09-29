@@ -12,7 +12,7 @@ defmodule BinanceSpotRest.Endpoints.Account.OrderTest do
       symbol: "LTCBTC",
       orderId: 1234,
       origClientOrderId: "origClientOrderId",
-      recvWindow: 3000
+      recvWindow: Decimal.new("3000.123")
     }
   end
 
@@ -37,7 +37,7 @@ defmodule BinanceSpotRest.Endpoints.Account.OrderTest do
                  "/api/v3/order?" <>
                    "orderId=1234&" <>
                    "origClientOrderId=origClientOrderId&" <>
-                   "recvWindow=3000&" <>
+                   "recvWindow=3000.123&" <>
                    "symbol=LTCBTC&" <>
                    "timestamp=1740587673449&" <>
                    "signature=fake_signature"

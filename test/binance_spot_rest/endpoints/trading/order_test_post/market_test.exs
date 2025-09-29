@@ -18,7 +18,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderTestPost.MarketTest do
       strategyType: 1_000_200,
       selfTradePreventionMode: BinanceSpotRest.Enums.SelfTradePreventionMode._EXPIRE_BOTH(),
       newOrderRespType: BinanceSpotRest.Enums.NewOrderRespType._ACK(),
-      recvWindow: 3000,
+      recvWindow: Decimal.new("3000.123"),
       computeCommissionRates: true
     }
   end
@@ -34,7 +34,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderTestPost.MarketTest do
       strategyType: 1_000_200,
       selfTradePreventionMode: BinanceSpotRest.Enums.SelfTradePreventionMode._EXPIRE_BOTH(),
       newOrderRespType: BinanceSpotRest.Enums.NewOrderRespType._ACK(),
-      recvWindow: 3000,
+      recvWindow: Decimal.new("3000.123"),
       computeCommissionRates: true
     }
   end
@@ -62,7 +62,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderTestPost.MarketTest do
                    "newClientOrderId=UsaAPevABCDE4LJ4oTobyX&" <>
                    "newOrderRespType=ACK&" <>
                    "quantity=0.002&" <>
-                   "recvWindow=3000&" <>
+                   "recvWindow=3000.123&" <>
                    "selfTradePreventionMode=EXPIRE_BOTH&" <>
                    "side=BUY&" <>
                    "strategyId=2&" <>
@@ -96,7 +96,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderTestPost.MarketTest do
                    "newClientOrderId=UsaAPevABCDE4LJ4oTobyX&" <>
                    "newOrderRespType=ACK&" <>
                    "quoteOrderQty=0.002&" <>
-                   "recvWindow=3000&" <>
+                   "recvWindow=3000.123&" <>
                    "selfTradePreventionMode=EXPIRE_BOTH&" <>
                    "side=BUY&" <>
                    "strategyId=2&" <>

@@ -14,7 +14,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOtocoPost.WorkingLimitPendi
       symbol: "LTCBTC",
       selfTradePreventionMode: BinanceSpotRest.Enums.SelfTradePreventionMode._EXPIRE_BOTH(),
       newOrderRespType: BinanceSpotRest.Enums.NewOrderRespType._ACK(),
-      recvWindow: 3000,
+      recvWindow: Decimal.new("3000.123"),
       # ---
       workingSide: BinanceSpotRest.Enums.Side._BUY(),
       workingType: BinanceSpotRest.Enums.OrderType._LIMIT(),
@@ -86,7 +86,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOtocoPost.WorkingLimitPendi
                    "pendingBelowType=TAKE_PROFIT_LIMIT&" <>
                    "pendingQuantity=1.0&" <>
                    "pendingSide=BUY&" <>
-                   "recvWindow=3000&" <>
+                   "recvWindow=3000.123&" <>
                    "selfTradePreventionMode=EXPIRE_BOTH&" <>
                    "symbol=LTCBTC&" <>
                    "workingClientOrderId=UsaAPevABCDE4LJ4oTobyX&" <>

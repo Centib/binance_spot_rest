@@ -11,7 +11,7 @@ defmodule BinanceSpotRest.Endpoints.Account.AllOrderListTest do
     %AllOrderList.Query{
       fromId: 1234,
       limit: 600,
-      recvWindow: 3000
+      recvWindow: Decimal.new("3000.123")
     }
   end
 
@@ -20,7 +20,7 @@ defmodule BinanceSpotRest.Endpoints.Account.AllOrderListTest do
       startTime: 1_751_624_374_960,
       endTime: 1_751_624_974_980,
       limit: 600,
-      recvWindow: 3000
+      recvWindow: Decimal.new("3000.123")
     }
   end
 
@@ -45,7 +45,7 @@ defmodule BinanceSpotRest.Endpoints.Account.AllOrderListTest do
                  "/api/v3/allOrderList?" <>
                    "fromId=1234&" <>
                    "limit=600&" <>
-                   "recvWindow=3000&" <>
+                   "recvWindow=3000.123&" <>
                    "timestamp=1740587673449&" <>
                    "signature=fake_signature"
              }
@@ -69,7 +69,7 @@ defmodule BinanceSpotRest.Endpoints.Account.AllOrderListTest do
                  "/api/v3/allOrderList?" <>
                    "endTime=1751624974980&" <>
                    "limit=600&" <>
-                   "recvWindow=3000&" <>
+                   "recvWindow=3000.123&" <>
                    "startTime=1751624374960&" <>
                    "timestamp=1740587673449&" <>
                    "signature=fake_signature"

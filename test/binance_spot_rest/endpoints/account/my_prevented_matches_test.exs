@@ -11,7 +11,7 @@ defmodule BinanceSpotRest.Endpoints.Account.MyPreventedMatchesTest do
     %MyPreventedMatches.Query{
       symbol: "LTCBTC",
       preventedMatchId: 1234,
-      recvWindow: 3000
+      recvWindow: Decimal.new("3000.123")
     }
   end
 
@@ -21,7 +21,7 @@ defmodule BinanceSpotRest.Endpoints.Account.MyPreventedMatchesTest do
       orderId: 1234,
       fromPreventedMatchId: 5678,
       limit: 600,
-      recvWindow: 3000
+      recvWindow: Decimal.new("3000.123")
     }
   end
 
@@ -45,7 +45,7 @@ defmodule BinanceSpotRest.Endpoints.Account.MyPreventedMatchesTest do
                url:
                  "/api/v3/myPreventedMatches?" <>
                    "preventedMatchId=1234&" <>
-                   "recvWindow=3000&" <>
+                   "recvWindow=3000.123&" <>
                    "symbol=LTCBTC&" <>
                    "timestamp=1740587673449&" <>
                    "signature=fake_signature"
@@ -71,7 +71,7 @@ defmodule BinanceSpotRest.Endpoints.Account.MyPreventedMatchesTest do
                    "fromPreventedMatchId=5678&" <>
                    "limit=600&" <>
                    "orderId=1234&" <>
-                   "recvWindow=3000&" <>
+                   "recvWindow=3000.123&" <>
                    "symbol=LTCBTC&" <>
                    "timestamp=1740587673449&" <>
                    "signature=fake_signature"
@@ -166,7 +166,7 @@ defmodule BinanceSpotRest.Endpoints.Account.MyPreventedMatchesTest do
                  symbol: "LTCBTC",
                  preventedMatchId: 1234,
                  orderId: 5678,
-                 recvWindow: 3000
+                 recvWindow: Decimal.new("3000.123")
                }
                ~>> BinanceSpotRest.Query.validate()
     end
@@ -175,7 +175,7 @@ defmodule BinanceSpotRest.Endpoints.Account.MyPreventedMatchesTest do
       assert {:error, %{validator: :map_exclusive_keys}} =
                %MyPreventedMatches.Query{
                  symbol: "LTCBTC",
-                 recvWindow: 3000
+                 recvWindow: Decimal.new("3000.123")
                }
                ~>> BinanceSpotRest.Query.validate()
     end
@@ -189,7 +189,7 @@ defmodule BinanceSpotRest.Endpoints.Account.MyPreventedMatchesTest do
                  preventedMatchId: 1234,
                  fromPreventedMatchId: 5678,
                  limit: 600,
-                 recvWindow: 3000
+                 recvWindow: Decimal.new("3000.123")
                }
                ~>> BinanceSpotRest.Query.validate()
     end
@@ -200,7 +200,7 @@ defmodule BinanceSpotRest.Endpoints.Account.MyPreventedMatchesTest do
                  symbol: "LTCBTC",
                  preventedMatchId: 1234,
                  fromPreventedMatchId: 5678,
-                 recvWindow: 3000
+                 recvWindow: Decimal.new("3000.123")
                }
                ~>> BinanceSpotRest.Query.validate()
     end
@@ -211,7 +211,7 @@ defmodule BinanceSpotRest.Endpoints.Account.MyPreventedMatchesTest do
                  symbol: "LTCBTC",
                  preventedMatchId: 1234,
                  limit: 600,
-                 recvWindow: 3000
+                 recvWindow: Decimal.new("3000.123")
                }
                ~>> BinanceSpotRest.Query.validate()
     end

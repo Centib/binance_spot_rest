@@ -18,7 +18,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderCancelReplacePost.MarketTest do
       strategyType: 1_000_200,
       selfTradePreventionMode: BinanceSpotRest.Enums.SelfTradePreventionMode._EXPIRE_BOTH(),
       newOrderRespType: BinanceSpotRest.Enums.NewOrderRespType._ACK(),
-      recvWindow: 3000,
+      recvWindow: Decimal.new("3000.123"),
       cancelReplaceMode: BinanceSpotRest.Enums.CancelReplaceMode._ALLOW_FAILURE(),
       cancelNewClientOrderId: "cancelNewClientOrderId",
       cancelOrigClientOrderId: "cancelOrigClientOrderId",
@@ -39,7 +39,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderCancelReplacePost.MarketTest do
       strategyType: 1_000_200,
       selfTradePreventionMode: BinanceSpotRest.Enums.SelfTradePreventionMode._EXPIRE_BOTH(),
       newOrderRespType: BinanceSpotRest.Enums.NewOrderRespType._ACK(),
-      recvWindow: 3000,
+      recvWindow: Decimal.new("3000.123"),
       cancelReplaceMode: BinanceSpotRest.Enums.CancelReplaceMode._ALLOW_FAILURE(),
       cancelNewClientOrderId: "cancelNewClientOrderId",
       cancelOrigClientOrderId: "cancelOrigClientOrderId",
@@ -77,7 +77,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderCancelReplacePost.MarketTest do
                    "newOrderRespType=ACK&" <>
                    "orderRateLimitExceededMode=CANCEL_ONLY&" <>
                    "quantity=0.002&" <>
-                   "recvWindow=3000&" <>
+                   "recvWindow=3000.123&" <>
                    "selfTradePreventionMode=EXPIRE_BOTH&" <>
                    "side=BUY&" <>
                    "strategyId=2&" <>
@@ -116,7 +116,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderCancelReplacePost.MarketTest do
                    "newOrderRespType=ACK&" <>
                    "orderRateLimitExceededMode=CANCEL_ONLY&" <>
                    "quoteOrderQty=0.002&" <>
-                   "recvWindow=3000&" <>
+                   "recvWindow=3000.123&" <>
                    "selfTradePreventionMode=EXPIRE_BOTH&" <>
                    "side=BUY&" <>
                    "strategyId=2&" <>

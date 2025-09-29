@@ -20,7 +20,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderTestPost.StopLossTest do
       strategyType: 1_000_200,
       selfTradePreventionMode: BinanceSpotRest.Enums.SelfTradePreventionMode._EXPIRE_BOTH(),
       newOrderRespType: BinanceSpotRest.Enums.NewOrderRespType._ACK(),
-      recvWindow: 3000,
+      recvWindow: Decimal.new("3000.123"),
       computeCommissionRates: true
     }
   end
@@ -48,7 +48,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderTestPost.StopLossTest do
                    "newClientOrderId=UsaAPevABCDE4LJ4oTobyX&" <>
                    "newOrderRespType=ACK&" <>
                    "quantity=1.0&" <>
-                   "recvWindow=3000&" <>
+                   "recvWindow=3000.123&" <>
                    "selfTradePreventionMode=EXPIRE_BOTH&" <>
                    "side=BUY&" <>
                    "stopPrice=20.0&" <>

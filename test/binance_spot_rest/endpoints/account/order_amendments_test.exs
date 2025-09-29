@@ -13,7 +13,7 @@ defmodule BinanceSpotRest.Endpoints.Account.OrderAmendmentsTest do
       orderId: 1234,
       fromExecutionId: 5678,
       limit: 600,
-      recvWindow: 3000
+      recvWindow: Decimal.new("3000.123")
     }
   end
 
@@ -39,7 +39,7 @@ defmodule BinanceSpotRest.Endpoints.Account.OrderAmendmentsTest do
                    "fromExecutionId=5678&" <>
                    "limit=600&" <>
                    "orderId=1234&" <>
-                   "recvWindow=3000&" <>
+                   "recvWindow=3000.123&" <>
                    "symbol=LTCBTC&" <>
                    "timestamp=1740587673449&" <>
                    "signature=fake_signature"

@@ -10,7 +10,7 @@ defmodule BinanceSpotRest.Endpoints.Account.AccountTest do
   def full_valid_query do
     %Account.Query{
       omitZeroBalances: true,
-      recvWindow: 3000
+      recvWindow: Decimal.new("3000.123")
     }
   end
 
@@ -34,7 +34,7 @@ defmodule BinanceSpotRest.Endpoints.Account.AccountTest do
                url:
                  "/api/v3/account?" <>
                    "omitZeroBalances=true&" <>
-                   "recvWindow=3000&" <>
+                   "recvWindow=3000.123&" <>
                    "timestamp=1740587673449&" <>
                    "signature=fake_signature"
              }
@@ -57,7 +57,7 @@ defmodule BinanceSpotRest.Endpoints.Account.AccountTest do
   describe "validation (type):" do
     @bad_types [
       omitZeroBalances: "true",
-      recvWindow: "3000"
+      recvWindow: Decimal.new("3000.12345")
     ]
 
     for {field, bad_value} <- @bad_types do

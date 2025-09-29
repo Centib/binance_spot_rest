@@ -11,7 +11,7 @@ defmodule BinanceSpotRest.Endpoints.Account.MyTradesTest do
     %MyTrades.Query{
       symbol: "LTCBTC",
       limit: 600,
-      recvWindow: 3000
+      recvWindow: Decimal.new("3000.123")
     }
   end
 
@@ -21,7 +21,7 @@ defmodule BinanceSpotRest.Endpoints.Account.MyTradesTest do
       orderId: 1234,
       fromId: 5678,
       limit: 600,
-      recvWindow: 3000
+      recvWindow: Decimal.new("3000.123")
     }
   end
 
@@ -31,7 +31,7 @@ defmodule BinanceSpotRest.Endpoints.Account.MyTradesTest do
       startTime: 1_751_624_374_960,
       endTime: 1_751_624_974_980,
       limit: 600,
-      recvWindow: 3000
+      recvWindow: Decimal.new("3000.123")
     }
   end
 
@@ -55,7 +55,7 @@ defmodule BinanceSpotRest.Endpoints.Account.MyTradesTest do
                url:
                  "/api/v3/myTrades?" <>
                    "limit=600&" <>
-                   "recvWindow=3000&" <>
+                   "recvWindow=3000.123&" <>
                    "symbol=LTCBTC&" <>
                    "timestamp=1740587673449&" <>
                    "signature=fake_signature"
@@ -81,7 +81,7 @@ defmodule BinanceSpotRest.Endpoints.Account.MyTradesTest do
                    "fromId=5678&" <>
                    "limit=600&" <>
                    "orderId=1234&" <>
-                   "recvWindow=3000&" <>
+                   "recvWindow=3000.123&" <>
                    "symbol=LTCBTC&" <>
                    "timestamp=1740587673449&" <>
                    "signature=fake_signature"
@@ -106,7 +106,7 @@ defmodule BinanceSpotRest.Endpoints.Account.MyTradesTest do
                  "/api/v3/myTrades?" <>
                    "endTime=1751624974980&" <>
                    "limit=600&" <>
-                   "recvWindow=3000&" <>
+                   "recvWindow=3000.123&" <>
                    "startTime=1751624374960&" <>
                    "symbol=LTCBTC&" <>
                    "timestamp=1740587673449&" <>

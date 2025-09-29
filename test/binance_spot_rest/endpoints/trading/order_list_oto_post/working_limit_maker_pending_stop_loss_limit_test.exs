@@ -14,7 +14,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOtoPost.WorkingLimitMakerPe
       symbol: "LTCBTC",
       selfTradePreventionMode: BinanceSpotRest.Enums.SelfTradePreventionMode._EXPIRE_BOTH(),
       newOrderRespType: BinanceSpotRest.Enums.NewOrderRespType._ACK(),
-      recvWindow: 3000,
+      recvWindow: Decimal.new("3000.123"),
       # ---
       workingSide: BinanceSpotRest.Enums.Side._BUY(),
       workingType: BinanceSpotRest.Enums.OrderType._LIMIT_MAKER(),
@@ -71,7 +71,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOtoPost.WorkingLimitMakerPe
                    "pendingTimeInForce=GTC&" <>
                    "pendingTrailingDelta=10&" <>
                    "pendingType=STOP_LOSS_LIMIT&" <>
-                   "recvWindow=3000&" <>
+                   "recvWindow=3000.123&" <>
                    "selfTradePreventionMode=EXPIRE_BOTH&" <>
                    "symbol=LTCBTC&" <>
                    "workingClientOrderId=UsaAPevABCDE4LJ4oTobyX&" <>

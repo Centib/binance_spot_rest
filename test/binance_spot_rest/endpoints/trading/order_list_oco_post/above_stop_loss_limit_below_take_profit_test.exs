@@ -16,7 +16,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOcoPost.AboveStopLossLimitB
       quantity: Decimal.new("1.0"),
       selfTradePreventionMode: BinanceSpotRest.Enums.SelfTradePreventionMode._EXPIRE_BOTH(),
       newOrderRespType: BinanceSpotRest.Enums.NewOrderRespType._ACK(),
-      recvWindow: 3000,
+      recvWindow: Decimal.new("3000.123"),
       # ---
       belowType: BinanceSpotRest.Enums.OrderType._TAKE_PROFIT(),
       belowStopPrice: Decimal.new("0.001"),
@@ -74,7 +74,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListOcoPost.AboveStopLossLimitB
                    "listClientOrderId=2inzWQdDvZLHbbAmAozX2N&" <>
                    "newOrderRespType=ACK&" <>
                    "quantity=1.0&" <>
-                   "recvWindow=3000&" <>
+                   "recvWindow=3000.123&" <>
                    "selfTradePreventionMode=EXPIRE_BOTH&" <>
                    "side=BUY&" <>
                    "symbol=LTCBTC&" <>

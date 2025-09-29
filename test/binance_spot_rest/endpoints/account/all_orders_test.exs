@@ -12,7 +12,7 @@ defmodule BinanceSpotRest.Endpoints.Account.AllOrdersTest do
       symbol: "LTCBTC",
       orderId: 1234,
       limit: 600,
-      recvWindow: 3000
+      recvWindow: Decimal.new("3000.123")
     }
   end
 
@@ -22,7 +22,7 @@ defmodule BinanceSpotRest.Endpoints.Account.AllOrdersTest do
       startTime: 1_751_624_374_960,
       endTime: 1_751_624_974_980,
       limit: 600,
-      recvWindow: 3000
+      recvWindow: Decimal.new("3000.123")
     }
   end
 
@@ -47,7 +47,7 @@ defmodule BinanceSpotRest.Endpoints.Account.AllOrdersTest do
                  "/api/v3/allOrders?" <>
                    "limit=600&" <>
                    "orderId=1234&" <>
-                   "recvWindow=3000&" <>
+                   "recvWindow=3000.123&" <>
                    "symbol=LTCBTC&" <>
                    "timestamp=1740587673449&" <>
                    "signature=fake_signature"
@@ -72,7 +72,7 @@ defmodule BinanceSpotRest.Endpoints.Account.AllOrdersTest do
                  "/api/v3/allOrders?" <>
                    "endTime=1751624974980&" <>
                    "limit=600&" <>
-                   "recvWindow=3000&" <>
+                   "recvWindow=3000.123&" <>
                    "startTime=1751624374960&" <>
                    "symbol=LTCBTC&" <>
                    "timestamp=1740587673449&" <>

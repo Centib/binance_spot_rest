@@ -11,7 +11,7 @@ defmodule BinanceSpotRest.Endpoints.Account.MyAllocationsTest do
     %MyAllocations.Query{
       symbol: "LTCBTC",
       limit: 600,
-      recvWindow: 3000
+      recvWindow: Decimal.new("3000.123")
     }
   end
 
@@ -20,7 +20,7 @@ defmodule BinanceSpotRest.Endpoints.Account.MyAllocationsTest do
       symbol: "LTCBTC",
       orderId: 1234,
       fromAllocationId: 5678,
-      recvWindow: 3000
+      recvWindow: Decimal.new("3000.123")
     }
   end
 
@@ -29,7 +29,7 @@ defmodule BinanceSpotRest.Endpoints.Account.MyAllocationsTest do
       symbol: "LTCBTC",
       fromAllocationId: 5678,
       limit: 600,
-      recvWindow: 3000
+      recvWindow: Decimal.new("3000.123")
     }
   end
 
@@ -39,7 +39,7 @@ defmodule BinanceSpotRest.Endpoints.Account.MyAllocationsTest do
       startTime: 1_751_624_374_960,
       endTime: 1_751_624_974_980,
       limit: 600,
-      recvWindow: 3000
+      recvWindow: Decimal.new("3000.123")
     }
   end
 
@@ -63,7 +63,7 @@ defmodule BinanceSpotRest.Endpoints.Account.MyAllocationsTest do
                url:
                  "/api/v3/myAllocations?" <>
                    "limit=600&" <>
-                   "recvWindow=3000&" <>
+                   "recvWindow=3000.123&" <>
                    "symbol=LTCBTC&" <>
                    "timestamp=1740587673449&" <>
                    "signature=fake_signature"
@@ -88,7 +88,7 @@ defmodule BinanceSpotRest.Endpoints.Account.MyAllocationsTest do
                  "/api/v3/myAllocations?" <>
                    "fromAllocationId=5678&" <>
                    "orderId=1234&" <>
-                   "recvWindow=3000&" <>
+                   "recvWindow=3000.123&" <>
                    "symbol=LTCBTC&" <>
                    "timestamp=1740587673449&" <>
                    "signature=fake_signature"
@@ -113,7 +113,7 @@ defmodule BinanceSpotRest.Endpoints.Account.MyAllocationsTest do
                  "/api/v3/myAllocations?" <>
                    "fromAllocationId=5678&" <>
                    "limit=600&" <>
-                   "recvWindow=3000&" <>
+                   "recvWindow=3000.123&" <>
                    "symbol=LTCBTC&" <>
                    "timestamp=1740587673449&" <>
                    "signature=fake_signature"
@@ -138,7 +138,7 @@ defmodule BinanceSpotRest.Endpoints.Account.MyAllocationsTest do
                  "/api/v3/myAllocations?" <>
                    "endTime=1751624974980&" <>
                    "limit=600&" <>
-                   "recvWindow=3000&" <>
+                   "recvWindow=3000.123&" <>
                    "startTime=1751624374960&" <>
                    "symbol=LTCBTC&" <>
                    "timestamp=1740587673449&" <>

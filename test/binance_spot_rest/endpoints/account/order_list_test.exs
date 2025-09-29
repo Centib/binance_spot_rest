@@ -11,7 +11,7 @@ defmodule BinanceSpotRest.Endpoints.Account.OrderListTest do
     %OrderList.Query{
       orderListId: 1234,
       origClientOrderId: "origClientOrderId",
-      recvWindow: 3000
+      recvWindow: Decimal.new("3000.123")
     }
   end
 
@@ -36,7 +36,7 @@ defmodule BinanceSpotRest.Endpoints.Account.OrderListTest do
                  "/api/v3/orderList?" <>
                    "orderListId=1234&" <>
                    "origClientOrderId=origClientOrderId&" <>
-                   "recvWindow=3000&" <>
+                   "recvWindow=3000.123&" <>
                    "timestamp=1740587673449&" <>
                    "signature=fake_signature"
              }

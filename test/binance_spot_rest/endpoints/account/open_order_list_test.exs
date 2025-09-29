@@ -9,7 +9,7 @@ defmodule BinanceSpotRest.Endpoints.Account.OpenOrderListTest do
 
   def full_valid_query do
     %OpenOrderList.Query{
-      recvWindow: 3000
+      recvWindow: Decimal.new("3000.123")
     }
   end
 
@@ -32,7 +32,7 @@ defmodule BinanceSpotRest.Endpoints.Account.OpenOrderListTest do
                base_url: "https://fake.binance.url",
                url:
                  "/api/v3/openOrderList?" <>
-                   "recvWindow=3000&" <>
+                   "recvWindow=3000.123&" <>
                    "timestamp=1740587673449&" <>
                    "signature=fake_signature"
              }

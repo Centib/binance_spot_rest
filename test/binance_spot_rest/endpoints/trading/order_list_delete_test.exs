@@ -13,7 +13,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListDeleteTest do
       orderListId: 1234,
       listClientOrderId: "listClientOrderId",
       newClientOrderId: "newClientOrderId",
-      recvWindow: 3000
+      recvWindow: Decimal.new("3000.123")
     }
   end
 
@@ -39,7 +39,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderListDeleteTest do
                    "listClientOrderId=listClientOrderId&" <>
                    "newClientOrderId=newClientOrderId&" <>
                    "orderListId=1234&" <>
-                   "recvWindow=3000&" <>
+                   "recvWindow=3000.123&" <>
                    "symbol=LTCBTC&" <>
                    "timestamp=1740587673449&" <>
                    "signature=fake_signature"

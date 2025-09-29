@@ -23,7 +23,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderCancelReplacePost.StopLossLimit
       icebergQty: Decimal.new("0.5"),
       selfTradePreventionMode: BinanceSpotRest.Enums.SelfTradePreventionMode._EXPIRE_BOTH(),
       newOrderRespType: BinanceSpotRest.Enums.NewOrderRespType._ACK(),
-      recvWindow: 3000,
+      recvWindow: Decimal.new("3000.123"),
       cancelReplaceMode: BinanceSpotRest.Enums.CancelReplaceMode._ALLOW_FAILURE(),
       cancelNewClientOrderId: "cancelNewClientOrderId",
       cancelOrigClientOrderId: "cancelOrigClientOrderId",
@@ -63,7 +63,7 @@ defmodule BinanceSpotRest.Endpoints.Trading.OrderCancelReplacePost.StopLossLimit
                    "orderRateLimitExceededMode=CANCEL_ONLY&" <>
                    "price=0.00129&" <>
                    "quantity=1.0&" <>
-                   "recvWindow=3000&" <>
+                   "recvWindow=3000.123&" <>
                    "selfTradePreventionMode=EXPIRE_BOTH&" <>
                    "side=BUY&" <>
                    "stopPrice=0.001&" <>
