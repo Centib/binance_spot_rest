@@ -4,6 +4,11 @@
 [![Hex.pm](https://img.shields.io/hexpm/v/binance_spot_rest.svg)](https://hex.pm/packages/binance_spot_rest)
 [![Documentation](https://img.shields.io/badge/docs-hexdocs-purple.svg)](https://hexdocs.pm/binance_spot_rest)
 
+> ⚠️ **Upgrade Notice (v0.2.0):**  
+> The `recvWindow` parameter is now strictly a `Decimal` struct.  
+> Integer values are no longer accepted. Max precision: 3 decimal places.  
+> See changelog for migration examples.
+
 Elixir library for interacting with the **Binance Spot REST API**.
 Provides a unified entry point for building, validating, signing, and executing REST requests.
 
@@ -25,7 +30,7 @@ Add to your `mix.exs`:
 ```elixir
 def deps do
   [
-    {:binance_spot_rest, "~> 0.1.3"}
+    {:binance_spot_rest, "~> 0.2.0"}
   ]
 end
 ```

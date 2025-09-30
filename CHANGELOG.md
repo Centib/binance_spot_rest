@@ -1,5 +1,35 @@
 # Changelog
 
+## v0.2.0 (2025-09-30)
+
+- **Breaking Change**: `recvWindow` parameter must now be provided as a **`Decimal` struct**.
+  - Integer values (e.g., `5000`) are no longer accepted directly.
+  - Must use `Decimal.new/1`, e.g. `Decimal.new("5000")`.
+  - Precision is limited to **3 decimal places** in line with Binance API docs.
+    - ✅ Valid: `Decimal.new("5000")`, `Decimal.new("123.456")`
+    - ❌ Invalid: `5000`, `Decimal.new("123.4567")`
+- Validation for `recvWindow` enforces both **range** (`0`–`60000`) and **precision**.
+- Documentation and examples updated to reflect mandatory `Decimal` usage.
+- **Migration Guide:**
+  - **Before (v0.1.x):**
+    ```elixir
+    %Account.Query{
+      recvWindow: 3000
+    }
+    ```
+  - **After (v0.2.0):**
+    ```elixir
+    %Account.Query{
+      recvWindow: Decimal.new("3000")
+    }
+    ```
+  - If you need fractional precision (up to 3 decimals):
+    ```elixir
+    %Account.Query{
+      recvWindow: Decimal.new("3000.123")
+    }
+    ```
+
 ## v0.1.3 (2025-09-17)
 
 - Fixed dependency conflict for `credo`:
@@ -34,4 +64,3 @@
 - Testable and mockable request execution
 - Supports high-level API (`request/1`) and low-level step chaining
 - Documentation on HexDocs
-

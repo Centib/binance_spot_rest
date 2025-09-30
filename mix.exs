@@ -2,7 +2,7 @@ defmodule BinanceSpotRest.MixProject do
   use Mix.Project
 
   @source_url "https://github.com/Centib/binance_spot_rest"
-  @version "0.1.3"
+  @version "0.2.0"
 
   def project do
     [
